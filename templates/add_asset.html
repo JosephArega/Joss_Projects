@@ -1,0 +1,322 @@
+{% extends "base.html" %}
+
+{% block title %}Add Asset - Task Management System{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1>
+                <i class="fas fa-plus me-2"></i>Add Asset
+            </h1>
+            <a href="{{ url_for('assets') }}" class="btn btn-secondary">
+                <i class="fas fa-arrow-left me-1"></i>Back to Assets
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <form method="POST">
+                    <!-- Basic Information -->
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <h5 class="text-primary mb-3">
+                                <i class="fas fa-info-circle me-2"></i>Basic Information
+                            </h5>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="server_name" class="form-label">Server Name *</label>
+                                <input type="text" class="form-control" id="server_name" name="server_name" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="asset_id" class="form-label">Asset ID *</label>
+                                <input type="text" class="form-control" id="asset_id" name="asset_id" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="serial_number" class="form-label">Serial Number</label>
+                                <input type="text" class="form-control" id="serial_number" name="serial_number">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="custodian" class="form-label">Custodian</label>
+                                <input type="text" class="form-control" id="custodian" name="custodian">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="mb-3">
+                                <label for="users" class="form-label">Users</label>
+                                <input type="text" class="form-control" id="users" name="users" placeholder="Comma-separated list of users">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Technical Details -->
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <h5 class="text-primary mb-3">
+                                <i class="fas fa-cogs me-2"></i>Technical Details
+                            </h5>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="ip_address" class="form-label">IP Address</label>
+                                <input type="text" class="form-control" id="ip_address" name="ip_address">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="host_name" class="form-label">Host Name</label>
+                                <input type="text" class="form-control" id="host_name" name="host_name">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="rack_number" class="form-label">Rack Number</label>
+                                <input type="text" class="form-control" id="rack_number" name="rack_number">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="slot_number" class="form-label">Slot Number</label>
+                                <input type="text" class="form-control" id="slot_number" name="slot_number">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="os" class="form-label">Operating System</label>
+                                <input type="text" class="form-control" id="os" name="os">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="technical_contact" class="form-label">Technical Contact</label>
+                                <input type="text" class="form-control" id="technical_contact" name="technical_contact">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="mb-3">
+                                <label for="service_packs_required" class="form-label">Service Packs Required</label>
+                                <textarea class="form-control" id="service_packs_required" name="service_packs_required" rows="2"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="mb-3">
+                                <label for="software_details" class="form-label">Software/Application Details</label>
+                                <textarea class="form-control" id="software_details" name="software_details" rows="3"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Hardware Specifications -->
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <h5 class="text-primary mb-3">
+                                <i class="fas fa-microchip me-2"></i>Hardware Specifications
+                            </h5>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="vendor" class="form-label">Vendor</label>
+                                <input type="text" class="form-control" id="vendor" name="vendor">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="make_model" class="form-label">Make/Model</label>
+                                <input type="text" class="form-control" id="make_model" name="make_model">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label for="cpu" class="form-label">CPU</label>
+                                <input type="text" class="form-control" id="cpu" name="cpu">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label for="ram" class="form-label">RAM</label>
+                                <input type="text" class="form-control" id="ram" name="ram">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label for="hdd" class="form-label">HDD</label>
+                                <input type="text" class="form-control" id="hdd" name="hdd">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Business Information -->
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <h5 class="text-primary mb-3">
+                                <i class="fas fa-building me-2"></i>Business Information
+                            </h5>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="asset_type" class="form-label">Asset Type</label>
+                                <select class="form-select" id="asset_type" name="asset_type">
+                                    <option value="">Select Asset Type</option>
+                                    <option value="Server">Server</option>
+                                    <option value="Workstation">Workstation</option>
+                                    <option value="Network Device">Network Device</option>
+                                    <option value="Storage">Storage</option>
+                                    <option value="Database">Database</option>
+                                    <option value="Application">Application</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="criticality" class="form-label">Criticality</label>
+                                <select class="form-select" id="criticality" name="criticality">
+                                    <option value="">Select Criticality</option>
+                                    <option value="Critical">Critical</option>
+                                    <option value="High">High</option>
+                                    <option value="Medium">Medium</option>
+                                    <option value="Low">Low</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="mb-3">
+                                <label for="purpose_service_role" class="form-label">Purpose/Service/Role</label>
+                                <textarea class="form-control" id="purpose_service_role" name="purpose_service_role" rows="3"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="mb-3">
+                                <label for="application_requirements" class="form-label">Application/Business Requirements</label>
+                                <textarea class="form-control" id="application_requirements" name="application_requirements" rows="3"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="mb-3">
+                                <label for="dependency" class="form-label">Dependencies</label>
+                                <textarea class="form-control" id="dependency" name="dependency" rows="2"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Security & Compliance -->
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <h5 class="text-primary mb-3">
+                                <i class="fas fa-shield-alt me-2"></i>Security & Compliance
+                            </h5>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="sensitivity" class="form-label">Sensitivity</label>
+                                <select class="form-select" id="sensitivity" name="sensitivity">
+                                    <option value="">Select Sensitivity</option>
+                                    <option value="Confidential">Confidential</option>
+                                    <option value="Internal">Internal</option>
+                                    <option value="Public">Public</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="backup_schedule" class="form-label">Backup Schedule</label>
+                                <input type="text" class="form-control" id="backup_schedule" name="backup_schedule">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label for="confidentiality_requirements" class="form-label">Confidentiality Requirements</label>
+                                <select class="form-select" id="confidentiality_requirements" name="confidentiality_requirements">
+                                    <option value="">Select Level</option>
+                                    <option value="High">High</option>
+                                    <option value="Medium">Medium</option>
+                                    <option value="Low">Low</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label for="integrity_requirements" class="form-label">Integrity Requirements</label>
+                                <select class="form-select" id="integrity_requirements" name="integrity_requirements">
+                                    <option value="">Select Level</option>
+                                    <option value="High">High</option>
+                                    <option value="Medium">Medium</option>
+                                    <option value="Low">Low</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label for="availability_requirements" class="form-label">Availability Requirements</label>
+                                <select class="form-select" id="availability_requirements" name="availability_requirements">
+                                    <option value="">Select Level</option>
+                                    <option value="High">High</option>
+                                    <option value="Medium">Medium</option>
+                                    <option value="Low">Low</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="mb-3">
+                                <label for="redundancy_requirements" class="form-label">Redundancy Requirements</label>
+                                <textarea class="form-control" id="redundancy_requirements" name="redundancy_requirements" rows="2"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="mb-3">
+                                <label for="stored_information_assets" class="form-label">Stored Information Assets</label>
+                                <textarea class="form-control" id="stored_information_assets" name="stored_information_assets" rows="2"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Value Information -->
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <h5 class="text-primary mb-3">
+                                <i class="fas fa-dollar-sign me-2"></i>Value Information
+                            </h5>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="value" class="form-label">Asset Value ($)</label>
+                                <input type="number" class="form-control" id="value" name="value" step="0.01" min="0">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="asset_value_rating" class="form-label">Asset Value Rating</label>
+                                <select class="form-select" id="asset_value_rating" name="asset_value_rating">
+                                    <option value="">Select Value Rating</option>
+                                    <option value="Very High">Very High</option>
+                                    <option value="High">High</option>
+                                    <option value="Medium">Medium</option>
+                                    <option value="Low">Low</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a href="{{ url_for('assets') }}" class="btn btn-secondary me-md-2">Cancel</a>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save me-1"></i>Create Asset
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

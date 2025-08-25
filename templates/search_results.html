@@ -1,0 +1,234 @@
+{% extends "base.html" %}
+
+{% block title %}Search Results - Task Management System{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h1 class="mb-4">
+            <i class="fas fa-search me-2"></i>Search Results
+            {% if query %}
+                <small class="text-muted">for "{{ query }}"</small>
+            {% endif %}
+        </h1>
+    </div>
+</div>
+
+{% if not query %}
+    <div class="row">
+        <div class="col-12">
+            <div class="alert alert-info">
+                <i class="fas fa-info-circle me-2"></i>Please enter a search term to see results.
+            </div>
+        </div>
+    </div>
+{% else %}
+    <!-- Tasks Results -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-tasks me-2"></i>Tasks ({{ tasks|length }} found)
+                    </h5>
+                </div>
+                <div class="card-body">
+                    {% if tasks %}
+                        <div class="table-responsive">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Priority</th>
+                                        <th>Status</th>
+                                        <th>Due Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for task in tasks %}
+                                    <tr>
+                                        <td>{{ task.name }}</td>
+                                        <td>
+                                            <span class="badge bg-{{ 'danger' if task.priority == 'High' else 'warning' if task.priority == 'Medium' else 'info' }}">
+                                                {{ task.priority }}
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <span class="badge bg-{{ 'success' if task.status == 'Completed' else 'danger' if task.status == 'Overdue' else 'warning' }}">
+                                                {{ task.status }}
+                                            </span>
+                                        </td>
+                                        <td>{{ task.due_date.strftime('%Y-%m-%d') }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% else %}
+                        <p class="text-muted mb-0">No tasks found matching your search.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Deployments Results -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-rocket me-2"></i>Deployments ({{ deployments|length }} found)
+                    </h5>
+                </div>
+                <div class="card-body">
+                    {% if deployments %}
+                        <div class="table-responsive">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Environment</th>
+                                        <th>Status</th>
+                                        <th>Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for deployment in deployments %}
+                                    <tr>
+                                        <td>{{ deployment.name }}</td>
+                                        <td>
+                                            <span class="badge bg-{{ 'danger' if deployment.environment == 'Production' else 'warning' if deployment.environment == 'Staging' else 'info' }}">
+                                                {{ deployment.environment or 'N/A' }}
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <span class="badge bg-{{ 'success' if deployment.status == 'Successful' else 'danger' if deployment.status == 'Failed' else 'warning' }}">
+                                                {{ deployment.status }}
+                                            </span>
+                                        </td>
+                                        <td>{{ deployment.date.strftime('%Y-%m-%d') }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% else %}
+                        <p class="text-muted mb-0">No deployments found matching your search.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Incidents Results -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-exclamation-triangle me-2"></i>Incidents ({{ incidents|length }} found)
+                    </h5>
+                </div>
+                <div class="card-body">
+                    {% if incidents %}
+                        <div class="table-responsive">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Severity</th>
+                                        <th>Status</th>
+                                        <th>Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for incident in incidents %}
+                                    <tr>
+                                        <td>{{ incident.name }}</td>
+                                        <td>
+                                            <span class="badge bg-{{ 'danger' if incident.severity == 'Critical' else 'warning' if incident.severity == 'High' else 'info' if incident.severity == 'Medium' else 'success' }}">
+                                                {{ incident.severity }}
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <span class="badge bg-{{ 'success' if incident.status == 'Resolved' else 'primary' if incident.status == 'In Progress' else 'danger' }}">
+                                                {{ incident.status }}
+                                            </span>
+                                        </td>
+                                        <td>{{ incident.date.strftime('%Y-%m-%d') }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% else %}
+                        <p class="text-muted mb-0">No incidents found matching your search.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Assets Results -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-server me-2"></i>Assets ({{ assets|length }} found)
+                    </h5>
+                </div>
+                <div class="card-body">
+                    {% if assets %}
+                        <div class="table-responsive">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Server Name</th>
+                                        <th>Asset ID</th>
+                                        <th>IP Address</th>
+                                        <th>Criticality</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for asset in assets %}
+                                    <tr>
+                                        <td>{{ asset.server_name }}</td>
+                                        <td>{{ asset.asset_id }}</td>
+                                        <td>{{ asset.ip_address or 'N/A' }}</td>
+                                        <td>
+                                            {% if asset.criticality %}
+                                                <span class="badge bg-{{ 'danger' if asset.criticality == 'Critical' else 'warning' if asset.criticality == 'High' else 'info' if asset.criticality == 'Medium' else 'success' }}">
+                                                    {{ asset.criticality }}
+                                                </span>
+                                            {% else %}
+                                                <span class="text-muted">N/A</span>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% else %}
+                        <p class="text-muted mb-0">No assets found matching your search.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% if not tasks and not deployments and not incidents and not assets %}
+        <div class="row">
+            <div class="col-12">
+                <div class="text-center py-5">
+                    <i class="fas fa-search fa-3x text-muted mb-3"></i>
+                    <h4 class="text-muted">No results found</h4>
+                    <p class="text-muted">Try searching with different keywords.</p>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endif %}
+{% endblock %}

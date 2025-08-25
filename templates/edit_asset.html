@@ -1,0 +1,323 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Asset - Task Management System{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1>
+                <i class="fas fa-edit me-2"></i>Edit Asset - {{ asset.server_name }}
+            </h1>
+            <a href="{{ url_for('assets') }}" class="btn btn-secondary">
+                <i class="fas fa-arrow-left me-1"></i>Back to Assets
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <form method="POST">
+                    <!-- Basic Information -->
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <h5 class="text-primary mb-3">
+                                <i class="fas fa-info-circle me-2"></i>Basic Information
+                            </h5>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="server_name" class="form-label">Server Name *</label>
+                                <input type="text" class="form-control" id="server_name" name="server_name" value="{{ asset.server_name }}" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="asset_id" class="form-label">Asset ID *</label>
+                                <input type="text" class="form-control" id="asset_id" name="asset_id" value="{{ asset.asset_id }}" readonly>
+                                <small class="form-text text-muted">Asset ID cannot be changed</small>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="serial_number" class="form-label">Serial Number</label>
+                                <input type="text" class="form-control" id="serial_number" name="serial_number" value="{{ asset.serial_number or '' }}">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="custodian" class="form-label">Custodian</label>
+                                <input type="text" class="form-control" id="custodian" name="custodian" value="{{ asset.custodian or '' }}">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="mb-3">
+                                <label for="users" class="form-label">Users</label>
+                                <input type="text" class="form-control" id="users" name="users" value="{{ asset.users or '' }}" placeholder="Comma-separated list of users">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Technical Details -->
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <h5 class="text-primary mb-3">
+                                <i class="fas fa-cogs me-2"></i>Technical Details
+                            </h5>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="ip_address" class="form-label">IP Address</label>
+                                <input type="text" class="form-control" id="ip_address" name="ip_address" value="{{ asset.ip_address or '' }}">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="host_name" class="form-label">Host Name</label>
+                                <input type="text" class="form-control" id="host_name" name="host_name" value="{{ asset.host_name or '' }}">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="rack_number" class="form-label">Rack Number</label>
+                                <input type="text" class="form-control" id="rack_number" name="rack_number" value="{{ asset.rack_number or '' }}">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="slot_number" class="form-label">Slot Number</label>
+                                <input type="text" class="form-control" id="slot_number" name="slot_number" value="{{ asset.slot_number or '' }}">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="os" class="form-label">Operating System</label>
+                                <input type="text" class="form-control" id="os" name="os" value="{{ asset.os or '' }}">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="technical_contact" class="form-label">Technical Contact</label>
+                                <input type="text" class="form-control" id="technical_contact" name="technical_contact" value="{{ asset.technical_contact or '' }}">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="mb-3">
+                                <label for="service_packs_required" class="form-label">Service Packs Required</label>
+                                <textarea class="form-control" id="service_packs_required" name="service_packs_required" rows="2">{{ asset.service_packs_required or '' }}</textarea>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="mb-3">
+                                <label for="software_details" class="form-label">Software/Application Details</label>
+                                <textarea class="form-control" id="software_details" name="software_details" rows="3">{{ asset.software_details or '' }}</textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Hardware Specifications -->
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <h5 class="text-primary mb-3">
+                                <i class="fas fa-microchip me-2"></i>Hardware Specifications
+                            </h5>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="vendor" class="form-label">Vendor</label>
+                                <input type="text" class="form-control" id="vendor" name="vendor" value="{{ asset.vendor or '' }}">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="make_model" class="form-label">Make/Model</label>
+                                <input type="text" class="form-control" id="make_model" name="make_model" value="{{ asset.make_model or '' }}">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label for="cpu" class="form-label">CPU</label>
+                                <input type="text" class="form-control" id="cpu" name="cpu" value="{{ asset.cpu or '' }}">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label for="ram" class="form-label">RAM</label>
+                                <input type="text" class="form-control" id="ram" name="ram" value="{{ asset.ram or '' }}">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label for="hdd" class="form-label">HDD</label>
+                                <input type="text" class="form-control" id="hdd" name="hdd" value="{{ asset.hdd or '' }}">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Business Information -->
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <h5 class="text-primary mb-3">
+                                <i class="fas fa-building me-2"></i>Business Information
+                            </h5>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="asset_type" class="form-label">Asset Type</label>
+                                <select class="form-select" id="asset_type" name="asset_type">
+                                    <option value="">Select Asset Type</option>
+                                    <option value="Server" {{ 'selected' if asset.asset_type == 'Server' else '' }}>Server</option>
+                                    <option value="Workstation" {{ 'selected' if asset.asset_type == 'Workstation' else '' }}>Workstation</option>
+                                    <option value="Network Device" {{ 'selected' if asset.asset_type == 'Network Device' else '' }}>Network Device</option>
+                                    <option value="Storage" {{ 'selected' if asset.asset_type == 'Storage' else '' }}>Storage</option>
+                                    <option value="Database" {{ 'selected' if asset.asset_type == 'Database' else '' }}>Database</option>
+                                    <option value="Application" {{ 'selected' if asset.asset_type == 'Application' else '' }}>Application</option>
+                                    <option value="Other" {{ 'selected' if asset.asset_type == 'Other' else '' }}>Other</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="criticality" class="form-label">Criticality</label>
+                                <select class="form-select" id="criticality" name="criticality">
+                                    <option value="">Select Criticality</option>
+                                    <option value="Critical" {{ 'selected' if asset.criticality == 'Critical' else '' }}>Critical</option>
+                                    <option value="High" {{ 'selected' if asset.criticality == 'High' else '' }}>High</option>
+                                    <option value="Medium" {{ 'selected' if asset.criticality == 'Medium' else '' }}>Medium</option>
+                                    <option value="Low" {{ 'selected' if asset.criticality == 'Low' else '' }}>Low</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="mb-3">
+                                <label for="purpose_service_role" class="form-label">Purpose/Service/Role</label>
+                                <textarea class="form-control" id="purpose_service_role" name="purpose_service_role" rows="3">{{ asset.purpose_service_role or '' }}</textarea>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="mb-3">
+                                <label for="application_requirements" class="form-label">Application/Business Requirements</label>
+                                <textarea class="form-control" id="application_requirements" name="application_requirements" rows="3">{{ asset.application_requirements or '' }}</textarea>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="mb-3">
+                                <label for="dependency" class="form-label">Dependencies</label>
+                                <textarea class="form-control" id="dependency" name="dependency" rows="2">{{ asset.dependency or '' }}</textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Security & Compliance -->
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <h5 class="text-primary mb-3">
+                                <i class="fas fa-shield-alt me-2"></i>Security & Compliance
+                            </h5>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="sensitivity" class="form-label">Sensitivity</label>
+                                <select class="form-select" id="sensitivity" name="sensitivity">
+                                    <option value="">Select Sensitivity</option>
+                                    <option value="Confidential" {{ 'selected' if asset.sensitivity == 'Confidential' else '' }}>Confidential</option>
+                                    <option value="Internal" {{ 'selected' if asset.sensitivity == 'Internal' else '' }}>Internal</option>
+                                    <option value="Public" {{ 'selected' if asset.sensitivity == 'Public' else '' }}>Public</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="backup_schedule" class="form-label">Backup Schedule</label>
+                                <input type="text" class="form-control" id="backup_schedule" name="backup_schedule" value="{{ asset.backup_schedule or '' }}">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label for="confidentiality_requirements" class="form-label">Confidentiality Requirements</label>
+                                <select class="form-select" id="confidentiality_requirements" name="confidentiality_requirements">
+                                    <option value="">Select Level</option>
+                                    <option value="High" {{ 'selected' if asset.confidentiality_requirements == 'High' else '' }}>High</option>
+                                    <option value="Medium" {{ 'selected' if asset.confidentiality_requirements == 'Medium' else '' }}>Medium</option>
+                                    <option value="Low" {{ 'selected' if asset.confidentiality_requirements == 'Low' else '' }}>Low</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label for="integrity_requirements" class="form-label">Integrity Requirements</label>
+                                <select class="form-select" id="integrity_requirements" name="integrity_requirements">
+                                    <option value="">Select Level</option>
+                                    <option value="High" {{ 'selected' if asset.integrity_requirements == 'High' else '' }}>High</option>
+                                    <option value="Medium" {{ 'selected' if asset.integrity_requirements == 'Medium' else '' }}>Medium</option>
+                                    <option value="Low" {{ 'selected' if asset.integrity_requirements == 'Low' else '' }}>Low</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label for="availability_requirements" class="form-label">Availability Requirements</label>
+                                <select class="form-select" id="availability_requirements" name="availability_requirements">
+                                    <option value="">Select Level</option>
+                                    <option value="High" {{ 'selected' if asset.availability_requirements == 'High' else '' }}>High</option>
+                                    <option value="Medium" {{ 'selected' if asset.availability_requirements == 'Medium' else '' }}>Medium</option>
+                                    <option value="Low" {{ 'selected' if asset.availability_requirements == 'Low' else '' }}>Low</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="mb-3">
+                                <label for="redundancy_requirements" class="form-label">Redundancy Requirements</label>
+                                <textarea class="form-control" id="redundancy_requirements" name="redundancy_requirements" rows="2">{{ asset.redundancy_requirements or '' }}</textarea>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="mb-3">
+                                <label for="stored_information_assets" class="form-label">Stored Information Assets</label>
+                                <textarea class="form-control" id="stored_information_assets" name="stored_information_assets" rows="2">{{ asset.stored_information_assets or '' }}</textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Value Information -->
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <h5 class="text-primary mb-3">
+                                <i class="fas fa-dollar-sign me-2"></i>Value Information
+                            </h5>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="value" class="form-label">Asset Value ($)</label>
+                                <input type="number" class="form-control" id="value" name="value" step="0.01" min="0" value="{{ asset.value or '' }}">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="asset_value_rating" class="form-label">Asset Value Rating</label>
+                                <select class="form-select" id="asset_value_rating" name="asset_value_rating">
+                                    <option value="">Select Value Rating</option>
+                                    <option value="Very High" {{ 'selected' if asset.asset_value_rating == 'Very High' else '' }}>Very High</option>
+                                    <option value="High" {{ 'selected' if asset.asset_value_rating == 'High' else '' }}>High</option>
+                                    <option value="Medium" {{ 'selected' if asset.asset_value_rating == 'Medium' else '' }}>Medium</option>
+                                    <option value="Low" {{ 'selected' if asset.asset_value_rating == 'Low' else '' }}>Low</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a href="{{ url_for('assets') }}" class="btn btn-secondary me-md-2">Cancel</a>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save me-1"></i>Update Asset
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

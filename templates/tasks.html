@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block title %}Tasks - Task Management System{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1>
+                <i class="fas fa-tasks me-2"></i>Tasks
+            </h1>
+            <a href="{{ url_for('add_task') }}" class="btn btn-primary">
+                <i class="fas fa-plus me-1"></i>Add Task
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                {% if tasks %}
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Priority</th>
+                                    <th>Status</th>
+                                    <th>Due Date</th>
+                                    <th>Created By</th>
+                                    <th>Assigned To</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for task in tasks %}
+                                <tr class="{{ 'table-danger' if task.status == 'Overdue' else 'table-success' if task.status == 'Completed' else '' }}">
+                                    <td>
+                                        <strong>{{ task.name }}</strong>
+                                        {% if task.description %}
+                                            <br><small class="text-muted">{{ task.description[:100] }}{% if task.description|length > 100 %}...{% endif %}</small>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <span class="badge bg-{{ 'danger' if task.priority == 'High' else 'warning' if task.priority == 'Medium' else 'info' }}">
+                                            {{ task.priority }}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span class="badge bg-{{ 'success' if task.status == 'Completed' else 'danger' if task.status == 'Overdue' else 'warning' }}">
+                                            {{ task.status }}
+                                        </span>
+                                    </td>
+                                    <td>{{ task.due_date.strftime('%Y-%m-%d') }}</td>
+                                    <td>{{ task.creator.username if task.creator else 'N/A' }}</td>
+                                    <td>{{ task.assignee.username if task.assignee else 'Unassigned' }}</td>
+                                    <td>
+                                        {% if task.status != 'Completed' and (current_user.role != 'Member' or task.assigned_to == current_user.id) %}
+                                            <form method="POST" action="{{ url_for('complete_task', task_id=task.id) }}" class="d-inline">
+                                                <button type="submit" class="btn btn-success btn-sm" onclick="return confirm('Mark this task as completed?')">
+                                                    <i class="fas fa-check"></i>
+                                                </button>
+                                            </form>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <div class="text-center py-5">
+                        <i class="fas fa-tasks fa-3x text-muted mb-3"></i>
+                        <h4 class="text-muted">No tasks found</h4>
+                        <p class="text-muted">Get started by creating your first task.</p>
+                        <a href="{{ url_for('add_task') }}" class="btn btn-primary">
+                            <i class="fas fa-plus me-1"></i>Add Task
+                        </a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

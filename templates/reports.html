@@ -1,0 +1,170 @@
+{% extends "base.html" %}
+
+{% block title %}Reports - Task Management System{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h1 class="mb-4">
+            <i class="fas fa-chart-bar me-2"></i>Reports & Analytics
+        </h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">Generate Report</h5>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="{{ url_for('generate_report') }}">
+                    <div class="mb-3">
+                        <label for="report_type" class="form-label">Report Type *</label>
+                        <select class="form-select" id="report_type" name="report_type" required>
+                            <option value="">Select Report Type</option>
+                            <option value="tasks">Tasks Report</option>
+                            <option value="deployments">Deployments Report</option>
+                            <option value="incidents">Incidents Report</option>
+                            <option value="assets">Assets Report</option>
+                            <option value="all">Combined Report (All)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="start_date" class="form-label">Start Date</label>
+                                <input type="date" class="form-control" id="start_date" name="start_date">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="end_date" class="form-label">End Date</label>
+                                <input type="date" class="form-control" id="end_date" name="end_date">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-chart-line me-1"></i>Generate Report
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-5">
+    <div class="col-12">
+        <h3 class="mb-4">Quick Actions</h3>
+    </div>
+    
+    <div class="col-lg-3 col-md-6 mb-3">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <i class="fas fa-file-csv fa-3x text-primary mb-3"></i>
+                <h5>Export to CSV</h5>
+                <p class="text-muted">Download reports in CSV format for further analysis</p>
+                <div class="dropdown">
+                    <button class="btn btn-outline-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                        Export CSV
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{{ url_for('export_csv', report_type='tasks') }}">Tasks</a></li>
+                        <li><a class="dropdown-item" href="{{ url_for('export_csv', report_type='deployments') }}">Deployments</a></li>
+                        <li><a class="dropdown-item" href="{{ url_for('export_csv', report_type='incidents') }}">Incidents</a></li>
+                        <li><a class="dropdown-item" href="{{ url_for('export_csv', report_type='assets') }}">Assets</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-3 col-md-6 mb-3">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <i class="fas fa-file-pdf fa-3x text-danger mb-3"></i>
+                <h5>Export to PDF</h5>
+                <p class="text-muted">Generate professional PDF reports for presentations</p>
+                <div class="dropdown">
+                    <button class="btn btn-outline-danger dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                        Export PDF
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{{ url_for('export_pdf', report_type='tasks') }}">Tasks</a></li>
+                        <li><a class="dropdown-item" href="{{ url_for('export_pdf', report_type='deployments') }}">Deployments</a></li>
+                        <li><a class="dropdown-item" href="{{ url_for('export_pdf', report_type='incidents') }}">Incidents</a></li>
+                        <li><a class="dropdown-item" href="{{ url_for('export_pdf', report_type='assets') }}">Assets</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-3 col-md-6 mb-3">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <i class="fas fa-chart-pie fa-3x text-success mb-3"></i>
+                <h5>Analytics Dashboard</h5>
+                <p class="text-muted">View interactive charts and graphs with real-time data</p>
+                <form method="POST" action="{{ url_for('generate_report') }}" class="d-inline">
+                    <input type="hidden" name="report_type" value="all">
+                    <button type="submit" class="btn btn-outline-success">
+                        View Analytics
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-3 col-md-6 mb-3">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <i class="fas fa-calendar-alt fa-3x text-warning mb-3"></i>
+                <h5>Scheduled Reports</h5>
+                <p class="text-muted">Set up automated reports for regular monitoring</p>
+                <button class="btn btn-outline-warning" disabled>
+                    Coming Soon
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-5">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">Report Features</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6><i class="fas fa-check-circle text-success me-2"></i>Available Features</h6>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-chart-bar me-2 text-primary"></i>Interactive charts and graphs</li>
+                            <li><i class="fas fa-filter me-2 text-primary"></i>Date range filtering</li>
+                            <li><i class="fas fa-download me-2 text-primary"></i>CSV and PDF export</li>
+                            <li><i class="fas fa-users me-2 text-primary"></i>Role-based data access</li>
+                            <li><i class="fas fa-tachometer-alt me-2 text-primary"></i>Real-time analytics</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <h6><i class="fas fa-info-circle text-info me-2"></i>Report Types</h6>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-tasks me-2 text-secondary"></i>Task completion and priority analysis</li>
+                            <li><i class="fas fa-rocket me-2 text-secondary"></i>Deployment success rate tracking</li>
+                            <li><i class="fas fa-exclamation-triangle me-2 text-secondary"></i>Incident severity and resolution metrics</li>
+                            <li><i class="fas fa-server me-2 text-secondary"></i>Asset inventory and criticality overview</li>
+                            <li><i class="fas fa-chart-line me-2 text-secondary"></i>Combined analytics dashboard</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
