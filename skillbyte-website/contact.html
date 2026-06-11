@@ -13,6 +13,9 @@
 </head>
 <body>
 
+  <!-- WebGL particle background (rendered by assets/js/three-scene.js) -->
+  <canvas id="bg-canvas" aria-hidden="true"></canvas>
+
   <header class="nav">
     <div class="container nav__inner">
       <a href="index.html" class="brand" aria-label="SkillByte home">
@@ -192,6 +195,10 @@
     </div>
   </footer>
 
+  <script type="importmap">
+    { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js" } }
+  </script>
+  <script type="module" src="assets/js/three-scene.js"></script>
   <script src="assets/js/main.js" defer></script>
 </body>
 </html>

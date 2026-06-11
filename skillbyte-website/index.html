@@ -13,6 +13,9 @@
 </head>
 <body>
 
+  <!-- WebGL particle background (rendered by assets/js/three-scene.js) -->
+  <canvas id="bg-canvas" aria-hidden="true"></canvas>
+
   <!-- ============================ NAV ============================ -->
   <header class="nav">
     <div class="container nav__inner">
@@ -88,39 +91,9 @@
           </div>
         </div>
 
-        <!-- visual -->
+        <!-- visual: live Three.js scene with glass overlays -->
         <div class="hero__visual reveal" data-delay="2" aria-hidden="true">
-          <div class="glass hero__card-main">
-            <div class="hc-row">
-              <div class="hc-avatar">SB</div>
-              <div class="hc-meta">
-                <strong>Senior Cloud Engineer</strong>
-                <span>Matched in 9 days · Remote</span>
-              </div>
-              <span class="hc-tag" style="margin-left:auto">Available</span>
-            </div>
-            <div>
-              <div style="display:flex;justify-content:space-between;font-size:.82rem;color:var(--text-muted);margin-bottom:6px">
-                <span>Skill match</span><span style="color:var(--primary);font-weight:700">96%</span>
-              </div>
-              <div class="hc-bar"><i style="width:96%"></i></div>
-            </div>
-            <div class="hc-skills">
-              <span class="hc-tag">AWS</span>
-              <span class="hc-tag">Kubernetes</span>
-              <span class="hc-tag">Terraform</span>
-              <span class="hc-tag">Go</span>
-              <span class="hc-tag">CI/CD</span>
-            </div>
-            <div class="hc-row" style="margin-top:auto">
-              <div class="hc-avatar alt">AI</div>
-              <div class="hc-meta">
-                <strong>Data / AI Specialist</strong>
-                <span>3 shortlisted candidates</span>
-              </div>
-              <span class="hc-tag" style="margin-left:auto">Vetted</span>
-            </div>
-          </div>
+          <div id="hero-3d" class="hero-3d"></div>
 
           <div class="glass hero__badge">
             <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>
@@ -517,6 +490,10 @@
     </div>
   </footer>
 
+  <script type="importmap">
+    { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js" } }
+  </script>
+  <script type="module" src="assets/js/three-scene.js"></script>
   <script src="assets/js/main.js" defer></script>
 </body>
 </html>
