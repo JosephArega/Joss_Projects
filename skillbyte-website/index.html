@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SkillByte — Connect Skilled Tech Talent with Teams That Build the Future</title>
+  <meta name="description" content="SkillByte connects companies with elite, vetted technology talent and delivers IT consulting, custom software, cloud, data & AI solutions, and upskilling programs." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%236d28d9'/%3E%3Cpath d='M11 9l-4 7 4 7M21 9l4 7-4 7M18 8l-4 16' stroke='white' stroke-width='2.2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
+</head>
+<body>
+
+  <!-- WebGL particle background (rendered by assets/js/three-scene.js) -->
+  <canvas id="bg-canvas" aria-hidden="true"></canvas>
+
+  <!-- ============================ NAV ============================ -->
+  <header class="nav">
+    <div class="container nav__inner">
+      <a href="index.html" class="brand" aria-label="SkillByte home">
+        <span class="brand__mark" aria-hidden="true">
+          <svg viewBox="0 0 32 32" fill="none"><path d="M11 9l-4 7 4 7M21 9l4 7-4 7M18 8l-4 16" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        SkillByte
+      </a>
+
+      <nav class="nav__menu" aria-label="Primary">
+        <a class="nav__link active" href="index.html">Home</a>
+        <a class="nav__link" href="services.html">Services</a>
+        <a class="nav__link" href="about.html">About</a>
+        <a class="nav__link" href="index.html#process">How it works</a>
+        <a class="nav__link" href="index.html#testimonials">Clients</a>
+      </nav>
+
+      <div class="nav__cta">
+        <a class="btn btn--ghost" href="contact.html">Get in touch</a>
+        <a class="btn btn--primary" href="contact.html#start">Hire talent</a>
+        <button class="nav__toggle" aria-label="Open menu" aria-expanded="false"><span></span></button>
+      </div>
+    </div>
+
+    <!-- mobile panel -->
+    <div class="nav__panel">
+      <a class="nav__link" href="index.html">Home</a>
+      <a class="nav__link" href="services.html">Services</a>
+      <a class="nav__link" href="about.html">About</a>
+      <a class="nav__link" href="index.html#process">How it works</a>
+      <a class="nav__link" href="index.html#testimonials">Clients</a>
+      <a class="btn btn--primary" href="contact.html#start">Hire talent</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- ============================ HERO ============================ -->
+    <section class="hero">
+      <div class="hero__bg"></div>
+      <div class="hero__grid-lines"></div>
+      <div class="container hero__inner">
+        <div class="hero__copy">
+          <span class="eyebrow reveal">Tech talent · delivered</span>
+          <h1 class="reveal" data-delay="1">
+            Connect with <span class="grad-text">skilled tech talent</span> that builds the future.
+          </h1>
+          <p class="hero__sub reveal" data-delay="2">
+            SkillByte pairs ambitious companies with elite, pre-vetted engineers, designers, and
+            data specialists — and delivers the consulting, software, and upskilling to make them thrive.
+          </p>
+          <div class="hero__actions reveal" data-delay="3">
+            <a class="btn btn--primary btn--lg" href="contact.html#start">
+              Hire vetted talent
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+            <a class="btn btn--ghost btn--lg" href="services.html">Explore services</a>
+          </div>
+
+          <div class="hero__stats reveal" data-delay="4">
+            <div class="hero__stat">
+              <div class="num"><span data-count="500" data-suffix="+">0</span></div>
+              <div class="label">Experts placed</div>
+            </div>
+            <div class="hero__stat">
+              <div class="num"><span data-count="98" data-suffix="%">0</span></div>
+              <div class="label">Client retention</div>
+            </div>
+            <div class="hero__stat">
+              <div class="num"><span data-count="14" data-suffix="d">0</span></div>
+              <div class="label">Avg. time to hire</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- visual: live Three.js scene with glass overlays -->
+        <div class="hero__visual reveal" data-delay="2" aria-hidden="true">
+          <div id="hero-3d" class="hero-3d"></div>
+
+          <div class="glass hero__badge">
+            <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>
+            <div>
+              <strong><span data-count="500" data-suffix="+">0</span></strong>
+              <span>placements</span>
+            </div>
+          </div>
+
+          <div class="glass hero__chip">
+            <span class="dot"></span> 32 specialists online now
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ TRUST ============================ -->
+    <section class="trust">
+      <div class="container">
+        <p class="trust__label">Trusted by fast-moving teams &amp; scale-ups</p>
+        <div class="trust__logos">
+          <span class="trust__logo"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>Northwind</span>
+          <span class="trust__logo"><svg viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="3" width="18" height="18" rx="5"/></svg>Quantia</span>
+          <span class="trust__logo"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l9 18H3z"/></svg>Apex Labs</span>
+          <span class="trust__logo"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7 7 .5-5.5 4.5L18 21l-6-4-6 4 1.5-7L2 9.5 9 9z"/></svg>Lumen</span>
+          <span class="trust__logo"><svg viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="6" width="18" height="12" rx="6"/></svg>Cobalt</span>
+          <span class="trust__logo"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="8" cy="12" r="6"/><circle cx="16" cy="12" r="6"/></svg>Vantage</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ SERVICES ============================ -->
+    <section class="section" id="services">
+      <div class="container">
+        <div class="section-head center reveal">
+          <span class="eyebrow">What we do</span>
+          <h2>One partner for talent, delivery &amp; growth</h2>
+          <p>From the perfect hire to the product they ship, SkillByte covers the full lifecycle of building a world-class technology team.</p>
+        </div>
+
+        <div class="grid grid--3">
+          <article class="card reveal">
+            <div class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+            <h3>Talent &amp; staff augmentation</h3>
+            <p>Plug pre-vetted engineers, designers, and PMs straight into your team — contract, contract-to-hire, or permanent.</p>
+            <ul class="card__list">
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Top 3% screened candidates</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Shortlists in days, not weeks</li>
+            </ul>
+            <a class="link-arrow card__more" href="services.html#talent">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          </article>
+
+          <article class="card reveal" data-delay="1">
+            <div class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+            <h3>Custom software development</h3>
+            <p>Dedicated squads design, build, and ship reliable web, mobile, and platform products on your timeline.</p>
+            <ul class="card__list">
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Full-stack product squads</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Agile delivery, real ownership</li>
+            </ul>
+            <a class="link-arrow card__more" href="services.html#software">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          </article>
+
+          <article class="card reveal" data-delay="2">
+            <div class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg></div>
+            <h3>Cloud &amp; DevOps</h3>
+            <p>Modernise infrastructure, automate delivery pipelines, and run resilient, cost-efficient cloud platforms.</p>
+            <ul class="card__list">
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>AWS · Azure · GCP</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Kubernetes &amp; IaC</li>
+            </ul>
+            <a class="link-arrow card__more" href="services.html#cloud">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          </article>
+
+          <article class="card reveal">
+            <div class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg></div>
+            <h3>Data &amp; AI solutions</h3>
+            <p>Turn raw data into decisions with analytics, ML, and applied AI built for production — not slideware.</p>
+            <ul class="card__list">
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Pipelines &amp; dashboards</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>LLM &amp; ML integration</li>
+            </ul>
+            <a class="link-arrow card__more" href="services.html#data">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          </article>
+
+          <article class="card reveal" data-delay="1">
+            <div class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
+            <h3>IT consulting &amp; strategy</h3>
+            <p>Architecture reviews, modernisation roadmaps, and fractional tech leadership to point your build in the right direction.</p>
+            <ul class="card__list">
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Architecture &amp; audits</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Fractional CTO / leadership</li>
+            </ul>
+            <a class="link-arrow card__more" href="services.html#consulting">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          </article>
+
+          <article class="card reveal" data-delay="2">
+            <div class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10L12 5 2 10l10 5 10-5z"/><path d="M6 12v5c0 1 3 3 6 3s6-2 6-3v-5"/></svg></div>
+            <h3>Training &amp; upskilling</h3>
+            <p>Bootcamps and tailored learning paths that level up your existing team on the skills that matter most.</p>
+            <ul class="card__list">
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Hands-on, role-based tracks</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Mentorship &amp; certification</li>
+            </ul>
+            <a class="link-arrow card__more" href="services.html#training">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ FEATURE SPLIT ============================ -->
+    <section class="section section--soft">
+      <div class="container split">
+        <div class="split__copy reveal">
+          <span class="eyebrow">Why SkillByte</span>
+          <h2 style="font-size:clamp(2rem,4.4vw,3.1rem);margin:18px 0 14px">Talent you can trust, delivery you can measure.</h2>
+          <p class="lead">We obsess over fit. Every specialist is screened for skill, communication, and culture — then backed by a delivery process that keeps work visible and on track.</p>
+
+          <div class="feature-list">
+            <div class="feature-item">
+              <span class="feature-item__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><path d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9a9 9 0 0 1 6.36 2.64"/></svg></span>
+              <div>
+                <h4>Rigorously vetted</h4>
+                <p>A multi-stage technical and behavioural screen means only the top 3% reach your inbox.</p>
+              </div>
+            </div>
+            <div class="feature-item">
+              <span class="feature-item__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span>
+              <div>
+                <h4>Fast by design</h4>
+                <p>Curated shortlists land in days. Most roles are filled in under two weeks.</p>
+              </div>
+            </div>
+            <div class="feature-item">
+              <span class="feature-item__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="10" width="3" height="7"/><rect x="13" y="6" width="3" height="11"/></svg></span>
+              <div>
+                <h4>Transparent delivery</h4>
+                <p>Shared dashboards, weekly demos, and clear metrics — you always know where things stand.</p>
+              </div>
+            </div>
+            <div class="feature-item">
+              <span class="feature-item__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3 7 7 .5-5.5 4.5L18 21l-6-4-6 4 1.5-7L2 9.5 9 9z"/></svg></span>
+              <div>
+                <h4>Long-term partnership</h4>
+                <p>98% of clients come back. We scale with you instead of churning through requisitions.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="split__media reveal" data-delay="1" aria-hidden="true">
+          <div class="media-frame">
+            <div class="dash">
+              <div class="dash__head"><strong>Hiring velocity</strong><span>+38% QoQ</span></div>
+              <div class="dash__bars">
+                <i style="height:45%"></i><i style="height:60%"></i><i style="height:52%"></i>
+                <i style="height:78%"></i><i style="height:66%"></i><i style="height:90%"></i><i style="height:100%"></i>
+              </div>
+            </div>
+            <div class="dash">
+              <div class="dash__head"><strong>Active placements</strong><span>live</span></div>
+              <div class="dash__row"><span class="dash__avatar"></span> Frontend Engineer — Lumen <span class="dash__pill">96% fit</span></div>
+              <div class="dash__row"><span class="dash__avatar"></span> ML Engineer — Quantia <span class="dash__pill">94% fit</span></div>
+              <div class="dash__row"><span class="dash__avatar"></span> DevOps Lead — Apex Labs <span class="dash__pill">92% fit</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ PROCESS ============================ -->
+    <section class="section" id="process">
+      <div class="container">
+        <div class="section-head center reveal">
+          <span class="eyebrow">How it works</span>
+          <h2>From brief to building in four steps</h2>
+          <p>A simple, predictable process that gets the right people working on the right problems — fast.</p>
+        </div>
+
+        <div class="grid grid--4">
+          <div class="step reveal">
+            <div class="step__num">01</div>
+            <h3>Discovery</h3>
+            <p>We dig into your goals, stack, and team culture to define exactly who and what you need.</p>
+          </div>
+          <div class="step reveal" data-delay="1">
+            <div class="step__num">02</div>
+            <h3>Match</h3>
+            <p>Our network and screening engine surface a tight shortlist of pre-vetted specialists.</p>
+          </div>
+          <div class="step reveal" data-delay="2">
+            <div class="step__num">03</div>
+            <h3>Onboard</h3>
+            <p>Interview, choose, and get your new talent integrated and productive within days.</p>
+          </div>
+          <div class="step reveal" data-delay="3">
+            <div class="step__num">04</div>
+            <h3>Scale</h3>
+            <p>We monitor delivery, gather feedback, and grow the team as your roadmap evolves.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ STATS ============================ -->
+    <section class="section section--ink">
+      <div class="container">
+        <div class="section-head center reveal">
+          <span class="eyebrow">By the numbers</span>
+          <h2>Results that compound</h2>
+        </div>
+        <div class="stats">
+          <div class="stat-card reveal">
+            <div class="num"><span data-count="500" data-suffix="+">0</span></div>
+            <div class="label">Specialists placed</div>
+          </div>
+          <div class="stat-card reveal" data-delay="1">
+            <div class="num"><span data-count="120" data-suffix="+">0</span></div>
+            <div class="label">Companies served</div>
+          </div>
+          <div class="stat-card reveal" data-delay="2">
+            <div class="num"><span data-count="98" data-suffix="%">0</span></div>
+            <div class="label">Client retention</div>
+          </div>
+          <div class="stat-card reveal" data-delay="3">
+            <div class="num"><span data-count="14" data-suffix="d">0</span></div>
+            <div class="label">Avg. time to hire</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ TESTIMONIALS ============================ -->
+    <section class="section section--soft" id="testimonials">
+      <div class="container">
+        <div class="section-head center reveal">
+          <span class="eyebrow">Client love</span>
+          <h2>Teams build better with SkillByte</h2>
+          <p>Don't take our word for it — here's what engineering and product leaders say.</p>
+        </div>
+
+        <div class="grid grid--3">
+          <figure class="quote reveal">
+            <div class="quote__stars" aria-label="5 out of 5 stars">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7 7 .5-5.5 4.5L18 21l-6-4-6 4 1.5-7L2 9.5 9 9z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7 7 .5-5.5 4.5L18 21l-6-4-6 4 1.5-7L2 9.5 9 9z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7 7 .5-5.5 4.5L18 21l-6-4-6 4 1.5-7L2 9.5 9 9z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7 7 .5-5.5 4.5L18 21l-6-4-6 4 1.5-7L2 9.5 9 9z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7 7 .5-5.5 4.5L18 21l-6-4-6 4 1.5-7L2 9.5 9 9z"/></svg>
+            </div>
+            <p>"SkillByte filled two senior roles in under two weeks. The candidates were sharp, ready, and a genuine culture fit — it felt like cheating."</p>
+            <figcaption class="quote__by">
+              <span class="quote__avatar">MR</span>
+              <div><strong>Maya Reyes</strong><span>VP Engineering, Quantia</span></div>
+            </figcaption>
+          </figure>
+
+          <figure class="quote reveal" data-delay="1">
+            <div class="quote__stars" aria-label="5 out of 5 stars">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7 7 .5-5.5 4.5L18 21l-6-4-6 4 1.5-7L2 9.5 9 9z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7 7 .5-5.5 4.5L18 21l-6-4-6 4 1.5-7L2 9.5 9 9z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7 7 .5-5.5 4.5L18 21l-6-4-6 4 1.5-7L2 9.5 9 9z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7 7 .5-5.5 4.5L18 21l-6-4-6 4 1.5-7L2 9.5 9 9z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7 7 .5-5.5 4.5L18 21l-6-4-6 4 1.5-7L2 9.5 9 9z"/></svg>
+            </div>
+            <p>"Their squad shipped our platform rebuild ahead of schedule. Transparent, accountable, and genuinely invested in the outcome."</p>
+            <figcaption class="quote__by">
+              <span class="quote__avatar">DT</span>
+              <div><strong>Daniel Tan</strong><span>CTO, Apex Labs</span></div>
+            </figcaption>
+          </figure>
+
+          <figure class="quote reveal" data-delay="2">
+            <div class="quote__stars" aria-label="5 out of 5 stars">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7 7 .5-5.5 4.5L18 21l-6-4-6 4 1.5-7L2 9.5 9 9z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7 7 .5-5.5 4.5L18 21l-6-4-6 4 1.5-7L2 9.5 9 9z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7 7 .5-5.5 4.5L18 21l-6-4-6 4 1.5-7L2 9.5 9 9z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7 7 .5-5.5 4.5L18 21l-6-4-6 4 1.5-7L2 9.5 9 9z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7 7 .5-5.5 4.5L18 21l-6-4-6 4 1.5-7L2 9.5 9 9z"/></svg>
+            </div>
+            <p>"The upskilling program transformed our team's cloud confidence. Six months on, we're shipping infra changes we used to outsource."</p>
+            <figcaption class="quote__by">
+              <span class="quote__avatar">PK</span>
+              <div><strong>Priya Kapoor</strong><span>Head of Platform, Lumen</span></div>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ TECH MARQUEE ============================ -->
+    <section class="section" style="padding-block:clamp(48px,6vw,80px)">
+      <div class="container">
+        <div class="section-head center reveal" style="margin-bottom:36px">
+          <span class="eyebrow">Deep bench</span>
+          <h2 style="font-size:clamp(1.7rem,3.6vw,2.4rem)">Talent across every modern stack</h2>
+        </div>
+      </div>
+      <div class="marquee reveal">
+        <div class="marquee__track">
+          <!-- set A -->
+          <span class="tech-pill"><span class="dot"></span>React</span>
+          <span class="tech-pill"><span class="dot"></span>TypeScript</span>
+          <span class="tech-pill"><span class="dot"></span>Node.js</span>
+          <span class="tech-pill"><span class="dot"></span>Python</span>
+          <span class="tech-pill"><span class="dot"></span>Go</span>
+          <span class="tech-pill"><span class="dot"></span>AWS</span>
+          <span class="tech-pill"><span class="dot"></span>Kubernetes</span>
+          <span class="tech-pill"><span class="dot"></span>PostgreSQL</span>
+          <span class="tech-pill"><span class="dot"></span>Terraform</span>
+          <span class="tech-pill"><span class="dot"></span>Rust</span>
+          <span class="tech-pill"><span class="dot"></span>Next.js</span>
+          <span class="tech-pill"><span class="dot"></span>PyTorch</span>
+          <!-- set B (duplicate for seamless loop) -->
+          <span class="tech-pill"><span class="dot"></span>React</span>
+          <span class="tech-pill"><span class="dot"></span>TypeScript</span>
+          <span class="tech-pill"><span class="dot"></span>Node.js</span>
+          <span class="tech-pill"><span class="dot"></span>Python</span>
+          <span class="tech-pill"><span class="dot"></span>Go</span>
+          <span class="tech-pill"><span class="dot"></span>AWS</span>
+          <span class="tech-pill"><span class="dot"></span>Kubernetes</span>
+          <span class="tech-pill"><span class="dot"></span>PostgreSQL</span>
+          <span class="tech-pill"><span class="dot"></span>Terraform</span>
+          <span class="tech-pill"><span class="dot"></span>Rust</span>
+          <span class="tech-pill"><span class="dot"></span>Next.js</span>
+          <span class="tech-pill"><span class="dot"></span>PyTorch</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ CTA ============================ -->
+    <section class="section" style="padding-top:0">
+      <div class="container">
+        <div class="cta-band reveal">
+          <h2>Ready to build your dream team?</h2>
+          <p>Tell us what you're building. We'll come back within 24 hours with a shortlist or a plan — no obligation.</p>
+          <div class="cta-band__actions">
+            <a class="btn btn--primary btn--lg" href="contact.html#start">Hire vetted talent</a>
+            <a class="btn btn--invert btn--lg" href="contact.html">Book a discovery call</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============================ FOOTER ============================ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div>
+          <a href="index.html" class="brand">
+            <span class="brand__mark" aria-hidden="true">
+              <svg viewBox="0 0 32 32" fill="none"><path d="M11 9l-4 7 4 7M21 9l4 7-4 7M18 8l-4 16" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            SkillByte
+          </a>
+          <p class="footer__about">Connecting skilled tech talent with the teams that build the future. Talent, delivery, and growth — under one roof.</p>
+          <div class="footer__social">
+            <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.76-2.05 4 0 4.74 2.64 4.74 6.06V21H19v-5.4c0-1.29-.02-2.95-1.8-2.95-1.8 0-2.08 1.4-2.08 2.85V21H9z"/></svg></a>
+            <a href="#" aria-label="X"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 2H22l-7 8 8.2 12h-6.4l-5-7.3L6 22H3l7.6-8.7L2 2h6.5l4.6 6.7zm-1.1 18h1.8L7.3 4H5.4z"/></svg></a>
+            <a href="#" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.1-1.47-1.1-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2z"/></svg></a>
+          </div>
+        </div>
+
+        <div class="footer__col">
+          <h5>Services</h5>
+          <a href="services.html#talent">Talent &amp; staffing</a>
+          <a href="services.html#software">Software development</a>
+          <a href="services.html#cloud">Cloud &amp; DevOps</a>
+          <a href="services.html#data">Data &amp; AI</a>
+          <a href="services.html#training">Training</a>
+        </div>
+
+        <div class="footer__col">
+          <h5>Company</h5>
+          <a href="about.html">About us</a>
+          <a href="index.html#process">How it works</a>
+          <a href="index.html#testimonials">Clients</a>
+          <a href="contact.html">Contact</a>
+        </div>
+
+        <div class="footer__col">
+          <h5>Get started</h5>
+          <a href="contact.html#start">Hire talent</a>
+          <a href="contact.html">Book a call</a>
+          <a href="mailto:hello@connectskillbyte.com">hello@connectskillbyte.com</a>
+        </div>
+      </div>
+
+      <div class="footer__bottom">
+        <span>© <span id="year">2026</span> SkillByte. All rights reserved.</span>
+        <span style="display:flex;gap:18px"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Cookies</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <script type="importmap">
+    { "imports": { "three": "./assets/vendor/three.module.js" } }
+  </script>
+  <script type="module" src="assets/js/three-scene.js"></script>
+  <script src="assets/js/main.js" defer></script>
+</body>
+</html>
