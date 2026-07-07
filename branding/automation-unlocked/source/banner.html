@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Automation Unlocked - Channel Banner</title>
+<meta name="hz:slide-selector" content=".banner" />
+<meta name="hz:canvas-width" content="2560" />
+<meta name="hz:canvas-height" content="1440" />
+<link rel="stylesheet" href="poppins-embed.css">
+<style>
+  * { margin:0; padding:0; box-sizing: border-box; }
+  .banner {
+    position: relative;
+    width: 2560px;
+    height: 1440px;
+    background:
+      radial-gradient(circle at 12% 15%, rgba(59,130,246,0.30) 0%, rgba(59,130,246,0) 40%),
+      radial-gradient(circle at 90% 88%, rgba(139,92,246,0.28) 0%, rgba(139,92,246,0) 45%),
+      #0B0F1A;
+    overflow: hidden;
+  }
+  .group {
+    position: absolute;
+    left: 1280px;
+    top: 720px;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    gap: 44px;
+  }
+  .textblock { display: flex; flex-direction: column; gap: 18px; }
+  .wordmark {
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+    font-size: 90px;
+    letter-spacing: -1px;
+    white-space: nowrap;
+    color: #F5F7FA;
+    line-height: 1;
+  }
+  .wordmark .accent {
+    background: linear-gradient(90deg, #3B82F6, #8B5CF6);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .tagline {
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-size: 32px;
+    letter-spacing: 1.5px;
+    color: #22D3EE;
+    white-space: nowrap;
+  }
+</style>
+</head>
+<body>
+<div class="banner" data-canvas-width="2560" data-canvas-height="1440">
+
+  <!-- decorative low-opacity circuit / node pattern, corners only, outside safe area -->
+  <g style="position:absolute;inset:0;">
+    <svg width="2560" height="1440" style="position:absolute;top:0;left:0;">
+      <g stroke="#22D3EE" stroke-width="2" opacity="0.14" fill="none">
+        <path d="M60,60 L60,180 L180,180 L180,140"/>
+        <circle cx="180" cy="140" r="5" fill="#22D3EE"/>
+        <path d="M60,60 L220,60"/>
+        <circle cx="220" cy="60" r="5" fill="#22D3EE"/>
+        <path d="M100,260 L160,260 L160,220"/>
+        <circle cx="100" cy="260" r="4" fill="#22D3EE"/>
+
+        <path d="M2500,1380 L2500,1260 L2380,1260 L2380,1300"/>
+        <circle cx="2380" cy="1300" r="5" fill="#22D3EE"/>
+        <path d="M2500,1380 L2340,1380"/>
+        <circle cx="2340" cy="1380" r="5" fill="#22D3EE"/>
+        <path d="M2460,1180 L2400,1180 L2400,1220"/>
+        <circle cx="2460" cy="1180" r="4" fill="#22D3EE"/>
+      </g>
+    </svg>
+  </g>
+
+  <!-- safe-area content group, centered in the 1546x423 safe zone -->
+  <div class="group">
+    <svg width="220" height="220" viewBox="0 0 480 480" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="lockGradB" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#3B82F6"/>
+          <stop offset="100%" stop-color="#8B5CF6"/>
+        </linearGradient>
+        <linearGradient id="shackleGradB" x1="0%" y1="100%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#3B82F6"/>
+          <stop offset="100%" stop-color="#8B5CF6"/>
+        </linearGradient>
+        <filter id="glowB" x="-80%" y="-80%" width="260%" height="260%">
+          <feGaussianBlur stdDeviation="10" result="blur"/>
+          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+      <rect x="8" y="8" width="464" height="464" rx="96" fill="#0F1522" stroke="url(#shackleGradB)" stroke-opacity="0.4" stroke-width="3"/>
+      <path d="M 172,235 L172,168 A68,68 0 0 1 308,168 L308,210"
+            fill="none" stroke="url(#shackleGradB)" stroke-width="36"
+            stroke-linecap="round" stroke-linejoin="round"/>
+      <rect x="130" y="228" width="220" height="172" rx="34" fill="url(#lockGradB)"/>
+      <circle cx="240" cy="300" r="16" fill="#0F1522"/>
+      <rect x="231" y="304" width="18" height="42" rx="8" fill="#0F1522"/>
+      <polygon points="316,150 372,150 322,232 358,232 274,352 302,250 262,250"
+               fill="#22D3EE" filter="url(#glowB)"/>
+    </svg>
+    <div class="textblock">
+      <div class="wordmark">Automation <span class="accent">Unlocked</span></div>
+      <div class="tagline">AI AUTOMATION TOOLS, WORKFLOWS &amp; TUTORIALS</div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
