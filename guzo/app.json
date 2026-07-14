@@ -1,0 +1,42 @@
+{
+  "expo": {
+    "name": "ጉዞ Guzo",
+    "slug": "guzo",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "dark",
+    "backgroundColor": "#0C120F",
+    "scheme": "guzo",
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "et.guzo.app",
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "Guzo uses your location to show nearby traffic reports and let you report road conditions.",
+        "UIBackgroundModes": ["remote-notification"]
+      }
+    },
+    "android": {
+      "package": "et.guzo.app",
+      "permissions": [
+        "ACCESS_COARSE_LOCATION",
+        "ACCESS_FINE_LOCATION",
+        "POST_NOTIFICATIONS"
+      ]
+    },
+    "plugins": [
+      [
+        "expo-location",
+        {
+          "locationWhenInUsePermission": "Guzo uses your location to show nearby traffic reports and let you report road conditions."
+        }
+      ],
+      "expo-notifications"
+    ],
+    "extra": {
+      "eas": {
+        "projectId": ""
+      }
+    }
+  }
+}

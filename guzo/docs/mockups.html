@@ -1,0 +1,500 @@
+<title>ጉዞ Guzo — UI Mockups</title>
+<style>
+  :root {
+    --ground: #EDF1EC;
+    --ground-2: #E2E9E2;
+    --ink: #17251D;
+    --ink-dim: #5B6E63;
+    --line: #C9D4CB;
+    --amber: #F2A900;
+    --green: #0E7A52;
+    /* the app's own palette — fixed, the phones are always dark */
+    --app-bg: #0C120F;
+    --app-surface: #141C17;
+    --app-card: #1B2620;
+    --app-border: #27362E;
+    --app-text: #F2F5F3;
+    --app-dim: #9DB0A6;
+    --app-amber: #FFB300;
+    --app-amber-ink: #1A1400;
+    --app-green: #0E7A52;
+    --app-green-dark: #0A5C3E;
+    --app-danger: #EF5350;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ground: #0A0F0C;
+      --ground-2: #101712;
+      --ink: #E9EFEA;
+      --ink-dim: #93A69A;
+      --line: #24312A;
+      --amber: #FFB300;
+    }
+  }
+  :root[data-theme="light"] {
+    --ground: #EDF1EC; --ground-2: #E2E9E2; --ink: #17251D;
+    --ink-dim: #5B6E63; --line: #C9D4CB; --amber: #F2A900;
+  }
+  :root[data-theme="dark"] {
+    --ground: #0A0F0C; --ground-2: #101712; --ink: #E9EFEA;
+    --ink-dim: #93A69A; --line: #24312A; --amber: #FFB300;
+  }
+
+  * { box-sizing: border-box; margin: 0; }
+  body {
+    background: var(--ground);
+    color: var(--ink);
+    font-family: "Segoe UI", "Noto Sans Ethiopic", system-ui, -apple-system, sans-serif;
+    padding: 40px 24px 64px;
+  }
+  .wrap { max-width: 1180px; margin: 0 auto; }
+
+  header { display: flex; align-items: center; gap: 18px; margin-bottom: 8px; }
+  header svg { width: 64px; height: 64px; flex: none; }
+  h1 { font-size: 30px; font-weight: 800; letter-spacing: -0.02em; text-wrap: balance; }
+  h1 .am { color: var(--green); }
+  .tagline { color: var(--ink-dim); font-size: 14.5px; margin-top: 4px; max-width: 62ch; }
+
+  .swatches { display: flex; gap: 8px; align-items: center; margin: 22px 0 34px; flex-wrap: wrap; }
+  .swatch { display: flex; align-items: center; gap: 7px; font-family: ui-monospace, Menlo, monospace; font-size: 11.5px; color: var(--ink-dim); }
+  .swatch i { width: 18px; height: 18px; border-radius: 5px; border: 1px solid var(--line); }
+
+  .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 34px 26px; }
+  figure { display: flex; flex-direction: column; gap: 12px; }
+  figcaption { order: -1; }
+  .cap-label {
+    font-family: ui-monospace, Menlo, monospace; font-size: 11px;
+    letter-spacing: 0.14em; text-transform: uppercase; color: var(--amber); font-weight: 700;
+  }
+  .cap-title { font-size: 16px; font-weight: 700; margin-top: 2px; }
+  .cap-note { font-size: 12.5px; color: var(--ink-dim); margin-top: 3px; line-height: 1.45; }
+
+  /* ---------- phone frame ---------- */
+  .phone {
+    width: 296px; margin: 0 auto;
+    border-radius: 40px; padding: 9px;
+    background: #060907;
+    box-shadow: 0 24px 48px -20px rgba(0,0,0,0.45), 0 0 0 1px var(--line);
+  }
+  .screen {
+    position: relative; height: 600px; overflow: hidden;
+    border-radius: 32px; background: var(--app-bg);
+    color: var(--app-text); font-size: 13px;
+    display: flex; flex-direction: column;
+  }
+  .notch {
+    position: absolute; top: 8px; left: 50%; transform: translateX(-50%);
+    width: 84px; height: 18px; border-radius: 10px; background: #060907; z-index: 30;
+  }
+
+  /* ---------- map ---------- */
+  .map {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(circle at 52% 56%, transparent 33%, #1D2A23 33.6%, #1D2A23 35.2%, transparent 35.8%),
+      linear-gradient(64deg, transparent 47.4%, #1D2A23 47.8%, #223129 49%, #1D2A23 50.2%, transparent 50.6%),
+      linear-gradient(-18deg, transparent 55.4%, #1D2A23 55.8%, #1D2A23 57.2%, transparent 57.6%),
+      linear-gradient(102deg, transparent 25.4%, #1A2620 25.8%, #1A2620 26.8%, transparent 27.2%),
+      linear-gradient(85deg, transparent 71.4%, #1A2620 71.8%, #1A2620 72.8%, transparent 73.2%),
+      linear-gradient(-62deg, transparent 34.4%, #1A2620 34.8%, #1A2620 35.8%, transparent 36.2%),
+      #101915;
+  }
+  .map.dim::after { content: ""; position: absolute; inset: 0; background: rgba(0,0,0,0.55); }
+
+  .pin {
+    position: absolute; width: 36px; height: 36px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; border: 2px solid var(--app-bg); z-index: 5;
+  }
+  .pin.hi { border: 3px solid var(--app-amber); }
+  .me {
+    position: absolute; width: 14px; height: 14px; border-radius: 50%;
+    background: #4FC3F7; border: 3px solid #fff; z-index: 5;
+  }
+
+  /* ---------- shared app pieces ---------- */
+  .appbar {
+    position: relative; z-index: 10; display: flex; align-items: center; gap: 8px;
+    padding: 34px 14px 6px;
+  }
+  .brand { color: var(--app-amber); font-weight: 900; font-size: 21px; text-shadow: 0 1px 6px rgba(0,0,0,0.6); }
+  .lang {
+    margin-left: auto; background: var(--app-surface); border: 1px solid var(--app-border);
+    border-radius: 999px; padding: 6px 13px; font-weight: 800; font-size: 12px;
+  }
+  .chips { position: relative; z-index: 10; display: flex; gap: 6px; padding: 8px 14px; overflow: hidden; }
+  .chip {
+    flex: none; background: var(--app-surface); border: 1px solid var(--app-border);
+    color: var(--app-dim); border-radius: 999px; padding: 6px 12px;
+    font-size: 11px; font-weight: 700; white-space: nowrap;
+  }
+  .chip.on { background: var(--app-amber); border-color: var(--app-amber); color: var(--app-amber-ink); }
+  .chip.grn { background: var(--app-green); border-color: var(--app-green); color: var(--app-text); }
+
+  .fab {
+    position: absolute; bottom: 66px; left: 50%; transform: translateX(-50%); z-index: 10;
+    background: var(--app-amber); color: var(--app-amber-ink);
+    border-radius: 999px; padding: 14px 26px; font-size: 16px; font-weight: 900;
+    box-shadow: 0 8px 18px rgba(0,0,0,0.5);
+  }
+
+  .tabbar {
+    margin-top: auto; position: relative; z-index: 10;
+    display: flex; border-top: 1px solid var(--app-border); background: var(--app-surface);
+  }
+  .tab { flex: 1; text-align: center; padding: 9px 0 12px; color: var(--app-dim); font-size: 10px; font-weight: 700; }
+  .tab b { display: block; font-size: 17px; margin-bottom: 2px; }
+  .tab.on { color: var(--app-amber); }
+
+  /* ---------- report sheet ---------- */
+  .sheet {
+    position: absolute; left: 0; right: 0; bottom: 0; z-index: 20;
+    background: var(--app-surface); border-radius: 22px 22px 0 0; padding: 10px 14px 18px;
+  }
+  .handle { width: 44px; height: 5px; border-radius: 3px; background: var(--app-border); margin: 0 auto 10px; }
+  .sheet h3 { font-size: 17px; font-weight: 800; margin-bottom: 12px; }
+  .typegrid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .type {
+    display: flex; align-items: center; gap: 8px; min-height: 52px;
+    background: var(--app-bg); border: 2px solid var(--app-border); border-radius: 13px;
+    padding: 8px 10px; color: var(--app-dim); font-size: 11.5px; font-weight: 700;
+  }
+  .type span { font-size: 19px; }
+  .type.sel { border-color: #5C6BC0; background: var(--app-card); color: var(--app-text); }
+  .field {
+    margin-top: 10px; background: var(--app-bg); border: 1px solid var(--app-border);
+    border-radius: 13px; padding: 11px 12px; color: var(--app-dim); font-size: 12px;
+  }
+  .hint { color: var(--app-dim); font-size: 10.5px; margin: 9px 2px; }
+  .primary {
+    background: var(--app-amber); color: var(--app-amber-ink); border-radius: 13px;
+    text-align: center; padding: 13px; font-size: 15px; font-weight: 900;
+  }
+
+  /* ---------- detail card ---------- */
+  .detail {
+    position: absolute; left: 10px; right: 10px; bottom: 58px; z-index: 20;
+    background: var(--app-surface); border: 1px solid var(--app-border);
+    border-radius: 18px; padding: 14px; display: flex; flex-direction: column; gap: 8px;
+  }
+  .drow { display: flex; align-items: center; gap: 9px; }
+  .drow .big { font-size: 26px; }
+  .dtitle { font-weight: 800; font-size: 15px; }
+  .dmeta { color: var(--app-dim); font-size: 11px; margin-top: 1px; }
+  .dx { margin-left: auto; color: var(--app-dim); font-size: 15px; }
+  .badge {
+    align-self: flex-start; background: var(--app-amber); color: var(--app-amber-ink);
+    border-radius: 999px; padding: 3px 10px; font-size: 10.5px; font-weight: 800;
+  }
+  .dnote { font-size: 12.5px; line-height: 1.45; }
+  .dcount { color: var(--app-dim); font-size: 11px; }
+  .voterow { display: flex; gap: 8px; }
+  .vote { flex: 1; border-radius: 12px; text-align: center; padding: 12px 0; font-weight: 800; font-size: 13px; }
+  .vote.yes { background: var(--app-green); }
+  .vote.no { border: 1.5px solid var(--app-danger); color: var(--app-danger); }
+
+  /* ---------- lists / cards ---------- */
+  .pad { padding: 34px 14px 8px; position: relative; z-index: 10; }
+  .h2 { font-size: 19px; font-weight: 900; }
+  .tipcard {
+    margin: 0 12px 9px; background: var(--app-card); border: 1px solid var(--app-border);
+    border-radius: 13px; padding: 12px; display: flex; flex-direction: column; gap: 8px;
+  }
+  .tipbody { font-size: 12.5px; line-height: 1.5; }
+  .tipfoot { display: flex; justify-content: space-between; align-items: center; color: var(--app-dim); font-size: 10.5px; }
+  .up { color: var(--app-amber); font-weight: 800; font-size: 12px; }
+  .composer {
+    margin-top: auto; border-top: 1px solid var(--app-border); background: var(--app-surface);
+    padding: 10px 12px; display: flex; gap: 8px; align-items: center;
+  }
+  .composer .field { flex: 1; margin: 0; }
+  .send { background: var(--app-amber); color: var(--app-amber-ink); border-radius: 12px; padding: 11px 15px; font-weight: 900; font-size: 12.5px; }
+
+  /* ---------- route ---------- */
+  .q { color: var(--app-amber); font-weight: 800; font-size: 15px; margin-top: 8px; }
+  .sub { color: var(--app-dim); font-size: 11px; margin: 4px 0 10px; }
+  .verdict { margin: 0 14px 10px; border-radius: 13px; padding: 12px 14px; position: relative; z-index: 10; }
+  .verdict.warn { background: #4A3200; }
+  .verdict.ok { background: var(--app-green-dark); }
+  .vdest { color: var(--app-dim); font-size: 11.5px; font-weight: 700; }
+  .vmsg { font-size: 14px; font-weight: 800; margin-top: 3px; }
+  .hitcard {
+    margin: 0 14px 8px; background: var(--app-card); border: 1px solid var(--app-border);
+    border-radius: 13px; padding: 11px; display: flex; gap: 9px; position: relative; z-index: 10;
+  }
+  .hitcard .big { font-size: 19px; }
+  .htitle { font-weight: 800; font-size: 13px; }
+  .hmeta { color: var(--app-dim); font-size: 10.5px; margin-top: 2px; }
+
+  /* ---------- settings ---------- */
+  .slabel { color: var(--app-amber); font-size: 10.5px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; margin: 14px 14px 7px; }
+  .srow { display: flex; gap: 6px; padding: 0 14px; }
+  .setcard {
+    margin: 10px 14px 0; background: var(--app-surface); border: 1px solid var(--app-border);
+    border-radius: 13px; padding: 12px; display: flex; align-items: center; justify-content: space-between;
+  }
+  .setname { font-weight: 700; font-size: 13px; }
+  .setsub { color: var(--app-dim); font-size: 10.5px; margin-top: 3px; }
+  .toggle { width: 40px; height: 23px; border-radius: 999px; background: var(--app-green); position: relative; flex: none; }
+  .toggle::after { content: ""; position: absolute; top: 2.5px; right: 3px; width: 18px; height: 18px; border-radius: 50%; background: var(--app-amber); }
+  .today { color: var(--app-dim); font-size: 11px; margin: 7px 14px 0; }
+
+  footer { margin-top: 44px; color: var(--ink-dim); font-size: 12.5px; border-top: 1px solid var(--line); padding-top: 16px; }
+</style>
+
+<div class="wrap">
+  <header>
+    <svg viewBox="0 0 512 512" role="img" aria-label="Guzo app icon">
+      <rect width="512" height="512" rx="112" fill="#0C120F"/>
+      <circle cx="256" cy="256" r="176" fill="none" stroke="#0E7A52" stroke-width="40"/>
+      <circle cx="256" cy="256" r="176" fill="none" stroke="#FFB300" stroke-width="8"/>
+      <g stroke="#0E7A52" stroke-width="30" stroke-linecap="round">
+        <line x1="256" y1="256" x2="256" y2="120"/>
+        <line x1="256" y1="256" x2="139" y2="324"/>
+        <line x1="256" y1="256" x2="373" y2="324"/>
+      </g>
+      <path fill="#FFB300" d="M256 186l16.5 50.7h53.3l-43.1 31.3 16.4 50.7-43.1-31.3-43.1 31.3 16.4-50.7-43.1-31.3h53.3z"/>
+    </svg>
+    <div>
+      <h1><span class="am">ጉዞ</span> Guzo — UI Mockups</h1>
+      <p class="tagline">Community traffic intelligence for Addis Ababa drivers. Dark-first for windshield glare and night driving; every control sized for one thumb while parked.</p>
+    </div>
+  </header>
+
+  <div class="swatches">
+    <span class="swatch"><i style="background:#0C120F"></i>#0C120F ground</span>
+    <span class="swatch"><i style="background:#0E7A52"></i>#0E7A52 green</span>
+    <span class="swatch"><i style="background:#FFB300"></i>#FFB300 amber</span>
+    <span class="swatch"><i style="background:#141C17"></i>#141C17 surface</span>
+    <span class="swatch"><i style="background:#9DB0A6"></i>#9DB0A6 dim text</span>
+  </div>
+
+  <div class="gallery">
+
+    <!-- 1 · HOME MAP -->
+    <figure>
+      <figcaption>
+        <div class="cap-label">Screen 01 · ካርታ</div>
+        <div class="cap-title">Home map — live feed</div>
+        <div class="cap-note">Color-coded pins, amber ring = 3+ confirmations. Filter chips, EN⇄አማ toggle, amber report FAB. Long-press the map to report a spot.</div>
+      </figcaption>
+      <div class="phone"><div class="screen">
+        <div class="notch"></div>
+        <div class="map"></div>
+        <div class="pin hi" style="top:180px;left:190px;background:#FFB300">🚗</div>
+        <div class="pin" style="top:250px;left:80px;background:#5C6BC0">👮</div>
+        <div class="pin" style="top:330px;left:150px;background:#EF5350">💥</div>
+        <div class="pin" style="top:395px;left:60px;background:#26C6DA">🌊</div>
+        <div class="pin hi" style="top:135px;left:90px;background:#FF7043">🚧</div>
+        <div class="pin" style="top:300px;left:225px;background:#A1887F">🕳️</div>
+        <div class="me" style="top:365px;left:170px"></div>
+        <div class="appbar"><span class="brand">ጉዞ</span><span class="lang">አማ</span></div>
+        <div class="chips">
+          <span class="chip on">All</span><span class="chip">🚗 Traffic</span>
+          <span class="chip">👮 Police</span><span class="chip">🚧 Blocked</span>
+        </div>
+        <div class="fab">＋ Report</div>
+        <div class="tabbar">
+          <div class="tab on"><b>🗺</b>Map</div><div class="tab"><b>💬</b>Tips</div>
+          <div class="tab"><b>🧭</b>Route</div><div class="tab"><b>⚙️</b>Settings</div>
+        </div>
+      </div></div>
+    </figure>
+
+    <!-- 2 · REPORT SHEET -->
+    <figure>
+      <figcaption>
+        <div class="cap-label">Screen 02 · ሪፖርት</div>
+        <div class="cap-title">Report modal — bottom sheet</div>
+        <div class="cap-note">Eight quick-tap types on 52 dp targets; two taps to file. Note optional (required for 💬 tips). Anonymous by default.</div>
+      </figcaption>
+      <div class="phone"><div class="screen">
+        <div class="notch"></div>
+        <div class="map dim"></div>
+        <div class="sheet">
+          <div class="handle"></div>
+          <h3>መንገዱ ላይ ምን አለ?</h3>
+          <div class="typegrid">
+            <div class="type"><span>🚗</span>የትራፊክ መጨናነቅ</div>
+            <div class="type sel"><span>👮</span>የትራፊክ ፖሊስ</div>
+            <div class="type"><span>🚧</span>የተዘጋ መንገድ</div>
+            <div class="type"><span>🕳️</span>ጉድጓድ</div>
+            <div class="type"><span>🌊</span>ጎርፍ</div>
+            <div class="type"><span>💥</span>አደጋ</div>
+            <div class="type"><span>⛽</span>የነዳጅ ወረፋ</div>
+            <div class="type"><span>💬</span>የአሽከርካሪ ምክር</div>
+          </div>
+          <div class="field">ማስታወሻ ይጨምሩ (አማራጭ)…</div>
+          <div class="hint">📍 አሁን ባሉበት ቦታ ተመልክቷል</div>
+          <div class="primary">ሪፖርት ላክ</div>
+        </div>
+      </div></div>
+    </figure>
+
+    <!-- 3 · VERIFY -->
+    <figure>
+      <figcaption>
+        <div class="cap-label">Screen 03 · ማረጋገጫ</div>
+        <div class="cap-title">Report detail — community verification</div>
+        <div class="cap-note">"Still there" extends the report 20 min; 3+ confirms earn the verified badge, 3+ dismissals hide it. Reports auto-fade after 30 min.</div>
+      </figcaption>
+      <div class="phone"><div class="screen">
+        <div class="notch"></div>
+        <div class="map"></div>
+        <div class="pin hi" style="top:150px;left:130px;background:#5C6BC0">👮</div>
+        <div class="me" style="top:250px;left:170px"></div>
+        <div class="appbar"><span class="brand">ጉዞ</span><span class="lang">EN</span></div>
+        <div class="detail">
+          <div class="drow">
+            <span class="big">👮</span>
+            <div>
+              <div class="dtitle">የትራፊክ ፖሊስ</div>
+              <div class="dmeta">Bole Medhanealem · ከ12 ደቂቃ በፊት</div>
+            </div>
+            <span class="dx">✕</span>
+          </div>
+          <span class="badge">⭐ በማህበረሰቡ የተረጋገጠ</span>
+          <div class="dnote">"Checking bolo and seatbelts"</div>
+          <div class="dcount">3 አረጋግጠዋል</div>
+          <div class="voterow">
+            <div class="vote yes">✓ አሁንም አለ</div>
+            <div class="vote no">✗ የለም</div>
+          </div>
+        </div>
+        <div class="tabbar">
+          <div class="tab on"><b>🗺</b>ካርታ</div><div class="tab"><b>💬</b>ምክሮች</div>
+          <div class="tab"><b>🧭</b>መንገድ</div><div class="tab"><b>⚙️</b>ቅንብሮች</div>
+        </div>
+      </div></div>
+    </figure>
+
+    <!-- 4 · TIPS -->
+    <figure>
+      <figcaption>
+        <div class="cap-label">Screen 04 · ምክሮች</div>
+        <div class="cap-title">Tips feed — neighborhood chat board</div>
+        <div class="cap-note">Scrollable community tips geotagged to Bole, Kazanchis, Merkato, Piassa, CMC…; upvotes float the best advice.</div>
+      </figcaption>
+      <div class="phone"><div class="screen">
+        <div class="notch"></div>
+        <div class="pad"><div class="h2">የአሽከርካሪ ምክሮች</div></div>
+        <div class="chips">
+          <span class="chip on">ሁሉም</span><span class="chip">ቦሌ</span>
+          <span class="chip">መርካቶ</span><span class="chip">ፒያሳ</span><span class="chip">መገናኛ</span>
+        </div>
+        <div class="tipcard">
+          <div class="tipbody">Bole road toward the airport is one-way after 6pm this week — use Gerji side.</div>
+          <div class="tipfoot"><span>📍 Bole · 45m · AbebeT</span><span class="up">▲ 14</span></div>
+        </div>
+        <div class="tipcard">
+          <div class="tipbody">መገናኛ አካባቢ ከቀኑ 11 ሰዓት በኋላ በጣም ይጨናነቃል — በ ሲኤምሲ በኩል ይሂዱ።</div>
+          <div class="tipfoot"><span>📍 Megenagna · 1h · ሾፌርX</span><span class="up">▲ 9</span></div>
+        </div>
+        <div class="tipcard">
+          <div class="tipbody">New speed bumps on the CMC–Summit road, unpainted and hard to see at night.</div>
+          <div class="tipfoot"><span>📍 CMC · 5h · ስም-አልባ</span><span class="up">▲ 11</span></div>
+        </div>
+        <div class="composer">
+          <div class="field">ምክር ያካፍሉ…</div>
+          <div class="send">ለጥፍ</div>
+        </div>
+        <div class="tabbar">
+          <div class="tab"><b>🗺</b>ካርታ</div><div class="tab on"><b>💬</b>ምክሮች</div>
+          <div class="tab"><b>🧭</b>መንገድ</div><div class="tab"><b>⚙️</b>ቅንብሮች</div>
+        </div>
+      </div></div>
+    </figure>
+
+    <!-- 5 · ROUTE -->
+    <figure>
+      <figcaption>
+        <div class="cap-label">Screen 05 · መንገድ</div>
+        <div class="cap-title">Route advisory</div>
+        <div class="cap-note">"Where are you going?" — checks active reports along a corridor to the destination. Green card when clear; amber with the list when not.</div>
+      </figcaption>
+      <div class="phone"><div class="screen">
+        <div class="notch"></div>
+        <div class="pad">
+          <div class="h2">የመንገድ ምክር</div>
+          <div class="q">ወዴት እየሄዱ ነው?</div>
+          <div class="sub">📍 አሁን ካሉበት ቦታ</div>
+          <div class="field">🔍 CMC</div>
+        </div>
+        <div style="height:10px"></div>
+        <div class="verdict warn">
+          <div class="vdest">→ ሲኤምሲ (CMC)</div>
+          <div class="vmsg">⚠ በመንገድዎ ላይ 2 ሪፖርቶች አሉ</div>
+        </div>
+        <div class="hitcard">
+          <span class="big">🚗</span>
+          <div>
+            <div class="htitle">የትራፊክ መጨናነቅ</div>
+            <div class="hmeta">Megenagna · ከ6 ደቂቃ በፊት · ከእርስዎ 2.1 ኪ.ሜ</div>
+            <div class="hmeta" style="color:var(--app-text)">Standstill toward CMC, minibuses turning around</div>
+          </div>
+        </div>
+        <div class="hitcard">
+          <span class="big">🕳️</span>
+          <div>
+            <div class="htitle">ጉድጓድ</div>
+            <div class="hmeta">CMC · ከ18 ደቂቃ በፊት · ከእርስዎ 4.8 ኪ.ሜ</div>
+          </div>
+        </div>
+        <div class="verdict ok" style="margin-top:6px">
+          <div class="vdest">→ ቦሌ (alternative)</div>
+          <div class="vmsg">መንገዱ ጥሩ ይመስላል — መልካም ጉዞ! ✓</div>
+        </div>
+        <div class="tabbar">
+          <div class="tab"><b>🗺</b>ካርታ</div><div class="tab"><b>💬</b>ምክሮች</div>
+          <div class="tab on"><b>🧭</b>መንገድ</div><div class="tab"><b>⚙️</b>ቅንብሮች</div>
+        </div>
+      </div></div>
+    </figure>
+
+    <!-- 6 · SETTINGS -->
+    <figure>
+      <figcaption>
+        <div class="cap-label">Screen 06 · ቅንብሮች</div>
+        <div class="cap-title">Settings — language, calendar, alerts, profile</div>
+        <div class="cap-note">One-tap Amharic⇄English, Ethiopian calendar (ዓ.ም.), 2 km opt-in alerts, optional nickname + vehicle profile with reputation.</div>
+      </figcaption>
+      <div class="phone"><div class="screen">
+        <div class="notch"></div>
+        <div class="pad"><div class="h2">ቅንብሮች</div></div>
+        <div class="slabel">ቋንቋ</div>
+        <div class="srow"><span class="chip">English</span><span class="chip on">አማርኛ</span></div>
+        <div class="slabel">የቀን አቆጣጠር</div>
+        <div class="srow"><span class="chip">ጎርጎርያን</span><span class="chip on">ዓ.ም.</span></div>
+        <div class="today">ዛሬ፦ ሐምሌ 7, 2018 ዓ.ም.</div>
+        <div class="setcard">
+          <span class="setname">ጨለማ ካርታ</span>
+          <div class="toggle"></div>
+        </div>
+        <div class="setcard">
+          <div>
+            <div class="setname">የአቅራቢያ ማንቂያዎች</div>
+            <div class="setsub">አዲስ ሪፖርት በ2 ኪ.ሜ ውስጥ ሲኖር አሳውቀኝ</div>
+          </div>
+          <div class="toggle"></div>
+        </div>
+        <div class="srow" style="margin-top:8px"><span class="chip">1 km</span><span class="chip on">2 km</span><span class="chip">5 km</span></div>
+        <div class="slabel">የአሽከርካሪ መገለጫ (አማራጭ)</div>
+        <div class="setcard"><span class="setsub">ቅጽል ስም — AbebeT</span></div>
+        <div class="srow" style="margin-top:8px; flex-wrap:wrap; row-gap:6px">
+          <span class="chip on">መኪና</span><span class="chip">ሚኒባስ</span><span class="chip">ታክሲ</span><span class="chip">ባጃጅ</span>
+        </div>
+        <div class="today">የታማኝነት ነጥብ፦ 35 ⭐</div>
+        <div class="tabbar">
+          <div class="tab"><b>🗺</b>ካርታ</div><div class="tab"><b>💬</b>ምክሮች</div>
+          <div class="tab"><b>🧭</b>መንገድ</div><div class="tab on"><b>⚙️</b>ቅንብሮች</div>
+        </div>
+      </div></div>
+    </figure>
+
+  </div>
+
+  <footer>
+    ጉዞ Guzo v0.1 mockups · palette: deep green #0E7A52 + amber #FFB300 on #0C120F ·
+    map: OpenStreetMap (CartoDB dark tiles) · app icon: steering wheel + Ethiopian star.
+  </footer>
+</div>

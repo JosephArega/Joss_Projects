@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- ጉዞ Guzo app icon: steering wheel + Ethiopian star (export to icon.png 1024x1024 for Expo) -->
+  <rect width="512" height="512" rx="112" fill="#0C120F"/>
+  <circle cx="256" cy="256" r="176" fill="none" stroke="#0E7A52" stroke-width="40"/>
+  <circle cx="256" cy="256" r="176" fill="none" stroke="#FFB300" stroke-width="8"/>
+  <!-- wheel spokes -->
+  <g stroke="#0E7A52" stroke-width="30" stroke-linecap="round">
+    <line x1="256" y1="256" x2="256" y2="120"/>
+    <line x1="256" y1="256" x2="139" y2="324"/>
+    <line x1="256" y1="256" x2="373" y2="324"/>
+  </g>
+  <!-- Ethiopian star hub -->
+  <g fill="#FFB300">
+    <path d="M256 186l16.5 50.7h53.3l-43.1 31.3 16.4 50.7-43.1-31.3-43.1 31.3 16.4-50.7-43.1-31.3h53.3z"/>
+  </g>
+</svg>
