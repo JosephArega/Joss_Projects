@@ -13,7 +13,7 @@ def check_permission(current_user_role, required_roles):
 @jwt_required()
 def get_users():
     try:
-        current_user_id = get_jwt_identity()
+        current_user_id = int(get_jwt_identity())
         current_user = User.query.get(current_user_id)
         
         if not check_permission(current_user.role, ['super_admin', 'manager', 'supervisor']):
@@ -29,7 +29,7 @@ def get_users():
 @jwt_required()
 def create_user():
     try:
-        current_user_id = get_jwt_identity()
+        current_user_id = int(get_jwt_identity())
         current_user = User.query.get(current_user_id)
         
         data = request.get_json()
@@ -84,7 +84,7 @@ def create_user():
 @jwt_required()
 def get_user(user_id):
     try:
-        current_user_id = get_jwt_identity()
+        current_user_id = int(get_jwt_identity())
         current_user = User.query.get(current_user_id)
         
         # Users can view their own profile or higher roles can view all
@@ -104,7 +104,7 @@ def get_user(user_id):
 @jwt_required()
 def update_user(user_id):
     try:
-        current_user_id = get_jwt_identity()
+        current_user_id = int(get_jwt_identity())
         current_user = User.query.get(current_user_id)
         
         user = User.query.get(user_id)
@@ -146,7 +146,7 @@ def update_user(user_id):
 @jwt_required()
 def delete_user(user_id):
     try:
-        current_user_id = get_jwt_identity()
+        current_user_id = int(get_jwt_identity())
         current_user = User.query.get(current_user_id)
         
         if not check_permission(current_user.role, ['super_admin', 'manager', 'supervisor']):

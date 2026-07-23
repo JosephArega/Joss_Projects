@@ -38,8 +38,8 @@ const IncidentsPage: React.FC = () => {
   const [formData, setFormData] = useState({
     name: '',
     description: '',
-    severity: 'medium' as const,
-    status: 'open' as const,
+    severity: 'medium',
+    status: 'open',
     incident_date: '',
     assigned_to: '',
   });
@@ -109,7 +109,7 @@ const IncidentsPage: React.FC = () => {
         ...formData,
         incident_date: formData.incident_date || undefined,
         assigned_to: formData.assigned_to ? parseInt(formData.assigned_to) : undefined,
-      };
+      } as Partial<Incident>;
 
       if (editingIncident) {
         await incidentsAPI.updateIncident(editingIncident.id, incidentData);
@@ -276,7 +276,7 @@ const IncidentsPage: React.FC = () => {
         </DialogTitle>
         <DialogContent>
           <Grid container spacing={2} sx={{ mt: 1 }}>
-            <Grid item xs={12}>
+            <Grid size={12}>
               <TextField
                 fullWidth
                 label="Incident Name"
@@ -285,7 +285,7 @@ const IncidentsPage: React.FC = () => {
                 required
               />
             </Grid>
-            <Grid item xs={12}>
+            <Grid size={12}>
               <TextField
                 fullWidth
                 label="Description"
@@ -296,7 +296,7 @@ const IncidentsPage: React.FC = () => {
                 required
               />
             </Grid>
-            <Grid item xs={6}>
+            <Grid size={6}>
               <TextField
                 fullWidth
                 select
@@ -310,7 +310,7 @@ const IncidentsPage: React.FC = () => {
                 <MenuItem value="critical">Critical</MenuItem>
               </TextField>
             </Grid>
-            <Grid item xs={6}>
+            <Grid size={6}>
               <TextField
                 fullWidth
                 select
@@ -324,7 +324,7 @@ const IncidentsPage: React.FC = () => {
                 <MenuItem value="closed">Closed</MenuItem>
               </TextField>
             </Grid>
-            <Grid item xs={6}>
+            <Grid size={6}>
               <TextField
                 fullWidth
                 type="date"
@@ -335,7 +335,7 @@ const IncidentsPage: React.FC = () => {
               />
             </Grid>
             {user?.role !== 'member' && (
-              <Grid item xs={6}>
+              <Grid size={6}>
                 <TextField
                   fullWidth
                   select

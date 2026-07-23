@@ -36,7 +36,7 @@ const DeploymentsPage: React.FC = () => {
   const [formData, setFormData] = useState({
     name: '',
     description: '',
-    status: 'pending' as const,
+    status: 'pending',
     deployment_date: '',
     backup_location: '',
   });
@@ -91,7 +91,7 @@ const DeploymentsPage: React.FC = () => {
       const deploymentData = {
         ...formData,
         deployment_date: formData.deployment_date || undefined,
-      };
+      } as Partial<Deployment>;
 
       if (editingDeployment) {
         await deploymentsAPI.updateDeployment(editingDeployment.id, deploymentData);
@@ -221,7 +221,7 @@ const DeploymentsPage: React.FC = () => {
         </DialogTitle>
         <DialogContent>
           <Grid container spacing={2} sx={{ mt: 1 }}>
-            <Grid item xs={12}>
+            <Grid size={12}>
               <TextField
                 fullWidth
                 label="Deployment Name"
@@ -230,7 +230,7 @@ const DeploymentsPage: React.FC = () => {
                 required
               />
             </Grid>
-            <Grid item xs={12}>
+            <Grid size={12}>
               <TextField
                 fullWidth
                 label="Description"
@@ -240,7 +240,7 @@ const DeploymentsPage: React.FC = () => {
                 onChange={(e) => setFormData({ ...formData, description: e.target.value })}
               />
             </Grid>
-            <Grid item xs={6}>
+            <Grid size={6}>
               <TextField
                 fullWidth
                 select
@@ -253,7 +253,7 @@ const DeploymentsPage: React.FC = () => {
                 <MenuItem value="failed">Failed</MenuItem>
               </TextField>
             </Grid>
-            <Grid item xs={6}>
+            <Grid size={6}>
               <TextField
                 fullWidth
                 type="date"
@@ -263,7 +263,7 @@ const DeploymentsPage: React.FC = () => {
                 onChange={(e) => setFormData({ ...formData, deployment_date: e.target.value })}
               />
             </Grid>
-            <Grid item xs={12}>
+            <Grid size={12}>
               <TextField
                 fullWidth
                 label="Backup Location"

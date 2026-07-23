@@ -12,7 +12,7 @@ def check_permission(current_user_role, required_roles):
 @jwt_required()
 def get_dashboard_data():
     try:
-        current_user_id = get_jwt_identity()
+        current_user_id = int(get_jwt_identity())
         current_user = User.query.get(current_user_id)
         
         data = {}

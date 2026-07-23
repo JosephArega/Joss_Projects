@@ -13,7 +13,7 @@ def check_permission(current_user_role, required_roles):
 @jwt_required()
 def get_incidents():
     try:
-        current_user_id = get_jwt_identity()
+        current_user_id = int(get_jwt_identity())
         current_user = User.query.get(current_user_id)
         
         # Members can only see their assigned or created incidents
@@ -34,7 +34,7 @@ def get_incidents():
 @jwt_required()
 def create_incident():
     try:
-        current_user_id = get_jwt_identity()
+        current_user_id = int(get_jwt_identity())
         current_user = User.query.get(current_user_id)
         
         data = request.get_json()
@@ -82,7 +82,7 @@ def create_incident():
 @jwt_required()
 def get_incident(incident_id):
     try:
-        current_user_id = get_jwt_identity()
+        current_user_id = int(get_jwt_identity())
         current_user = User.query.get(current_user_id)
         
         incident = Incident.query.get(incident_id)
@@ -102,7 +102,7 @@ def get_incident(incident_id):
 @jwt_required()
 def update_incident(incident_id):
     try:
-        current_user_id = get_jwt_identity()
+        current_user_id = int(get_jwt_identity())
         current_user = User.query.get(current_user_id)
         
         incident = Incident.query.get(incident_id)
@@ -160,7 +160,7 @@ def update_incident(incident_id):
 @jwt_required()
 def delete_incident(incident_id):
     try:
-        current_user_id = get_jwt_identity()
+        current_user_id = int(get_jwt_identity())
         current_user = User.query.get(current_user_id)
         
         incident = Incident.query.get(incident_id)

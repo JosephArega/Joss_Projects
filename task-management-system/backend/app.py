@@ -10,6 +10,11 @@ load_dotenv()
 
 app = Flask(__name__)
 
+# Serve routes both with and without a trailing slash. Without this, Flask
+# 308-redirects e.g. /api/tasks -> /api/tasks/, which browsers reject on a
+# CORS preflight ("Redirect is not allowed for a preflight request").
+app.url_map.strict_slashes = False
+
 # Configuration
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'your-secret-key-change-in-production')
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///task_management.db')

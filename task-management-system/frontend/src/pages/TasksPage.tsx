@@ -45,8 +45,8 @@ const TasksPage: React.FC = () => {
   const [formData, setFormData] = useState({
     name: '',
     description: '',
-    priority: 'medium' as const,
-    status: 'pending' as const,
+    priority: 'medium',
+    status: 'pending',
     due_date: '',
     assigned_to: '',
   });
@@ -118,7 +118,7 @@ const TasksPage: React.FC = () => {
         ...formData,
         due_date: formData.due_date || undefined,
         assigned_to: formData.assigned_to ? parseInt(formData.assigned_to) : undefined,
-      };
+      } as Partial<Task>;
 
       if (editingTask) {
         await tasksAPI.updateTask(editingTask.id, taskData);
@@ -267,7 +267,7 @@ const TasksPage: React.FC = () => {
         </DialogTitle>
         <DialogContent>
           <Grid container spacing={2} sx={{ mt: 1 }}>
-            <Grid item xs={12}>
+            <Grid size={12}>
               <TextField
                 fullWidth
                 label="Task Name"
@@ -276,7 +276,7 @@ const TasksPage: React.FC = () => {
                 required
               />
             </Grid>
-            <Grid item xs={12}>
+            <Grid size={12}>
               <TextField
                 fullWidth
                 label="Description"
@@ -286,7 +286,7 @@ const TasksPage: React.FC = () => {
                 onChange={(e) => setFormData({ ...formData, description: e.target.value })}
               />
             </Grid>
-            <Grid item xs={6}>
+            <Grid size={6}>
               <TextField
                 fullWidth
                 select
@@ -300,7 +300,7 @@ const TasksPage: React.FC = () => {
                 <MenuItem value="critical">Critical</MenuItem>
               </TextField>
             </Grid>
-            <Grid item xs={6}>
+            <Grid size={6}>
               <TextField
                 fullWidth
                 select
@@ -314,7 +314,7 @@ const TasksPage: React.FC = () => {
                 <MenuItem value="overdue">Overdue</MenuItem>
               </TextField>
             </Grid>
-            <Grid item xs={6}>
+            <Grid size={6}>
               <TextField
                 fullWidth
                 type="date"
@@ -325,7 +325,7 @@ const TasksPage: React.FC = () => {
               />
             </Grid>
             {user?.role !== 'member' && (
-              <Grid item xs={6}>
+              <Grid size={6}>
                 <TextField
                   fullWidth
                   select

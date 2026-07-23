@@ -13,7 +13,7 @@ def check_permission(current_user_role, required_roles):
 @jwt_required()
 def get_deployments():
     try:
-        current_user_id = get_jwt_identity()
+        current_user_id = int(get_jwt_identity())
         current_user = User.query.get(current_user_id)
         
         # Members can only see their deployments
@@ -31,7 +31,7 @@ def get_deployments():
 @jwt_required()
 def create_deployment():
     try:
-        current_user_id = get_jwt_identity()
+        current_user_id = int(get_jwt_identity())
         
         data = request.get_json()
         
@@ -71,7 +71,7 @@ def create_deployment():
 @jwt_required()
 def get_deployment(deployment_id):
     try:
-        current_user_id = get_jwt_identity()
+        current_user_id = int(get_jwt_identity())
         current_user = User.query.get(current_user_id)
         
         deployment = Deployment.query.get(deployment_id)
@@ -91,7 +91,7 @@ def get_deployment(deployment_id):
 @jwt_required()
 def update_deployment(deployment_id):
     try:
-        current_user_id = get_jwt_identity()
+        current_user_id = int(get_jwt_identity())
         current_user = User.query.get(current_user_id)
         
         deployment = Deployment.query.get(deployment_id)
@@ -140,7 +140,7 @@ def update_deployment(deployment_id):
 @jwt_required()
 def delete_deployment(deployment_id):
     try:
-        current_user_id = get_jwt_identity()
+        current_user_id = int(get_jwt_identity())
         current_user = User.query.get(current_user_id)
         
         deployment = Deployment.query.get(deployment_id)

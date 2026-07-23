@@ -65,7 +65,7 @@ const AssetsPage: React.FC = () => {
     integrity_req: '',
     availability_req: '',
     asset_value: '',
-    asset_value_rating: 'medium' as const,
+    asset_value_rating: 'medium',
     classification: '',
     owner_id: '',
     custodian: '',
@@ -189,7 +189,7 @@ const AssetsPage: React.FC = () => {
         ...formData,
         asset_value: formData.asset_value ? parseFloat(formData.asset_value) : undefined,
         owner_id: formData.owner_id ? parseInt(formData.owner_id) : undefined,
-      };
+      } as Partial<Asset>;
 
       if (editingAsset) {
         await assetsAPI.updateAsset(editingAsset.id, assetData);
@@ -306,7 +306,7 @@ const AssetsPage: React.FC = () => {
               </AccordionSummary>
               <AccordionDetails>
                 <Grid container spacing={2}>
-                  <Grid item xs={6}>
+                  <Grid size={6}>
                     <TextField
                       fullWidth
                       label="Server Name"
@@ -315,7 +315,7 @@ const AssetsPage: React.FC = () => {
                       required
                     />
                   </Grid>
-                  <Grid item xs={6}>
+                  <Grid size={6}>
                     <TextField
                       fullWidth
                       label="Asset ID"
@@ -324,7 +324,7 @@ const AssetsPage: React.FC = () => {
                       required
                     />
                   </Grid>
-                  <Grid item xs={6}>
+                  <Grid size={6}>
                     <TextField
                       fullWidth
                       label="Serial Number"
@@ -332,7 +332,7 @@ const AssetsPage: React.FC = () => {
                       onChange={(e) => setFormData({ ...formData, serial_number: e.target.value })}
                     />
                   </Grid>
-                  <Grid item xs={6}>
+                  <Grid size={6}>
                     <TextField
                       fullWidth
                       label="IP Address"
@@ -351,7 +351,7 @@ const AssetsPage: React.FC = () => {
               </AccordionSummary>
               <AccordionDetails>
                 <Grid container spacing={2}>
-                  <Grid item xs={6}>
+                  <Grid size={6}>
                     <TextField
                       fullWidth
                       label="Make/Model"
@@ -359,7 +359,7 @@ const AssetsPage: React.FC = () => {
                       onChange={(e) => setFormData({ ...formData, make_model: e.target.value })}
                     />
                   </Grid>
-                  <Grid item xs={6}>
+                  <Grid size={6}>
                     <TextField
                       fullWidth
                       label="CPU"
@@ -367,7 +367,7 @@ const AssetsPage: React.FC = () => {
                       onChange={(e) => setFormData({ ...formData, cpu: e.target.value })}
                     />
                   </Grid>
-                  <Grid item xs={6}>
+                  <Grid size={6}>
                     <TextField
                       fullWidth
                       label="RAM"
@@ -375,7 +375,7 @@ const AssetsPage: React.FC = () => {
                       onChange={(e) => setFormData({ ...formData, ram: e.target.value })}
                     />
                   </Grid>
-                  <Grid item xs={6}>
+                  <Grid size={6}>
                     <TextField
                       fullWidth
                       label="HDD"
@@ -394,7 +394,7 @@ const AssetsPage: React.FC = () => {
               </AccordionSummary>
               <AccordionDetails>
                 <Grid container spacing={2}>
-                  <Grid item xs={6}>
+                  <Grid size={6}>
                     <TextField
                       fullWidth
                       label="Asset Type"
@@ -402,7 +402,7 @@ const AssetsPage: React.FC = () => {
                       onChange={(e) => setFormData({ ...formData, asset_type: e.target.value })}
                     />
                   </Grid>
-                  <Grid item xs={6}>
+                  <Grid size={6}>
                     <TextField
                       fullWidth
                       select
@@ -416,7 +416,7 @@ const AssetsPage: React.FC = () => {
                       <MenuItem value="critical">Critical</MenuItem>
                     </TextField>
                   </Grid>
-                  <Grid item xs={12}>
+                  <Grid size={12}>
                     <TextField
                       fullWidth
                       label="Purpose/Service/Role"

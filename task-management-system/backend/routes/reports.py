@@ -27,7 +27,7 @@ def check_permission(current_user_role, required_roles):
 @jwt_required()
 def get_dashboard_data():
     try:
-        current_user_id = get_jwt_identity()
+        current_user_id = int(get_jwt_identity())
         current_user = User.query.get(current_user_id)
         
         data = {}
@@ -134,7 +134,7 @@ def create_chart(chart_type, data, title, labels=None):
 @jwt_required()
 def get_analytics():
     try:
-        current_user_id = get_jwt_identity()
+        current_user_id = int(get_jwt_identity())
         current_user = User.query.get(current_user_id)
         
         if not check_permission(current_user.role, ['manager', 'supervisor']):
@@ -220,7 +220,7 @@ def get_analytics():
 @jwt_required()
 def export_csv():
     try:
-        current_user_id = get_jwt_identity()
+        current_user_id = int(get_jwt_identity())
         current_user = User.query.get(current_user_id)
         
         data = request.get_json()
@@ -300,7 +300,7 @@ def export_csv():
 @jwt_required()
 def export_pdf():
     try:
-        current_user_id = get_jwt_identity()
+        current_user_id = int(get_jwt_identity())
         current_user = User.query.get(current_user_id)
         
         data = request.get_json()

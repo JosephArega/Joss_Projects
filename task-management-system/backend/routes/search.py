@@ -13,7 +13,7 @@ def check_permission(current_user_role, required_roles):
 @jwt_required()
 def global_search():
     try:
-        current_user_id = get_jwt_identity()
+        current_user_id = int(get_jwt_identity())
         current_user = User.query.get(current_user_id)
         
         query = request.args.get('q', '').strip()
@@ -153,7 +153,7 @@ def global_search():
 @jwt_required()
 def search_suggestions():
     try:
-        current_user_id = get_jwt_identity()
+        current_user_id = int(get_jwt_identity())
         current_user = User.query.get(current_user_id)
         
         query = request.args.get('q', '').strip()

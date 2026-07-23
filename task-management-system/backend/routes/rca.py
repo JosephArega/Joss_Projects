@@ -12,7 +12,7 @@ def check_permission(current_user_role, required_roles):
 @jwt_required()
 def get_rcas():
     try:
-        current_user_id = get_jwt_identity()
+        current_user_id = int(get_jwt_identity())
         current_user = User.query.get(current_user_id)
         
         # Members can only see their assigned RCAs
@@ -30,7 +30,7 @@ def get_rcas():
 @jwt_required()
 def create_rca():
     try:
-        current_user_id = get_jwt_identity()
+        current_user_id = int(get_jwt_identity())
         current_user = User.query.get(current_user_id)
         
         data = request.get_json()
@@ -79,7 +79,7 @@ def create_rca():
 @jwt_required()
 def get_rca(rca_id):
     try:
-        current_user_id = get_jwt_identity()
+        current_user_id = int(get_jwt_identity())
         current_user = User.query.get(current_user_id)
         
         rca = RCA.query.get(rca_id)
@@ -99,7 +99,7 @@ def get_rca(rca_id):
 @jwt_required()
 def update_rca(rca_id):
     try:
-        current_user_id = get_jwt_identity()
+        current_user_id = int(get_jwt_identity())
         current_user = User.query.get(current_user_id)
         
         rca = RCA.query.get(rca_id)
@@ -145,7 +145,7 @@ def update_rca(rca_id):
 @jwt_required()
 def delete_rca(rca_id):
     try:
-        current_user_id = get_jwt_identity()
+        current_user_id = int(get_jwt_identity())
         current_user = User.query.get(current_user_id)
         
         rca = RCA.query.get(rca_id)
@@ -168,7 +168,7 @@ def delete_rca(rca_id):
 @jwt_required()
 def get_rca_by_incident(incident_id):
     try:
-        current_user_id = get_jwt_identity()
+        current_user_id = int(get_jwt_identity())
         current_user = User.query.get(current_user_id)
         
         rca = RCA.query.filter_by(incident_id=incident_id).first()

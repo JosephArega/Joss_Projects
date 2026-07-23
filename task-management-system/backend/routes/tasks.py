@@ -13,7 +13,7 @@ def check_permission(current_user_role, required_roles):
 @jwt_required()
 def get_tasks():
     try:
-        current_user_id = get_jwt_identity()
+        current_user_id = int(get_jwt_identity())
         current_user = User.query.get(current_user_id)
         
         # Members can only see their assigned tasks
@@ -31,7 +31,7 @@ def get_tasks():
 @jwt_required()
 def create_task():
     try:
-        current_user_id = get_jwt_identity()
+        current_user_id = int(get_jwt_identity())
         current_user = User.query.get(current_user_id)
         
         data = request.get_json()
@@ -77,7 +77,7 @@ def create_task():
 @jwt_required()
 def get_task(task_id):
     try:
-        current_user_id = get_jwt_identity()
+        current_user_id = int(get_jwt_identity())
         current_user = User.query.get(current_user_id)
         
         task = Task.query.get(task_id)
@@ -97,7 +97,7 @@ def get_task(task_id):
 @jwt_required()
 def update_task(task_id):
     try:
-        current_user_id = get_jwt_identity()
+        current_user_id = int(get_jwt_identity())
         current_user = User.query.get(current_user_id)
         
         task = Task.query.get(task_id)
@@ -157,7 +157,7 @@ def update_task(task_id):
 @jwt_required()
 def delete_task(task_id):
     try:
-        current_user_id = get_jwt_identity()
+        current_user_id = int(get_jwt_identity())
         current_user = User.query.get(current_user_id)
         
         task = Task.query.get(task_id)
@@ -180,7 +180,7 @@ def delete_task(task_id):
 @jwt_required()
 def get_my_tasks():
     try:
-        current_user_id = get_jwt_identity()
+        current_user_id = int(get_jwt_identity())
         
         assigned_tasks = Task.query.filter_by(assigned_to=current_user_id).all()
         created_tasks = Task.query.filter_by(created_by=current_user_id).all()
