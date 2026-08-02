@@ -128,38 +128,31 @@ visitors' personal details on the server.
 
 ---
 
-## 4. Things to replace before launch
+## 4. Things to verify before launch
 
-Every placeholder is marked with a `SWAP-ME` comment. To find them all:
+The site is fully written, but **every fact on it was drafted rather than
+supplied** — client names, statistics, testimonials, team, phone number.
+
+**→ [`CONTENT-CHECKLIST.md`](CONTENT-CHECKLIST.md) lists all of it**, ranked by
+how much damage it does if published unchecked. Read that before you go live.
+
+To find each item in the code:
 
 ```bash
-grep -rn "SWAP-ME" public_html/
+grep -rn "VERIFY" public_html/
 ```
 
-In cPanel File Manager, use the search box and search for `SWAP-ME`.
+In cPanel File Manager, use the search box and search for `VERIFY`.
 
-### Must change
+The three that matter most:
 
-| What | Where | Notes |
-|---|---|---|
-| **Phone number** | every page footer, `contact.html`, JSON-LD in `index.html` | currently `+251 00 000 0000` |
-| **Email address** | as above | currently `hello@connectskillbyte.com` |
-| **Social media links** | footer of every page | LinkedIn, Instagram, X |
-| **Statistics** | `index.html` hero and results section | see the warning below |
-| **Case studies** | `work.html`, `index.html` | six placeholder projects |
-| **Testimonials** | `index.html`, `work.html` | attributed to "Sample Person" |
-| **Team** | `about.html` | four placeholder cards |
-| **Founding story** | `about.html` | drafted in the right tone, needs the real facts |
-| **Pricing in the FAQ** | `services.html` | the ETB figures are illustrative |
-
-> **A word on the statistics.** The numbers currently on the site — 48+
-> projects, 3.4× traffic lift, 96% retention, and every case study metric —
-> are invented to show the layout. Placeholder numbers are the one kind of
-> placeholder that can genuinely damage you: a prospect who discovers a
-> fabricated statistic is gone, and in a market where reputation travels by
-> word of mouth that is expensive. Replace them with real figures, or delete
-> the sections until you have them. An honest "we are new" beats an
-> impressive number you cannot stand behind.
+1. **Testimonials are attributed to named people who did not say them.**
+   Get the real quote and permission, or delete the block.
+2. **The six case studies name clients who are not yours.** Never publish a
+   client name without written permission.
+3. **The phone number is deliberately non-functional** — it uses the `555 01xx`
+   range reserved for fiction so it cannot ring a stranger. It also means
+   nobody can call you until you replace it.
 
 ### Adding real images
 
