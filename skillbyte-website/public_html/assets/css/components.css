@@ -1185,6 +1185,7 @@ body.nav-open {
   display: flex;
   flex-direction: column;
   gap: var(--space-2);
+  min-inline-size: 0;
 }
 
 .field__label {
@@ -1201,6 +1202,8 @@ body.nav-open {
 
 .field__control {
   inline-size: 100%;
+  min-inline-size: 0;
+  max-inline-size: 100%;
   padding: 0.85rem 1rem;
   font-size: var(--step-0);
   color: var(--text);
@@ -1429,22 +1432,26 @@ select.field__control {
   block-size: 1.1rem;
 }
 
-/* Oversized wordmark bleeding off the footer edge — type as structure */
+/* Oversized wordmark bleeding off the footer edge — type as structure.
+   Authored as SVG rather than an HTML heading because it is a graphic, not
+   readable text: it carries no information the logo and copyright line above
+   it do not already state. Encoding it as SVG says that honestly, and keeps
+   contrast checkers from grading decoration as body copy.
+   The viewBox crops the descender so the wordmark sits flush to the edge, and
+   textLength makes it span the full width at any viewport size. */
 .footer-wordmark {
   display: block;
   inline-size: 100%;
+  block-size: auto;
   margin-block-start: var(--space-8);
+  margin-block-end: -0.6%;
   font-family: var(--font-display);
-  font-size: clamp(4rem, 19vw, 17rem);
+  font-size: 190px; /* user units inside the viewBox, not screen pixels */
   font-weight: 800;
-  line-height: 0.8;
-  letter-spacing: -0.055em;
-  text-align: center;
-  color: var(--text);
+  fill: var(--text);
   opacity: 0.055;
   user-select: none;
   pointer-events: none;
-  margin-block-end: -0.14em;
 }
 
 /* --------------------------------------------------------------------------

@@ -1,0 +1,13 @@
+{
+  "name": "SkillByte Digital Consultancy",
+  "short_name": "SkillByte",
+  "description": "Digital marketing, mobile apps and websites for businesses across Ethiopia and East Africa.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ff5c14",
+  "icons": [
+    { "src": "/assets/img/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "/assets/img/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" }
+  ]
+}

@@ -1,0 +1,9 @@
+# https://connectskillbyte.com/robots.txt
+
+User-agent: *
+Allow: /
+Disallow: /styleguide.html
+Disallow: /thank-you.html
+Disallow: /contact-handler.php
+
+Sitemap: https://connectskillbyte.com/sitemap.xml

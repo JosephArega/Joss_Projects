@@ -205,9 +205,13 @@
   --surface-inverse: var(--ink-950);
 
   /* Text — contrast-checked against --bg */
-  --text: var(--ink-900); /* 15.9:1 */
-  --text-muted: var(--ink-600); /* 7.6:1 */
-  --text-subtle: var(--ink-500); /* 4.9:1 */
+  --text: var(--ink-900); /* 15.9:1 on --bg */
+  --text-muted: var(--ink-600); /* 7.6:1 on --bg */
+  /* Deliberately NOT --ink-500: that measures 4.38:1 on white, which fails AA
+     for the 12–15px labels this token is used on. This value clears 4.5:1
+     against the three backgrounds it actually appears on — --bg (5.6:1),
+     --bg-subtle (5.4:1) and --brand-soft (5.2:1). */
+  --text-subtle: #6b675e;
   --text-inverse: var(--ink-0);
   /* Accent TEXT uses the dark end of each ramp so small copy still passes AA.
      The bright 500s are for fills and large display type only. */

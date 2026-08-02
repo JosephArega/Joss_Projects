@@ -381,9 +381,19 @@
   align-items: start;
 }
 
+/* Grid and flex items default to min-width:auto, so a child that cannot
+   shrink below its min-content width pushes the whole track wider than the
+   viewport. A <select> is exactly that child: its intrinsic width comes from
+   its longest <option>, which on this form is wider than a 320px screen.
+   Allowing these items to shrink is what keeps narrow phones from scrolling
+   sideways. */
+.contact-layout > * {
+  min-inline-size: 0;
+}
+
 @media (min-width: 64rem) {
   .contact-layout {
-    grid-template-columns: 1fr 0.75fr;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.75fr);
   }
 }
 
@@ -436,11 +446,16 @@
 .form-grid {
   display: grid;
   gap: var(--space-5);
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.form-grid > * {
+  min-inline-size: 0;
 }
 
 @media (min-width: 40rem) {
   .form-grid--2 {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   }
   .form-grid__span {
     grid-column: 1 / -1;
