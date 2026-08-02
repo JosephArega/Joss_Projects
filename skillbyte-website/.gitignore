@@ -1,0 +1,3 @@
+# Deployment archive — rebuild any time with:
+#   cd public_html && zip -r ../skillbyte-website.zip .
+skillbyte-website.zip
