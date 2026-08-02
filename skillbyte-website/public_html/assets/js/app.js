@@ -416,6 +416,12 @@
     var status = form.querySelector('[data-form-status]');
     var submit = form.querySelector('[type="submit"]');
 
+    // Stamp how long the visitor spent on the page. The handler treats a
+    // sub-two-second submission as a bot. Left empty without JS, in which
+    // case the server skips the check rather than blocking the visitor.
+    var loadedAt = Date.now();
+    var elapsed = form.querySelector('[name="elapsed"]');
+
     var messages = {
       name: 'Please tell us your name.',
       email: 'Please enter a valid email address.',
@@ -476,6 +482,10 @@
     }
 
     form.addEventListener('submit', function (e) {
+      if (elapsed) {
+        elapsed.value = String(Math.round((Date.now() - loadedAt) / 1000));
+      }
+
       var valid = true;
       var firstInvalid = null;
 
