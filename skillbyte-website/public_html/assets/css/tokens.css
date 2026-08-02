@@ -1,0 +1,392 @@
+/* ==========================================================================
+   SkillByte Design System — Layer 1: Tokens
+   Fonts, colour scales, semantic mappings, type scale, motion, elevation.
+   Everything downstream reads from here. Change a brand colour once, here.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Fonts — self-hosted variable fonts. No third-party request on page load.
+   Bricolage Grotesque: display / headings (optical sizing axis)
+   Inter: UI, body, everything else
+   -------------------------------------------------------------------------- */
+
+@font-face {
+  font-family: 'Bricolage Grotesque';
+  font-style: normal;
+  font-weight: 200 800;
+  font-display: swap;
+  src: url('../fonts/bricolage-grotesque-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Bricolage Grotesque';
+  font-style: normal;
+  font-weight: 200 800;
+  font-display: swap;
+  src: url('../fonts/bricolage-grotesque-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF,
+    U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020,
+    U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('../fonts/inter-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('../fonts/inter-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF,
+    U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020,
+    U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* --------------------------------------------------------------------------
+   Raw palette — never used directly in components, only via semantic tokens.
+   -------------------------------------------------------------------------- */
+
+:root {
+  /* Flare — primary brand orange. Energy, action, CTAs. */
+  --flare-50: #fff3ec;
+  --flare-100: #ffe2d1;
+  --flare-200: #ffc3a3;
+  --flare-300: #ff9d6b;
+  --flare-400: #ff7a3d;
+  --flare-500: #ff5c14;
+  --flare-600: #e8460a;
+  --flare-700: #bd3406;
+  --flare-800: #8f280a;
+  --flare-900: #6b200b;
+
+  /* Volt — secondary brand green. Growth, results, confirmation. */
+  --volt-50: #e9fcf2;
+  --volt-100: #c9f7e0;
+  --volt-200: #93efc3;
+  --volt-300: #55e2a1;
+  --volt-400: #22ce82;
+  --volt-500: #05b26a;
+  --volt-600: #009056;
+  --volt-700: #027147;
+  --volt-800: #06593a;
+  --volt-900: #084930;
+
+  /* Solar — amber. Gradient bridge between Flare and Volt, highlight accents. */
+  --solar-300: #ffd873;
+  --solar-400: #ffc531;
+  --solar-500: #f7ab00;
+  --solar-600: #c98400;
+
+  /* Ink — warm-tinted neutrals. Warmth keeps the vibrant palette coherent;
+     a cold grey next to orange reads as cheap. */
+  --ink-0: #ffffff;
+  --ink-50: #faf9f7;
+  --ink-100: #f2f0ec;
+  --ink-200: #e5e2dc;
+  --ink-300: #cfcbc2;
+  --ink-400: #a9a49a;
+  --ink-500: #7d786e;
+  --ink-600: #5a564e;
+  --ink-700: #403d37;
+  --ink-800: #2a2825;
+  --ink-900: #1a1917;
+  --ink-950: #0e0e0d;
+
+  /* Utility */
+  --danger: #d92d20;
+  --danger-soft: #fef3f2;
+
+  /* ------------------------------------------------------------------------
+     Type scale — fluid. Every step interpolates between a mobile floor and a
+     desktop ceiling, so there are no breakpoint jumps in typography.
+     ------------------------------------------------------------------------ */
+  --font-display: 'Bricolage Grotesque', 'Segoe UI', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', 'Cascadia Mono', Menlo, monospace;
+
+  --step--2: clamp(0.69rem, 0.67rem + 0.11vw, 0.75rem);
+  --step--1: clamp(0.83rem, 0.79rem + 0.19vw, 0.94rem);
+  --step-0: clamp(1rem, 0.95rem + 0.24vw, 1.13rem);
+  --step-1: clamp(1.2rem, 1.12rem + 0.39vw, 1.42rem);
+  --step-2: clamp(1.44rem, 1.31rem + 0.63vw, 1.8rem);
+  --step-3: clamp(1.73rem, 1.53rem + 0.98vw, 2.28rem);
+  --step-4: clamp(2.07rem, 1.77rem + 1.48vw, 2.89rem);
+  --step-5: clamp(2.49rem, 2.05rem + 2.2vw, 3.66rem);
+  --step-6: clamp(2.99rem, 2.35rem + 3.18vw, 4.63rem);
+  --step-7: clamp(3.58rem, 2.68rem + 4.52vw, 5.86rem);
+  /* Hero — deliberately breaks the scale. Type as structure, not text. */
+  --step-hero: clamp(3.25rem, 1.2rem + 10.2vw, 9rem);
+
+  --leading-tight: 0.95;
+  --leading-snug: 1.12;
+  --leading-normal: 1.6;
+  --leading-loose: 1.75;
+
+  --tracking-tight: -0.035em;
+  --tracking-snug: -0.02em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.08em;
+
+  /* ------------------------------------------------------------------------
+     Space — 4px base, named by role rather than t-shirt size where it helps.
+     ------------------------------------------------------------------------ */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 2.5rem;
+  --space-8: 3rem;
+  --space-9: 4rem;
+  --space-10: 5rem;
+  --space-11: 6rem;
+  --space-12: 8rem;
+
+  /* Vertical rhythm between page sections, fluid */
+  --section-y: clamp(4rem, 9vw, 8.5rem);
+
+  /* Layout */
+  --container: 78rem;
+  --container-narrow: 46rem;
+  --gutter: clamp(1.15rem, 4vw, 2.75rem);
+
+  /* Radius */
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+  --radius-pill: 999px;
+
+  /* ------------------------------------------------------------------------
+     Motion — one place to tune the whole site's feel.
+     ------------------------------------------------------------------------ */
+  --dur-instant: 90ms;
+  --dur-fast: 180ms;
+  --dur-base: 280ms;
+  --dur-slow: 520ms;
+  --dur-slower: 900ms;
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1); /* the workhorse */
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1); /* overshoot, use sparingly */
+
+  --z-base: 1;
+  --z-sticky: 50;
+  --z-nav: 100;
+  --z-overlay: 200;
+  --z-toast: 300;
+}
+
+/* --------------------------------------------------------------------------
+   Semantic tokens — LIGHT (default)
+   Components only ever reference these. Dark mode re-maps the same names.
+   -------------------------------------------------------------------------- */
+
+:root {
+  color-scheme: light;
+
+  /* Surfaces, back to front */
+  --bg: var(--ink-0);
+  --bg-subtle: var(--ink-50);
+  --bg-sunken: var(--ink-100);
+  --surface: var(--ink-0);
+  --surface-raised: var(--ink-0);
+  --surface-inverse: var(--ink-950);
+
+  /* Text — contrast-checked against --bg */
+  --text: var(--ink-900); /* 15.9:1 */
+  --text-muted: var(--ink-600); /* 7.6:1 */
+  --text-subtle: var(--ink-500); /* 4.9:1 */
+  --text-inverse: var(--ink-0);
+  /* Accent TEXT uses the dark end of each ramp so small copy still passes AA.
+     The bright 500s are for fills and large display type only. */
+  --text-accent: var(--flare-700); /* 5.7:1 */
+  --text-accent-alt: var(--volt-700); /* 6.1:1 */
+
+  /* Lines */
+  --border: var(--ink-200);
+  --border-strong: var(--ink-300);
+  --border-accent: var(--flare-500);
+
+  /* Brand fills — large areas, icons, graphics (3:1 min, non-text) */
+  --brand: var(--flare-500);
+  --brand-hover: var(--flare-600);
+  --brand-soft: var(--flare-50);
+  --brand-on: #ffffff;
+  --accent: var(--volt-500);
+  --accent-hover: var(--volt-600);
+  --accent-soft: var(--volt-50);
+  --accent-on: #ffffff;
+  --highlight: var(--solar-400);
+
+  /* Gradients — the signature. Spectrum is the hero move; use it once or
+     twice per page, not everywhere, or it stops meaning anything. */
+  --grad-spectrum: linear-gradient(
+    100deg,
+    var(--flare-600) 0%,
+    var(--flare-500) 26%,
+    var(--solar-400) 55%,
+    var(--volt-400) 82%,
+    var(--volt-500) 100%
+  );
+  --grad-flare: linear-gradient(135deg, var(--flare-600) 0%, var(--solar-400) 100%);
+  --grad-volt: linear-gradient(135deg, var(--volt-500) 0%, var(--solar-400) 100%);
+  --grad-ink: linear-gradient(160deg, var(--ink-900) 0%, var(--ink-950) 100%);
+  --grad-glow: radial-gradient(
+    60% 60% at 50% 0%,
+    color-mix(in oklab, var(--flare-500) 22%, transparent) 0%,
+    transparent 70%
+  );
+
+  /* Elevation — warm-tinted so shadows sit in the palette, not beside it */
+  --shadow-xs: 0 1px 2px color-mix(in oklab, var(--ink-900) 6%, transparent);
+  --shadow-sm: 0 2px 6px color-mix(in oklab, var(--ink-900) 7%, transparent),
+    0 1px 2px color-mix(in oklab, var(--ink-900) 5%, transparent);
+  --shadow-md: 0 10px 26px -8px color-mix(in oklab, var(--ink-800) 18%, transparent),
+    0 2px 8px -2px color-mix(in oklab, var(--ink-800) 8%, transparent);
+  --shadow-lg: 0 26px 56px -18px color-mix(in oklab, var(--ink-800) 26%, transparent),
+    0 6px 18px -8px color-mix(in oklab, var(--ink-800) 10%, transparent);
+  --shadow-brand: 0 14px 34px -12px color-mix(in oklab, var(--flare-600) 45%, transparent);
+
+  /* Glass / sticky nav */
+  --glass-bg: color-mix(in oklab, var(--ink-0) 82%, transparent);
+  --glass-border: color-mix(in oklab, var(--ink-900) 8%, transparent);
+
+  /* Focus ring — same treatment everywhere so keyboard users learn it once */
+  --focus-ring: var(--flare-600);
+  --focus-ring-offset: var(--bg);
+
+  /* Noise / texture overlay strength */
+  --grain-opacity: 0.035;
+}
+
+/* --------------------------------------------------------------------------
+   Semantic tokens — DARK
+   Not an inversion. Surfaces lift with light rather than shadow, accents step
+   toward the light end of each ramp so they stay readable on near-black.
+   -------------------------------------------------------------------------- */
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+
+  --bg: var(--ink-950);
+  --bg-subtle: #131312;
+  --bg-sunken: #090909;
+  --surface: #161614;
+  --surface-raised: #1e1d1a;
+  --surface-inverse: var(--ink-50);
+
+  --text: #f5f3ef; /* 17.2:1 */
+  --text-muted: #b3ada2; /* 8.6:1 */
+  --text-subtle: #8b857a; /* 5.2:1 */
+  --text-inverse: var(--ink-950);
+  --text-accent: var(--flare-300); /* 7.9:1 */
+  --text-accent-alt: var(--volt-300); /* 10.4:1 */
+
+  --border: #2b2a26;
+  --border-strong: #3d3b35;
+  --border-accent: var(--flare-400);
+
+  --brand: var(--flare-500);
+  --brand-hover: var(--flare-400);
+  --brand-soft: color-mix(in oklab, var(--flare-500) 14%, var(--ink-950));
+  --brand-on: #ffffff;
+  --accent: var(--volt-400);
+  --accent-hover: var(--volt-300);
+  --accent-soft: color-mix(in oklab, var(--volt-500) 14%, var(--ink-950));
+  --accent-on: #04231a;
+  --highlight: var(--solar-300);
+
+  --grad-spectrum: linear-gradient(
+    100deg,
+    var(--flare-400) 0%,
+    var(--flare-300) 24%,
+    var(--solar-300) 54%,
+    var(--volt-300) 80%,
+    var(--volt-400) 100%
+  );
+  --grad-flare: linear-gradient(135deg, var(--flare-400) 0%, var(--solar-300) 100%);
+  --grad-volt: linear-gradient(135deg, var(--volt-400) 0%, var(--solar-300) 100%);
+  --grad-ink: linear-gradient(160deg, #1c1b18 0%, var(--ink-950) 100%);
+  --grad-glow: radial-gradient(
+    60% 60% at 50% 0%,
+    color-mix(in oklab, var(--flare-500) 26%, transparent) 0%,
+    transparent 70%
+  );
+
+  /* In dark, depth comes from a hairline highlight + a deeper shadow */
+  --shadow-xs: 0 1px 2px rgb(0 0 0 / 0.5);
+  --shadow-sm: 0 2px 8px rgb(0 0 0 / 0.55);
+  --shadow-md: 0 12px 30px -10px rgb(0 0 0 / 0.7);
+  --shadow-lg: 0 30px 64px -22px rgb(0 0 0 / 0.8);
+  --shadow-brand: 0 16px 40px -14px color-mix(in oklab, var(--flare-500) 55%, transparent);
+
+  --glass-bg: color-mix(in oklab, var(--ink-950) 76%, transparent);
+  --glass-border: color-mix(in oklab, #ffffff 9%, transparent);
+
+  --focus-ring: var(--flare-300);
+  --focus-ring-offset: var(--bg);
+
+  --grain-opacity: 0.05;
+}
+
+/* Respect the OS preference when the visitor has not chosen explicitly.
+   The inline script in <head> sets data-theme before first paint, so this
+   block is the no-JS safety net rather than the primary mechanism. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    color-scheme: dark;
+    --bg: var(--ink-950);
+    --bg-subtle: #131312;
+    --bg-sunken: #090909;
+    --surface: #161614;
+    --surface-raised: #1e1d1a;
+    --surface-inverse: var(--ink-50);
+    --text: #f5f3ef;
+    --text-muted: #b3ada2;
+    --text-subtle: #8b857a;
+    --text-inverse: var(--ink-950);
+    --text-accent: var(--flare-300);
+    --text-accent-alt: var(--volt-300);
+    --border: #2b2a26;
+    --border-strong: #3d3b35;
+    --border-accent: var(--flare-400);
+    --brand-hover: var(--flare-400);
+    --brand-soft: color-mix(in oklab, var(--flare-500) 14%, var(--ink-950));
+    --accent: var(--volt-400);
+    --accent-hover: var(--volt-300);
+    --accent-soft: color-mix(in oklab, var(--volt-500) 14%, var(--ink-950));
+    --accent-on: #04231a;
+    --highlight: var(--solar-300);
+    --grad-spectrum: linear-gradient(
+      100deg,
+      var(--flare-400) 0%,
+      var(--flare-300) 24%,
+      var(--solar-300) 54%,
+      var(--volt-300) 80%,
+      var(--volt-400) 100%
+    );
+    --grad-flare: linear-gradient(135deg, var(--flare-400) 0%, var(--solar-300) 100%);
+    --grad-volt: linear-gradient(135deg, var(--volt-400) 0%, var(--solar-300) 100%);
+    --grad-ink: linear-gradient(160deg, #1c1b18 0%, var(--ink-950) 100%);
+    --shadow-xs: 0 1px 2px rgb(0 0 0 / 0.5);
+    --shadow-sm: 0 2px 8px rgb(0 0 0 / 0.55);
+    --shadow-md: 0 12px 30px -10px rgb(0 0 0 / 0.7);
+    --shadow-lg: 0 30px 64px -22px rgb(0 0 0 / 0.8);
+    --glass-bg: color-mix(in oklab, var(--ink-950) 76%, transparent);
+    --glass-border: color-mix(in oklab, #ffffff 9%, transparent);
+    --focus-ring: var(--flare-300);
+    --grain-opacity: 0.05;
+  }
+}

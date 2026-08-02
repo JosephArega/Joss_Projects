@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Design System — SkillByte</title>
+<meta name="description" content="The SkillByte design system: colour, type, motion and components in light and dark.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#ffffff">
+<link rel="preload" href="assets/fonts/bricolage-grotesque-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/components.css">
+<link rel="stylesheet" href="assets/css/sections.css">
+<script>
+(function(){try{var t=localStorage.getItem('skillbyte-theme');if(t==='dark'||t==='light'){document.documentElement.setAttribute('data-theme',t);}}catch(e){}document.documentElement.classList.remove('no-js');})();
+</script>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a class="logo" href="index.html">
+      <svg class="logo__mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+        <defs>
+          <linearGradient id="sbMark" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#e8460a"/>
+            <stop offset="55%" stop-color="#ff5c14"/>
+            <stop offset="100%" stop-color="#ffc531"/>
+          </linearGradient>
+        </defs>
+        <path d="M8 0h13.1L32 10.9V24a8 8 0 0 1-8 8H8a8 8 0 0 1-8-8V8a8 8 0 0 1 8-8Z" fill="url(#sbMark)"/>
+        <rect x="8.4" y="20" width="3.6" height="5.6" rx="1.8" fill="#fff"/>
+        <rect x="14.2" y="15.8" width="3.6" height="9.8" rx="1.8" fill="#fff" opacity=".82"/>
+        <rect x="20" y="11.4" width="3.6" height="14.2" rx="1.8" fill="#fff" opacity=".64"/>
+      </svg>
+      <span class="logo__text">Skill<span class="text-gradient">Byte</span></span>
+    </a>
+
+    <div class="site-header__actions">
+      <button class="theme-toggle" type="button" data-theme-toggle aria-pressed="false" aria-label="Switch to dark theme">
+        <svg class="theme-toggle__sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg class="theme-toggle__moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
+      </button>
+      <a class="btn btn--primary btn--sm" href="index.html">Back to site</a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ================= Intro ================= -->
+  <section class="section container">
+    <p class="eyebrow">SkillByte Design System v1</p>
+    <h1 class="display display--lg">Vibrant, structural, <span class="text-gradient">fast</span>.</h1>
+    <p class="lead" style="margin-block-start: var(--space-5);">
+      This page is the reference for every decision the site is built from. Toggle the theme in the
+      header — everything below re-maps through the same semantic tokens, so light and dark are one
+      system rather than two designs.
+    </p>
+  </section>
+
+  <!-- ================= Colour ================= -->
+  <section class="section section--sunken">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">01 — Colour</p>
+        <h2>Two brand hues, one warm neutral ramp</h2>
+        <p class="lead">
+          <strong>Flare</strong> (orange) carries action and energy. <strong>Volt</strong> (green)
+          carries growth and results. <strong>Solar</strong> (amber) exists to bridge them in
+          gradients. The neutrals are warm-tinted on purpose — a cold grey next to this orange
+          reads as cheap.
+        </p>
+      </div>
+
+      <h3 style="margin-block-end: var(--space-4); font-size: var(--step-1);">Flare — primary</h3>
+      <div class="sg-swatches" style="margin-block-end: var(--space-8);">
+        <div class="sg-swatch"><div class="sg-swatch__chip" style="background:var(--flare-100)"></div><div class="sg-swatch__meta"><span class="sg-swatch__name">100</span><span class="sg-swatch__hex">#ffe2d1</span></div></div>
+        <div class="sg-swatch"><div class="sg-swatch__chip" style="background:var(--flare-300)"></div><div class="sg-swatch__meta"><span class="sg-swatch__name">300</span><span class="sg-swatch__hex">#ff9d6b</span></div></div>
+        <div class="sg-swatch"><div class="sg-swatch__chip" style="background:var(--flare-400)"></div><div class="sg-swatch__meta"><span class="sg-swatch__name">400</span><span class="sg-swatch__hex">#ff7a3d</span></div></div>
+        <div class="sg-swatch"><div class="sg-swatch__chip" style="background:var(--flare-500)"></div><div class="sg-swatch__meta"><span class="sg-swatch__name">500 · core</span><span class="sg-swatch__hex">#ff5c14</span></div></div>
+        <div class="sg-swatch"><div class="sg-swatch__chip" style="background:var(--flare-600)"></div><div class="sg-swatch__meta"><span class="sg-swatch__name">600</span><span class="sg-swatch__hex">#e8460a</span></div></div>
+        <div class="sg-swatch"><div class="sg-swatch__chip" style="background:var(--flare-700)"></div><div class="sg-swatch__meta"><span class="sg-swatch__name">700 · text</span><span class="sg-swatch__hex">#bd3406</span></div></div>
+        <div class="sg-swatch"><div class="sg-swatch__chip" style="background:var(--flare-900)"></div><div class="sg-swatch__meta"><span class="sg-swatch__name">900</span><span class="sg-swatch__hex">#6b200b</span></div></div>
+      </div>
+
+      <h3 style="margin-block-end: var(--space-4); font-size: var(--step-1);">Volt — secondary</h3>
+      <div class="sg-swatches" style="margin-block-end: var(--space-8);">
+        <div class="sg-swatch"><div class="sg-swatch__chip" style="background:var(--volt-100)"></div><div class="sg-swatch__meta"><span class="sg-swatch__name">100</span><span class="sg-swatch__hex">#c9f7e0</span></div></div>
+        <div class="sg-swatch"><div class="sg-swatch__chip" style="background:var(--volt-300)"></div><div class="sg-swatch__meta"><span class="sg-swatch__name">300</span><span class="sg-swatch__hex">#55e2a1</span></div></div>
+        <div class="sg-swatch"><div class="sg-swatch__chip" style="background:var(--volt-400)"></div><div class="sg-swatch__meta"><span class="sg-swatch__name">400</span><span class="sg-swatch__hex">#22ce82</span></div></div>
+        <div class="sg-swatch"><div class="sg-swatch__chip" style="background:var(--volt-500)"></div><div class="sg-swatch__meta"><span class="sg-swatch__name">500 · core</span><span class="sg-swatch__hex">#05b26a</span></div></div>
+        <div class="sg-swatch"><div class="sg-swatch__chip" style="background:var(--volt-600)"></div><div class="sg-swatch__meta"><span class="sg-swatch__name">600</span><span class="sg-swatch__hex">#009056</span></div></div>
+        <div class="sg-swatch"><div class="sg-swatch__chip" style="background:var(--volt-700)"></div><div class="sg-swatch__meta"><span class="sg-swatch__name">700 · text</span><span class="sg-swatch__hex">#027147</span></div></div>
+        <div class="sg-swatch"><div class="sg-swatch__chip" style="background:var(--volt-900)"></div><div class="sg-swatch__meta"><span class="sg-swatch__name">900</span><span class="sg-swatch__hex">#084930</span></div></div>
+      </div>
+
+      <h3 style="margin-block-end: var(--space-4); font-size: var(--step-1);">Solar &amp; Ink</h3>
+      <div class="sg-swatches">
+        <div class="sg-swatch"><div class="sg-swatch__chip" style="background:var(--solar-400)"></div><div class="sg-swatch__meta"><span class="sg-swatch__name">Solar 400</span><span class="sg-swatch__hex">#ffc531</span></div></div>
+        <div class="sg-swatch"><div class="sg-swatch__chip" style="background:var(--solar-500)"></div><div class="sg-swatch__meta"><span class="sg-swatch__name">Solar 500</span><span class="sg-swatch__hex">#f7ab00</span></div></div>
+        <div class="sg-swatch"><div class="sg-swatch__chip" style="background:var(--ink-100)"></div><div class="sg-swatch__meta"><span class="sg-swatch__name">Ink 100</span><span class="sg-swatch__hex">#f2f0ec</span></div></div>
+        <div class="sg-swatch"><div class="sg-swatch__chip" style="background:var(--ink-300)"></div><div class="sg-swatch__meta"><span class="sg-swatch__name">Ink 300</span><span class="sg-swatch__hex">#cfcbc2</span></div></div>
+        <div class="sg-swatch"><div class="sg-swatch__chip" style="background:var(--ink-500)"></div><div class="sg-swatch__meta"><span class="sg-swatch__name">Ink 500</span><span class="sg-swatch__hex">#7d786e</span></div></div>
+        <div class="sg-swatch"><div class="sg-swatch__chip" style="background:var(--ink-700)"></div><div class="sg-swatch__meta"><span class="sg-swatch__name">Ink 700</span><span class="sg-swatch__hex">#403d37</span></div></div>
+        <div class="sg-swatch"><div class="sg-swatch__chip" style="background:var(--ink-900)"></div><div class="sg-swatch__meta"><span class="sg-swatch__name">Ink 900</span><span class="sg-swatch__hex">#1a1917</span></div></div>
+        <div class="sg-swatch"><div class="sg-swatch__chip" style="background:var(--ink-950)"></div><div class="sg-swatch__meta"><span class="sg-swatch__name">Ink 950</span><span class="sg-swatch__hex">#0e0e0d</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= Contrast rules ================= -->
+  <section class="section container">
+    <div class="section-head">
+      <p class="eyebrow">02 — Contrast rules</p>
+      <h2>How the vibrant palette stays readable</h2>
+      <p class="lead">
+        Bright orange on white is 3.1:1 — fine for a large headline or a button fill, not for body
+        copy. So the ramps split by job: the 500s are for fills and oversized display type, the 700s
+        are for text. Dark mode mirrors this with the 300s.
+      </p>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <h3 class="card__title" style="font-size: var(--step-1); margin-block-end: var(--space-4);">Text colours (AA or better)</h3>
+        <div class="sg-row"><span class="sg-note">15.9:1</span><span style="color:var(--text)">Body text — --text</span></div>
+        <div class="sg-row"><span class="sg-note">7.6:1</span><span style="color:var(--text-muted)">Secondary — --text-muted</span></div>
+        <div class="sg-row"><span class="sg-note">4.9:1</span><span style="color:var(--text-subtle)">Subtle / captions — --text-subtle</span></div>
+        <div class="sg-row"><span class="sg-note">5.7:1</span><span style="color:var(--text-accent)">Accent link — --text-accent</span></div>
+        <div class="sg-row" style="border:none"><span class="sg-note">6.1:1</span><span style="color:var(--text-accent-alt)">Accent alt — --text-accent-alt</span></div>
+      </div>
+
+      <div class="card">
+        <h3 class="card__title" style="font-size: var(--step-1); margin-block-end: var(--space-4);">Fills only (3:1 non-text)</h3>
+        <div class="sg-row"><span class="sg-note">--brand</span><span style="background:var(--brand);color:var(--brand-on);padding:.35em .8em;border-radius:var(--radius-sm);font-weight:600">Button / icon fill</span></div>
+        <div class="sg-row"><span class="sg-note">--accent</span><span style="background:var(--accent);color:var(--accent-on);padding:.35em .8em;border-radius:var(--radius-sm);font-weight:600">Confirmation fill</span></div>
+        <div class="sg-row" style="border:none">
+          <span class="sg-note">display</span>
+          <span class="display text-gradient" style="font-size:var(--step-3)">Big type can carry it</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= Gradients ================= -->
+  <section class="section section--sunken">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">03 — Gradients</p>
+        <h2>Used once or twice a page, never everywhere</h2>
+        <p class="lead">A gradient that appears on every element stops meaning anything. Spectrum is reserved for the hero, the scroll bar and key metrics.</p>
+      </div>
+
+      <div class="stack stack--lg">
+        <div>
+          <p class="sg-note" style="margin-block-end:var(--space-2)">--grad-spectrum · hero, progress bar, key metrics</p>
+          <div class="sg-gradient" style="background:var(--grad-spectrum)"></div>
+        </div>
+        <div>
+          <p class="sg-note" style="margin-block-end:var(--space-2)">--grad-flare · primary buttons, icon accents</p>
+          <div class="sg-gradient" style="background:var(--grad-flare)"></div>
+        </div>
+        <div>
+          <p class="sg-note" style="margin-block-end:var(--space-2)">--grad-volt · results, growth, secondary highlights</p>
+          <div class="sg-gradient" style="background:var(--grad-volt)"></div>
+        </div>
+        <div>
+          <p class="sg-note" style="margin-block-end:var(--space-2)">--grad-ink · CTA bands, feature bento tiles</p>
+          <div class="sg-gradient" style="background:var(--grad-ink)"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= Type ================= -->
+  <section class="section container">
+    <div class="section-head">
+      <p class="eyebrow">04 — Typography</p>
+      <h2>Bricolage Grotesque + Inter</h2>
+      <p class="lead">
+        Both self-hosted variable fonts — every weight from one 77KB and one 48KB file, with no
+        request to Google. Bricolage has real character in its display sizes without tipping into
+        novelty; Inter stays invisible in body copy, which is the job.
+      </p>
+    </div>
+
+    <div class="stack stack--lg">
+      <div>
+        <p class="sg-note">--step-hero · clamp(3.25rem → 9rem) · Bricolage 800</p>
+        <p class="display display--hero" style="margin-block-start:var(--space-2)">Aa</p>
+      </div>
+      <div>
+        <p class="sg-note">--step-7 · display--xl</p>
+        <p class="display display--xl">Digital work that ships</p>
+      </div>
+      <div>
+        <p class="sg-note">--step-5 · h2 · section headings</p>
+        <h2>Bold, oversized, structural</h2>
+      </div>
+      <div>
+        <p class="sg-note">--step-3 · h3</p>
+        <h3>Sub-section heading</h3>
+      </div>
+      <div>
+        <p class="sg-note">--step-1 · .lead</p>
+        <p class="lead">Lead paragraph. Sets up a section in one or two sentences and stops before it becomes a wall.</p>
+      </div>
+      <div>
+        <p class="sg-note">--step-0 · body · Inter 400</p>
+        <p style="max-inline-size:60ch">Body copy sits at a fluid 16–18px with a 1.6 line height and a 60-character measure. Every step in the scale interpolates between a mobile floor and a desktop ceiling, so type never jumps at a breakpoint — it grows smoothly with the viewport.</p>
+      </div>
+      <div>
+        <p class="sg-note">--step--1 · captions, labels, meta</p>
+        <p class="text-subtle">Supporting detail, form labels and metadata.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= Buttons ================= -->
+  <section class="section section--sunken">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">05 — Buttons &amp; links</p>
+        <h2>Micro-interactions with a reason</h2>
+        <p class="lead">Every interactive element lifts 2px on hover, compresses on press, and shows the same focus ring. Hover the primary button to see the gradient cross-fade from Flare to Spectrum.</p>
+      </div>
+
+      <div class="cluster" style="--cluster-gap: var(--space-4); margin-block-end: var(--space-8);">
+        <a class="btn btn--primary btn--lg" href="#0">Start a project
+          <svg class="btn__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a class="btn btn--secondary btn--lg" href="#0">See our work</a>
+        <a class="btn btn--primary" href="#0">Primary</a>
+        <a class="btn btn--secondary" href="#0">Secondary</a>
+        <a class="btn btn--ghost" href="#0">Ghost</a>
+        <a class="btn btn--primary btn--sm" href="#0">Small</a>
+        <button class="btn btn--secondary" type="button" disabled>Disabled</button>
+      </div>
+
+      <div class="cluster" style="--cluster-gap: var(--space-6);">
+        <a class="link-arrow" href="#0">Text link with animated underline
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <span class="badge badge--brand">Badge</span>
+        <span class="badge badge--accent badge--live"><span class="badge__dot"></span>Available for projects</span>
+        <span class="chip">Chip</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= Bento ================= -->
+  <section class="section container">
+    <div class="section-head">
+      <p class="eyebrow">06 — Bento grid</p>
+      <h2>Asymmetric by default</h2>
+      <p class="lead">A six-column grid where tiles declare their own span. It collapses to a single column on mobile. Hover a tile on a mouse to see the cursor spotlight.</p>
+    </div>
+
+    <div class="bento">
+      <article class="card card--interactive card--spotlight bento__tile bento__tile--wide bento__tile--tall">
+        <div class="card__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
+        </div>
+        <h3 class="card__title">Wide + tall tile</h3>
+        <p class="card__body" style="margin-block-start:var(--space-3)">span 4 &times; 2 rows. The anchor tile in a bento block — this is where the primary service goes.</p>
+      </article>
+
+      <article class="card card--interactive bento__tile bento__tile--third bento__tile--feature">
+        <h3 class="card__title">Feature tile</h3>
+        <p class="card__body" style="margin-block-start:var(--space-3)">Inverse ink surface. One per grid.</p>
+      </article>
+
+      <article class="card card--interactive bento__tile bento__tile--third bento__tile--brand">
+        <h3 class="card__title">Brand tile</h3>
+        <p class="card__body" style="margin-block-start:var(--space-3)">Gradient fill. Use for the CTA tile.</p>
+      </article>
+
+      <article class="card card--interactive card--spotlight bento__tile bento__tile--third">
+        <h3 class="card__title">Standard</h3>
+        <p class="card__body" style="margin-block-start:var(--space-3)">span 2</p>
+      </article>
+
+      <article class="card card--interactive card--spotlight bento__tile bento__tile--wide">
+        <h3 class="card__title">Wide tile</h3>
+        <p class="card__body" style="margin-block-start:var(--space-3)">span 4</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ================= Cards, stats, process ================= -->
+  <section class="section section--sunken">
+    <div class="container stack stack--xl">
+      <div class="section-head" style="margin-block-end:0">
+        <p class="eyebrow">07 — Content components</p>
+        <h2>Stats, process, testimonial</h2>
+      </div>
+
+      <div class="stat-grid">
+        <div class="stat"><span class="stat__value"><span data-count-to="48">0</span>+</span><span class="stat__label">Projects delivered</span></div>
+        <div class="stat"><span class="stat__value"><span data-count-to="3.4" data-count-decimals="1">0</span>&times;</span><span class="stat__label">Average traffic lift</span></div>
+        <div class="stat"><span class="stat__value"><span data-count-to="96">0</span>%</span><span class="stat__label">Client retention</span></div>
+        <div class="stat"><span class="stat__value"><span data-count-to="12">0</span></span><span class="stat__label">Countries reached</span></div>
+      </div>
+
+      <div class="process">
+        <div class="process__step is-visible">
+          <span class="process__num">01</span>
+          <h3 class="process__title">Discover</h3>
+          <p class="text-muted">The rule loads from the top border on scroll.</p>
+        </div>
+        <div class="process__step is-visible">
+          <span class="process__num">02</span>
+          <h3 class="process__title">Design</h3>
+          <p class="text-muted">Four steps read as a sequence, not four cards.</p>
+        </div>
+        <div class="process__step is-visible">
+          <span class="process__num">03</span>
+          <h3 class="process__title">Build</h3>
+          <p class="text-muted">No boxes — the rules do the structural work.</p>
+        </div>
+        <div class="process__step is-visible">
+          <span class="process__num">04</span>
+          <h3 class="process__title">Grow</h3>
+          <p class="text-muted">Collapses to a stack on mobile.</p>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <figure class="quote">
+          <span class="quote__mark" aria-hidden="true">&ldquo;</span>
+          <blockquote class="quote__text">They rebuilt our booking flow and our online orders doubled in a quarter. What stood out was that they explained every decision in plain language.</blockquote>
+          <figcaption class="quote__author">
+            <span class="quote__avatar quote__avatar--initials" aria-hidden="true">SP</span>
+            <span>
+              <span class="quote__name">Sample Person</span>
+              <span class="quote__role">Placeholder Role, Placeholder Co.</span>
+            </span>
+          </figcaption>
+        </figure>
+
+        <article class="work-card">
+          <div class="work-card__body">
+            <div class="work-card__tags"><span class="work-card__tag">Web</span><span class="work-card__tag">SEO</span></div>
+            <h3 class="work-card__title">Work card without media</h3>
+            <p class="text-muted">Case study cards lead with the result, not the deliverable.</p>
+            <div class="work-card__result">
+              <span class="work-card__metric">+214%</span>
+              <span class="work-card__metric-label">organic sessions in 6 months</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= Forms ================= -->
+  <section class="section container">
+    <div class="section-head">
+      <p class="eyebrow">08 — Forms</p>
+      <h2>Feedback that feels responsive</h2>
+      <p class="lead">Fields glow on focus with a 4px brand halo. Errors validate on blur, then correct live as you type — so nobody is told they're wrong while still typing.</p>
+    </div>
+
+    <div class="form-grid form-grid--2" style="max-inline-size: 46rem;">
+      <div class="field">
+        <label class="field__label" for="sg-name">Your name <span class="field__required">*</span></label>
+        <input class="field__control" type="text" id="sg-name" placeholder="Abebe Bekele">
+        <p class="field__error"></p>
+      </div>
+      <div class="field">
+        <label class="field__label" for="sg-email">Email <span class="field__required">*</span></label>
+        <input class="field__control" type="email" id="sg-email" value="not-an-email" aria-invalid="true">
+        <p class="field__error">Please enter a valid email address.</p>
+      </div>
+      <div class="field form-grid__span">
+        <label class="field__label" for="sg-service">What do you need?</label>
+        <select class="field__control" id="sg-service">
+          <option>Digital marketing &amp; SEO</option>
+          <option>Mobile app development</option>
+          <option>Website development</option>
+        </select>
+      </div>
+      <div class="field form-grid__span">
+        <label class="field__label" for="sg-msg">Project details</label>
+        <textarea class="field__control" id="sg-msg" placeholder="Tell us what you're trying to achieve."></textarea>
+      </div>
+      <div class="form-grid__span stack">
+        <div class="form-status form-status--success">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+          <span>Success state — your message is on its way.</span>
+        </div>
+        <div class="form-status form-status--error">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v5m0 3h.01"/></svg>
+          <span>Error state — please check the highlighted fields.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= Motion ================= -->
+  <section class="section section--sunken">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">09 — Motion</p>
+        <h2>Fast, purposeful, and fully optional</h2>
+        <p class="lead">One easing curve does almost all the work. Everything is gated behind <code class="mono">prefers-reduced-motion</code>: movement is removed, opacity fades stay, and no content is ever hidden by a script that failed to run.</p>
+      </div>
+
+      <div class="grid-3">
+        <div class="card">
+          <h3 class="card__title" style="font-size:var(--step-1)">Durations</h3>
+          <p class="card__body" style="margin-block-start:var(--space-3)">
+            <span class="mono">90ms</span> press feedback ·
+            <span class="mono">180ms</span> hover ·
+            <span class="mono">280ms</span> UI transitions ·
+            <span class="mono">520ms</span> scroll reveals
+          </p>
+        </div>
+        <div class="card">
+          <h3 class="card__title" style="font-size:var(--step-1)">Easing</h3>
+          <p class="card__body" style="margin-block-start:var(--space-3)">
+            <span class="mono">cubic-bezier(.22,1,.36,1)</span> for nearly everything. A spring curve is reserved for icons and toggles.
+          </p>
+        </div>
+        <div class="card">
+          <h3 class="card__title" style="font-size:var(--step-1)">Scroll</h3>
+          <p class="card__body" style="margin-block-start:var(--space-3)">
+            Native CSS <span class="mono">animation-timeline</span> where supported, IntersectionObserver everywhere else. No animation library.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p class="text-subtle">SkillByte design system — internal reference. Delete <code class="mono">styleguide.html</code> before launch, or leave it: it carries <code class="mono">noindex</code>.</p>
+  </div>
+</footer>
+
+<script src="assets/js/app.js" defer></script>
+</body>
+</html>

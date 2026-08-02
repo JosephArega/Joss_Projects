@@ -1,0 +1,458 @@
+/* ==========================================================================
+   SkillByte Design System — Layer 4: Sections
+   Composition-level styles: the hero, page headers, and section treatments
+   that aren't reusable components.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Hero
+   -------------------------------------------------------------------------- */
+
+.hero {
+  position: relative;
+  padding-block: clamp(3rem, 8vw, 7rem) clamp(3.5rem, 9vw, 8rem);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Ambient gradient wash. --hx/--hy follow the cursor on pointer devices;
+   they default to a fixed position so touch and no-JS still get the glow. */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: -20% -10% auto;
+  block-size: 120%;
+  z-index: -2;
+  background: radial-gradient(
+      42rem 34rem at var(--hx, 22%) var(--hy, 18%),
+      color-mix(in oklab, var(--flare-500) 20%, transparent),
+      transparent 62%
+    ),
+    radial-gradient(
+      38rem 30rem at calc(100% - var(--hx, 22%)) calc(100% - var(--hy, 18%)),
+      color-mix(in oklab, var(--volt-500) 16%, transparent),
+      transparent 60%
+    );
+  transition: background-position var(--dur-slow) var(--ease-out);
+  pointer-events: none;
+}
+
+/* Faint grid, so the empty space reads as considered rather than blank */
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -3;
+  pointer-events: none;
+  background-image: linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 4.5rem 4.5rem;
+  opacity: 0.5;
+  -webkit-mask-image: radial-gradient(70% 60% at 50% 35%, #000, transparent 75%);
+  mask-image: radial-gradient(70% 60% at 50% 35%, #000, transparent 75%);
+}
+
+.hero__inner {
+  position: relative;
+  z-index: 1;
+}
+
+.hero__title {
+  margin-block: var(--space-5) 0;
+  max-inline-size: 16ch;
+}
+
+.hero__copy {
+  margin-block-start: var(--space-6);
+  max-inline-size: 46ch;
+  font-size: var(--step-1);
+  line-height: 1.65;
+  color: var(--text-muted);
+}
+
+.hero__actions {
+  margin-block-start: var(--space-7);
+}
+
+.hero__meta {
+  margin-block-start: clamp(3rem, 7vw, 5rem);
+  padding-block-start: var(--space-6);
+  border-block-start: 1px solid var(--border);
+  display: grid;
+  gap: var(--space-5);
+  grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+}
+
+/* --------------------------------------------------------------------------
+   Kinetic type
+
+   Each word is a clipping container; the inner span slides up into place.
+   The real words stay in the DOM as plain text, so screen readers, search
+   crawlers and AI agents parsing the raw HTML read a normal heading.
+   -------------------------------------------------------------------------- */
+
+.kinetic {
+  display: block;
+}
+
+.kinetic__line {
+  display: block;
+  overflow: hidden;
+  padding-block-end: 0.08em; /* room for descenders inside the clip */
+  margin-block-end: -0.04em;
+}
+
+.kinetic__word {
+  display: inline-block;
+  transform: translateY(105%);
+  animation: kinetic-rise 0.95s var(--ease-out) forwards;
+  animation-delay: calc(var(--kinetic-index, 0) * 85ms + 120ms);
+}
+
+@keyframes kinetic-rise {
+  to {
+    transform: translateY(0);
+  }
+}
+
+/* Variable-font weight nudge on hover. Purposeful: it invites you to touch
+   the headline, and it only works because Bricolage Grotesque is variable. */
+@media (hover: hover) and (pointer: fine) {
+  .kinetic__word {
+    transition: font-variation-settings var(--dur-base) var(--ease-out),
+      color var(--dur-base) var(--ease-out);
+  }
+  .kinetic__word:hover {
+    font-variation-settings: 'wght' 800, 'opsz' 96;
+    color: var(--text-accent);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kinetic__word {
+    transform: none;
+    animation: none;
+  }
+  .kinetic__line {
+    overflow: visible;
+  }
+}
+
+/* No-JS and no-animation safety: if the animation never runs, the words must
+   still be visible rather than clipped out of view. */
+.no-js .kinetic__word {
+  transform: none;
+  animation: none;
+}
+
+/* --------------------------------------------------------------------------
+   Page header (interior pages)
+   -------------------------------------------------------------------------- */
+
+.page-header {
+  position: relative;
+  padding-block: clamp(3rem, 7vw, 5.5rem) clamp(2.5rem, 5vw, 4rem);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.page-header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--grad-glow);
+  opacity: 0.75;
+  pointer-events: none;
+}
+
+.page-header__title {
+  font-size: var(--step-7);
+  max-inline-size: 18ch;
+}
+
+.page-header__copy {
+  margin-block-start: var(--space-5);
+  max-inline-size: 52ch;
+}
+
+/* Breadcrumb */
+.breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--step--1);
+  color: var(--text-subtle);
+  margin-block-end: var(--space-5);
+}
+
+.breadcrumb a {
+  color: var(--text-muted);
+  text-decoration: none;
+}
+
+.breadcrumb a:hover {
+  color: var(--text-accent);
+}
+
+.breadcrumb li + li::before {
+  content: '/';
+  margin-inline-end: var(--space-2);
+  color: var(--border-strong);
+}
+
+.breadcrumb ol {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Service detail blocks (services.html)
+   -------------------------------------------------------------------------- */
+
+.service-block {
+  position: relative;
+  padding-block: clamp(3rem, 7vw, 6rem);
+  border-block-start: 1px solid var(--border);
+}
+
+.service-block:first-of-type {
+  border-block-start: none;
+}
+
+.service-block__label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-block-end: var(--space-5);
+}
+
+.service-block__num {
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  font-weight: 600;
+  color: var(--text-subtle);
+  letter-spacing: var(--tracking-wide);
+}
+
+.service-block__title {
+  font-size: var(--step-5);
+  max-inline-size: 14ch;
+}
+
+/* Deliverables panel */
+.panel {
+  padding: clamp(1.5rem, 3vw, 2.25rem);
+  border-radius: var(--radius-lg);
+  background: var(--bg-subtle);
+  border: 1px solid var(--border);
+}
+
+.panel--brand {
+  background: var(--brand-soft);
+  border-color: color-mix(in oklab, var(--brand) 22%, transparent);
+}
+
+.panel__title {
+  font-family: var(--font-body);
+  font-size: var(--step--1);
+  font-weight: 700;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--text-subtle);
+  margin-block-end: var(--space-4);
+}
+
+/* Tech / tool chips */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.chip {
+  padding: 0.35em 0.8em;
+  font-size: var(--step--1);
+  font-weight: 500;
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  transition: border-color var(--dur-fast) var(--ease-out),
+    color var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
+}
+
+.chip:hover {
+  border-color: var(--border-accent);
+  color: var(--text);
+  transform: translateY(-1px);
+}
+
+/* --------------------------------------------------------------------------
+   Case study detail
+   -------------------------------------------------------------------------- */
+
+.case-meta {
+  display: grid;
+  gap: var(--space-5);
+  padding-block: var(--space-6);
+  border-block: 1px solid var(--border);
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+}
+
+.case-meta__label {
+  font-size: var(--step--2);
+  font-weight: 700;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--text-subtle);
+  margin-block-end: var(--space-2);
+}
+
+.case-meta__value {
+  font-size: var(--step-0);
+  font-weight: 500;
+}
+
+/* --------------------------------------------------------------------------
+   Contact page
+   -------------------------------------------------------------------------- */
+
+.contact-layout {
+  display: grid;
+  gap: clamp(2.5rem, 5vw, 4rem);
+  align-items: start;
+}
+
+@media (min-width: 64rem) {
+  .contact-layout {
+    grid-template-columns: 1fr 0.75fr;
+  }
+}
+
+.contact-detail {
+  display: flex;
+  gap: var(--space-4);
+  padding-block: var(--space-5);
+  border-block-end: 1px solid var(--border);
+}
+
+.contact-detail:last-child {
+  border-block-end: none;
+}
+
+.contact-detail__icon {
+  display: grid;
+  place-items: center;
+  inline-size: 2.6rem;
+  block-size: 2.6rem;
+  flex: none;
+  border-radius: var(--radius-md);
+  background: var(--brand-soft);
+  color: var(--text-accent);
+}
+
+.contact-detail__icon svg {
+  inline-size: 1.2rem;
+  block-size: 1.2rem;
+}
+
+.contact-detail__label {
+  font-size: var(--step--1);
+  font-weight: 600;
+  color: var(--text-subtle);
+  margin-block-end: 0.15rem;
+}
+
+.contact-detail__value {
+  font-size: var(--step-0);
+  font-weight: 500;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.contact-detail__value:hover {
+  color: var(--text-accent);
+}
+
+/* Form grid */
+.form-grid {
+  display: grid;
+  gap: var(--space-5);
+}
+
+@media (min-width: 40rem) {
+  .form-grid--2 {
+    grid-template-columns: 1fr 1fr;
+  }
+  .form-grid__span {
+    grid-column: 1 / -1;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Styleguide page only — swatches and spec tables.
+   Safe to delete alongside styleguide.html before going live.
+   -------------------------------------------------------------------------- */
+
+.sg-swatches {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(6.5rem, 1fr));
+  gap: var(--space-3);
+}
+
+.sg-swatch {
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.sg-swatch__chip {
+  block-size: 4.5rem;
+}
+
+.sg-swatch__meta {
+  padding: var(--space-3);
+  font-size: var(--step--2);
+  line-height: 1.4;
+}
+
+.sg-swatch__name {
+  font-weight: 700;
+  display: block;
+}
+
+.sg-swatch__hex {
+  font-family: var(--font-mono);
+  color: var(--text-subtle);
+  text-transform: uppercase;
+}
+
+.sg-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-4);
+  padding-block: var(--space-4);
+  border-block-end: 1px solid var(--border);
+}
+
+.sg-note {
+  font-size: var(--step--1);
+  color: var(--text-subtle);
+  font-family: var(--font-mono);
+  min-inline-size: 8rem;
+}
+
+.sg-gradient {
+  block-size: 5rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+}

@@ -1,0 +1,504 @@
+/* ==========================================================================
+   SkillByte Design System — Layer 2: Base
+   Reset, document defaults, typography, layout primitives, motion utilities.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Reset
+   -------------------------------------------------------------------------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  /* Sticky nav is 4.5rem; keep anchored sections clear of it */
+  scroll-padding-top: 6rem;
+  -moz-tab-size: 4;
+  tab-size: 4;
+}
+
+body {
+  min-height: 100svh;
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: var(--step-0);
+  line-height: var(--leading-normal);
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1;
+  overflow-x: hidden;
+  transition: background-color var(--dur-base) var(--ease-out),
+    color var(--dur-base) var(--ease-out);
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+ul[class],
+ol[class] {
+  list-style: none;
+  padding: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.18em;
+}
+
+:target {
+  scroll-margin-top: 6rem;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Focus — one visible treatment everywhere. Never remove without replacing.
+   -------------------------------------------------------------------------- */
+
+:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 3px;
+  border-radius: var(--radius-xs);
+}
+
+/* Mouse users don't get the ring, keyboard users always do */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+.skip-link {
+  position: absolute;
+  top: 0;
+  left: var(--space-4);
+  z-index: var(--z-toast);
+  padding: var(--space-3) var(--space-5);
+  background: var(--brand);
+  color: var(--brand-on);
+  font-weight: 600;
+  border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+  transform: translateY(-120%);
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+
+.skip-link:focus-visible {
+  transform: translateY(0);
+}
+
+/* --------------------------------------------------------------------------
+   Typography
+   -------------------------------------------------------------------------- */
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-tight);
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: var(--step-6);
+}
+h2 {
+  font-size: var(--step-5);
+}
+h3 {
+  font-size: var(--step-3);
+}
+h4 {
+  font-size: var(--step-1);
+  letter-spacing: var(--tracking-snug);
+}
+
+p {
+  text-wrap: pretty;
+}
+
+/* Display type — the oversized, structural headings */
+.display {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  text-wrap: balance;
+}
+
+.display--hero {
+  font-size: var(--step-hero);
+  font-weight: 800;
+  line-height: 0.92;
+  letter-spacing: -0.045em;
+}
+
+.display--xl {
+  font-size: var(--step-7);
+}
+.display--lg {
+  font-size: var(--step-6);
+}
+.display--md {
+  font-size: var(--step-5);
+}
+
+/* Eyebrow / kicker above section headings */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-body);
+  font-size: var(--step--1);
+  font-weight: 600;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--text-accent);
+  margin-bottom: var(--space-4);
+}
+
+.eyebrow::before {
+  content: '';
+  inline-size: 1.75rem;
+  block-size: 2px;
+  border-radius: 2px;
+  background: var(--grad-flare);
+  flex: none;
+}
+
+.lead {
+  font-size: var(--step-1);
+  line-height: var(--leading-loose);
+  color: var(--text-muted);
+  max-inline-size: 60ch;
+}
+
+.text-muted {
+  color: var(--text-muted);
+}
+.text-subtle {
+  color: var(--text-subtle);
+}
+.text-accent {
+  color: var(--text-accent);
+}
+.text-accent-alt {
+  color: var(--text-accent-alt);
+}
+
+/* Gradient text. Falls back to a solid accent colour where unsupported, and
+   the background-clip is only applied once we know the browser handles it. */
+.text-gradient {
+  color: var(--text-accent);
+}
+
+@supports (-webkit-background-clip: text) or (background-clip: text) {
+  .text-gradient {
+    background: var(--grad-spectrum);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+/* Forced-colours / high-contrast mode: gradient text is invisible there */
+@media (forced-colors: active) {
+  .text-gradient {
+    background: none;
+    color: CanvasText;
+    -webkit-text-fill-color: CanvasText;
+  }
+}
+
+.mono {
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  letter-spacing: var(--tracking-normal);
+}
+
+/* --------------------------------------------------------------------------
+   Layout primitives
+   -------------------------------------------------------------------------- */
+
+.container {
+  inline-size: 100%;
+  max-inline-size: var(--container);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.container--narrow {
+  max-inline-size: var(--container-narrow);
+}
+
+.container--wide {
+  max-inline-size: 90rem;
+}
+
+.section {
+  padding-block: var(--section-y);
+  position: relative;
+}
+
+.section--tight {
+  padding-block: clamp(2.5rem, 6vw, 5rem);
+}
+
+.section--sunken {
+  background: var(--bg-subtle);
+}
+
+/* Stack: consistent vertical rhythm without margin guesswork */
+.stack > * + * {
+  margin-block-start: var(--stack-gap, var(--space-4));
+}
+.stack--sm {
+  --stack-gap: var(--space-3);
+}
+.stack--lg {
+  --stack-gap: var(--space-6);
+}
+.stack--xl {
+  --stack-gap: var(--space-8);
+}
+
+.cluster {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--cluster-gap, var(--space-4));
+}
+
+.section-head {
+  max-inline-size: 44rem;
+  margin-block-end: clamp(2.5rem, 5vw, 4rem);
+}
+
+.section-head--center {
+  margin-inline: auto;
+  text-align: center;
+}
+
+.section-head--center .eyebrow {
+  justify-content: center;
+}
+
+/* Two-column split that collapses cleanly */
+.split {
+  display: grid;
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: center;
+}
+
+@media (min-width: 60rem) {
+  .split {
+    grid-template-columns: 1fr 1fr;
+  }
+  .split--wide-start {
+    grid-template-columns: 1.15fr 0.85fr;
+  }
+  .split--wide-end {
+    grid-template-columns: 0.85fr 1.15fr;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Visibility helpers
+   -------------------------------------------------------------------------- */
+
+.visually-hidden {
+  position: absolute !important;
+  inline-size: 1px;
+  block-size: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+/* --------------------------------------------------------------------------
+   Motion system
+
+   Scroll-triggered reveals. Two implementations:
+   1. Native CSS scroll-driven animations where supported (no JS, no jank)
+   2. IntersectionObserver adding .is-visible, for everything else
+
+   Both are gated behind prefers-reduced-motion.
+   -------------------------------------------------------------------------- */
+
+/* Default state assumes JS will handle it. If JS is off, .no-js on <html>
+   makes everything visible immediately — content is never hidden by a
+   failed script. */
+.reveal {
+  opacity: 0;
+  transform: translateY(var(--reveal-shift, 1.75rem));
+  transition: opacity var(--dur-slow) var(--ease-out),
+    transform var(--dur-slow) var(--ease-out);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+  will-change: auto;
+}
+
+.no-js .reveal {
+  opacity: 1;
+  transform: none;
+}
+
+/* Staggered children — set --reveal-delay per item via nth-child so we don't
+   need inline styles or JS to sequence a group. */
+.reveal-group > .reveal:nth-child(1) {
+  --reveal-delay: 0ms;
+}
+.reveal-group > .reveal:nth-child(2) {
+  --reveal-delay: 70ms;
+}
+.reveal-group > .reveal:nth-child(3) {
+  --reveal-delay: 140ms;
+}
+.reveal-group > .reveal:nth-child(4) {
+  --reveal-delay: 210ms;
+}
+.reveal-group > .reveal:nth-child(5) {
+  --reveal-delay: 280ms;
+}
+.reveal-group > .reveal:nth-child(6) {
+  --reveal-delay: 350ms;
+}
+.reveal-group > .reveal:nth-child(7) {
+  --reveal-delay: 420ms;
+}
+.reveal-group > .reveal:nth-child(8) {
+  --reveal-delay: 490ms;
+}
+
+/* --------------------------------------------------------------------------
+   Reduced motion — honour it thoroughly, not token-effort.
+   Movement is removed; opacity fades stay because they don't trigger
+   vestibular discomfort and they preserve the sense of hierarchy.
+   -------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Grain overlay — a whisper of texture stops the large flat gradients from
+   looking like a 2015 CSS demo. Pure SVG, no image request.
+   -------------------------------------------------------------------------- */
+
+.grain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: var(--grain-opacity);
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* --------------------------------------------------------------------------
+   Print — people do print contact pages and proposals.
+   -------------------------------------------------------------------------- */
+
+@media print {
+  .site-header,
+  .site-footer,
+  .scroll-progress,
+  .section-rail,
+  .theme-toggle,
+  .cursor-glow {
+    display: none !important;
+  }
+
+  body {
+    background: #fff;
+    color: #000;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+
+  a[href^='http']::after {
+    content: ' (' attr(href) ')';
+    font-size: 0.8em;
+    color: #555;
+  }
+}
