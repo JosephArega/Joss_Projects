@@ -1615,6 +1615,20 @@ select.field__control {
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 24rem), 1fr));
 }
 
+/* Explicit 2-then-4, rather than auto-fit. A four-item group in an auto-fit
+   grid lands as 3 + 1, which reads as a mistake. */
+.grid-4 {
+  display: grid;
+  gap: clamp(1rem, 2.2vw, 1.75rem);
+  grid-template-columns: repeat(2, 1fr);
+}
+
+@media (min-width: 62rem) {
+  .grid-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
 /* Feature list with tick markers */
 .ticks {
   display: grid;
