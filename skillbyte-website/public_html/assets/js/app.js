@@ -148,16 +148,49 @@
     var observer = new IntersectionObserver(
       function (entries) {
         entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
+          // Reveal on entry, and also for anything already scrolled past.
+          // Without the second condition, deep-linking to #work would leave
+          // every section above it stuck at opacity 0 until scrolled back up.
+          if (entry.isIntersecting || entry.boundingClientRect.top < 0) {
             entry.target.classList.add('is-visible');
             observer.unobserve(entry.target);
           }
         });
       },
-      { rootMargin: '0px 0px -12% 0px', threshold: 0.12 }
+      { rootMargin: '0px 0px -8% 0px', threshold: 0 }
     );
 
     for (var i = 0; i < targets.length; i++) observer.observe(targets[i]);
+
+    // Backstop. Content must never stay invisible because an observer
+    // callback was missed — the bottom rootMargin in particular can leave
+    // elements at the very end of the page untriggered. This sweeps anything
+    // that has entered the viewport and removes itself once all are shown.
+    var remaining = Array.prototype.slice.call(targets);
+    var pending = false;
+
+    function sweep() {
+      pending = false;
+      for (var i = remaining.length - 1; i >= 0; i--) {
+        if (remaining[i].getBoundingClientRect().top < window.innerHeight) {
+          remaining[i].classList.add('is-visible');
+          remaining.splice(i, 1);
+        }
+      }
+      if (!remaining.length) {
+        window.removeEventListener('scroll', onScroll);
+        window.removeEventListener('resize', onScroll);
+      }
+    }
+
+    function onScroll() {
+      if (pending) return;
+      pending = true;
+      requestAnimationFrame(sweep);
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
   }
 
   /* ------------------------------------------------------------------------

@@ -295,6 +295,57 @@
 }
 
 /* --------------------------------------------------------------------------
+   Work card placeholder art
+
+   Stands in for real project photography. A generated mark on a brand wash
+   reads as a deliberate choice, where a grey box with a broken-image icon
+   reads as an unfinished site. Replace with <img> when the shots exist.
+   -------------------------------------------------------------------------- */
+
+.work-card__placeholder {
+  position: relative;
+  display: grid;
+  place-items: center;
+  block-size: 100%;
+  background: var(--grad-ink);
+  overflow: hidden;
+}
+
+.work-card__placeholder::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    70% 90% at 25% 15%,
+    color-mix(in oklab, var(--ph-tint, var(--flare-500)) 55%, transparent),
+    transparent 70%
+  );
+}
+
+/* Faint grid so the tile has some internal texture */
+.work-card__placeholder::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(rgb(255 255 255 / 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(255 255 255 / 0.07) 1px, transparent 1px);
+  background-size: 2.5rem 2.5rem;
+}
+
+.work-card__placeholder span {
+  position: relative;
+  z-index: 1;
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 7vw, 4rem);
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  color: color-mix(in oklab, #ffffff 92%, transparent);
+  text-align: center;
+  padding-inline: var(--space-5);
+  line-height: 1;
+}
+
+/* --------------------------------------------------------------------------
    Case study detail
    -------------------------------------------------------------------------- */
 
