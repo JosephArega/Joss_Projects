@@ -20,8 +20,8 @@
 html {
   -webkit-text-size-adjust: 100%;
   scroll-behavior: smooth;
-  /* Sticky nav is 4.5rem; keep anchored sections clear of it */
-  scroll-padding-top: 6rem;
+  /* The floating nav pill is ~4rem tall plus its float margin */
+  scroll-padding-top: 7rem;
   -moz-tab-size: 4;
   tab-size: 4;
 }
@@ -90,7 +90,7 @@ a {
 }
 
 :target {
-  scroll-margin-top: 6rem;
+  scroll-margin-top: 7rem;
 }
 
 hr {
@@ -210,7 +210,7 @@ p {
   inline-size: 1.75rem;
   block-size: 2px;
   border-radius: 2px;
-  background: var(--grad-flare);
+  background: var(--grad-primary);
   flex: none;
 }
 

@@ -35,7 +35,7 @@
         'aria-label',
         theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'
       );
-      if (meta) meta.setAttribute('content', theme === 'dark' ? '#0e0e0d' : '#ffffff');
+      if (meta) meta.setAttribute('content', theme === 'dark' ? '#0a1420' : '#ffffff');
     }
 
     sync(currentTheme());
@@ -96,7 +96,7 @@
     });
 
     // Close if the viewport grows past the mobile breakpoint while open
-    window.matchMedia('(min-width: 62rem)').addEventListener('change', function (e) {
+    window.matchMedia('(min-width: 68rem)').addEventListener('change', function (e) {
       if (e.matches) setOpen(false);
     });
   }
@@ -557,6 +557,196 @@
   }
 
   /* ------------------------------------------------------------------------
+     Site search
+
+     Five pages do not justify a search index file, but a magnifying glass
+     that does nothing is worse than no magnifying glass. So the icon opens a
+     real filter over a small hand-maintained index of pages and sections.
+     Add an entry here when you add a page.
+     ------------------------------------------------------------------------ */
+
+  var SEARCH_INDEX = [
+    { t: 'Home', p: 'index.html', d: 'Digital work that ships — marketing, apps and websites' },
+    { t: 'Services', p: 'services.html', d: 'Everything we do, and what you get' },
+    { t: 'Digital Marketing & SEO', p: 'services.html#digital-marketing', d: 'Search, paid social and organic campaigns measured against revenue' },
+    { t: 'Mobile App Development', p: 'services.html#mobile-apps', d: 'iOS and Android built for patchy data and mid-range devices' },
+    { t: 'Website Development', p: 'services.html#web-development', d: 'Fast, accessible sites that load on a 3G connection' },
+    { t: 'Branding, Social, Content & Training', p: 'services.html#more', d: 'The four services that usually come attached to a bigger project' },
+    { t: 'Pricing and timelines', p: 'services.html', d: 'What projects cost, how long they take, who owns the code' },
+    { t: 'Work', p: 'work.html', d: 'Case studies, each led by the result it produced' },
+    { t: 'About', p: 'about.html', d: 'Our story, how we work, and the team' },
+    { t: 'The team', p: 'about.html', d: 'Who you will actually be working with' },
+    { t: 'Contact', p: 'contact.html', d: 'Start a project — we reply within one business day' }
+  ];
+
+  function initSearch() {
+    var toggle = document.querySelector('[data-search-toggle]');
+    var overlay = document.getElementById('site-search');
+    if (!toggle || !overlay) return;
+
+    var input = overlay.querySelector('#search-input');
+    var list = overlay.querySelector('#search-results');
+    var count = overlay.querySelector('[data-search-count]');
+    var closeBtn = overlay.querySelector('[data-search-close]');
+    var lastFocus = null;
+
+    function links() {
+      return list.querySelectorAll('a');
+    }
+
+    function render(query) {
+      var q = query.trim().toLowerCase();
+      var matches = q
+        ? SEARCH_INDEX.filter(function (item) {
+            return (item.t + ' ' + item.d).toLowerCase().indexOf(q) !== -1;
+          })
+        : SEARCH_INDEX;
+
+      list.innerHTML = '';
+
+      if (!matches.length) {
+        var empty = document.createElement('li');
+        empty.className = 'search-empty';
+        empty.textContent = 'Nothing matches \u201C' + query.trim() + '\u201D.';
+        list.appendChild(empty);
+        if (count) count.textContent = 'No results';
+        return;
+      }
+
+      matches.forEach(function (item) {
+        var li = document.createElement('li');
+        li.className = 'search-result';
+
+        var a = document.createElement('a');
+        a.href = item.p;
+
+        var title = document.createElement('span');
+        title.className = 'search-result__title';
+        title.textContent = item.t;
+
+        var meta = document.createElement('span');
+        meta.className = 'search-result__meta';
+        meta.textContent = item.d;
+
+        a.appendChild(title);
+        a.appendChild(meta);
+        li.appendChild(a);
+        list.appendChild(li);
+      });
+
+      if (count) {
+        count.textContent =
+          matches.length + (matches.length === 1 ? ' result' : ' results') + ' available';
+      }
+    }
+
+    /* Roving focus across the real anchors. Moving actual DOM focus (rather
+       than painting an aria-selected state) means Enter, middle-click and
+       "open in new tab" all behave the way they do anywhere else. */
+    function focusAt(index) {
+      var items = links();
+      if (!items.length) return;
+      if (index < 0) {
+        input.focus();
+        return;
+      }
+      var i = index % items.length;
+      items[i].focus();
+      items[i].scrollIntoView({ block: 'nearest' });
+    }
+
+    function currentIndex() {
+      var items = links();
+      for (var i = 0; i < items.length; i++) {
+        if (items[i] === document.activeElement) return i;
+      }
+      return -1;
+    }
+
+    function open() {
+      lastFocus = document.activeElement;
+      overlay.hidden = false;
+      document.body.classList.add('search-open');
+      toggle.setAttribute('aria-expanded', 'true');
+      requestAnimationFrame(function () {
+        overlay.classList.add('is-open');
+      });
+      input.value = '';
+      render('');
+      input.focus();
+    }
+
+    function close() {
+      overlay.classList.remove('is-open');
+      document.body.classList.remove('search-open');
+      toggle.setAttribute('aria-expanded', 'false');
+      window.setTimeout(function () {
+        overlay.hidden = true;
+      }, 280);
+      if (lastFocus && lastFocus.focus) lastFocus.focus();
+    }
+
+    toggle.addEventListener('click', open);
+    if (closeBtn) closeBtn.addEventListener('click', close);
+
+    overlay.addEventListener('click', function (e) {
+      if (e.target === overlay) close();
+    });
+
+    input.addEventListener('input', function () {
+      render(this.value);
+    });
+
+    input.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        focusAt(0);
+      } else if (e.key === 'Enter') {
+        var first = links()[0];
+        if (first) {
+          e.preventDefault();
+          window.location.href = first.getAttribute('href');
+        }
+      }
+    });
+
+    list.addEventListener('keydown', function (e) {
+      if (e.key !== 'ArrowDown' && e.key !== 'ArrowUp') return;
+      e.preventDefault();
+      focusAt(currentIndex() + (e.key === 'ArrowDown' ? 1 : -1));
+    });
+
+    /* Focus trap: the overlay is modal, so Tab must not wander behind it. */
+    overlay.addEventListener('keydown', function (e) {
+      if (e.key !== 'Tab') return;
+      var focusable = overlay.querySelectorAll('input, button, a[href]');
+      if (!focusable.length) return;
+      var first = focusable[0];
+      var last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && !overlay.hidden) {
+        close();
+        return;
+      }
+      // Cmd/Ctrl+K opens search from anywhere, the convention people expect
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        if (overlay.hidden) open();
+        else close();
+      }
+    });
+  }
+
+  /* ------------------------------------------------------------------------
      Current year in the footer
      ------------------------------------------------------------------------ */
 
@@ -582,6 +772,7 @@
     initCounters();
     initAccordions();
     initContactForm();
+    initSearch();
     initYear();
   }
 

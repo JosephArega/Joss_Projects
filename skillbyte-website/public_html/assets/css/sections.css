@@ -10,7 +10,7 @@
 
 .hero {
   position: relative;
-  padding-block: clamp(3rem, 8vw, 7rem) clamp(3.5rem, 9vw, 8rem);
+  padding-block: calc(var(--nav-space) + clamp(2rem, 6vw, 5rem)) clamp(3.5rem, 9vw, 8rem);
   overflow: hidden;
   isolation: isolate;
 }
@@ -25,12 +25,12 @@
   z-index: -2;
   background: radial-gradient(
       42rem 34rem at var(--hx, 22%) var(--hy, 18%),
-      color-mix(in oklab, var(--flare-500) 20%, transparent),
+      color-mix(in oklab, var(--tide-500) 24%, transparent),
       transparent 62%
     ),
     radial-gradient(
       38rem 30rem at calc(100% - var(--hx, 22%)) calc(100% - var(--hy, 18%)),
-      color-mix(in oklab, var(--volt-500) 16%, transparent),
+      color-mix(in oklab, var(--volt-500) 18%, transparent),
       transparent 60%
     );
   transition: background-position var(--dur-slow) var(--ease-out);
@@ -151,7 +151,7 @@
 
 .page-header {
   position: relative;
-  padding-block: clamp(3rem, 7vw, 5.5rem) clamp(2.5rem, 5vw, 4rem);
+  padding-block: calc(var(--nav-space) + clamp(1.5rem, 4vw, 3rem)) clamp(2.5rem, 5vw, 4rem);
   overflow: hidden;
   isolation: isolate;
 }
@@ -259,6 +259,13 @@
   border-color: color-mix(in oklab, var(--brand) 22%, transparent);
 }
 
+/* The subtle grey label fails AA against the tinted brand panel in dark mode
+   (4.3:1). The brand accent is both legible on it and the more meaningful
+   colour for a label sitting on a brand surface. */
+.panel--brand .panel__title {
+  color: var(--text-accent);
+}
+
 .panel__title {
   font-family: var(--font-body);
   font-size: var(--step--1);
@@ -317,7 +324,7 @@
   inset: 0;
   background: radial-gradient(
     70% 90% at 25% 15%,
-    color-mix(in oklab, var(--ph-tint, var(--flare-500)) 55%, transparent),
+    color-mix(in oklab, var(--ph-tint, var(--tide-500)) 55%, transparent),
     transparent 70%
   );
 }

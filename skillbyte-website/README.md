@@ -161,7 +161,7 @@ grey boxes. To use a real photo, replace the placeholder block:
 
 ```html
 <!-- before -->
-<div class="work-card__placeholder" style="--ph-tint: var(--flare-500);" role="img" aria-label="...">
+<div class="work-card__placeholder" style="--ph-tint: var(--tide-500);" role="img" aria-label="...">
   <span>Habesha<br>Kitchen</span>
 </div>
 
@@ -189,11 +189,40 @@ depends on it.
 Everything flows from `assets/css/tokens.css`. Change a value there and it
 updates across both themes site-wide.
 
-The one rule worth knowing: **each colour ramp splits by job.** The bright
-`500` shades are for button fills, icons and very large display type. The
-darker `700` shades (and `300` in dark mode) are for text. Bright orange on
-white measures 3.1:1 — fine for a headline, illegal for body copy. That split
-is what lets the palette stay this vibrant and still pass accessibility checks.
+**Each colour has one job.** This is the rule that keeps the palette from
+turning into decoration:
+
+| Ramp | Role |
+|---|---|
+| **Tide** (teal) | The brand and its actions — nav, buttons, links, logo |
+| **Volt** (green) | Growth and confirmation; Tide's partner in gradients |
+| **Flare** (orange) | Outcomes and data only — stat values, case-study metrics |
+| **Deep** (navy) | The navigation pill, CTA bands, feature tiles |
+| **Ink** | Cool slate neutrals for text and surfaces |
+
+On this site, **orange means a number.** If you use it for a button or a nav
+item, that meaning disappears and the page goes back to looking like every
+other agency site.
+
+**Each ramp also splits by job.** The bright `500` shades are for fills, icons
+and very large display type. The darker `700` shades (and `300` in dark mode)
+are for text. Core teal on white measures 2.6:1 — fine for a button fill,
+illegal for body copy. That split is what lets the palette stay this vibrant
+and still pass accessibility checks.
+
+### The navigation bar
+
+The nav is a floating dark pill that stays dark in **both** themes — the
+contrast against a light page is what gives it presence. It overlays the page
+rather than sitting in a band above it, which is why `--nav-space` exists in
+`tokens.css`: the header cancels its own height with a negative margin and the
+first section of each page adds it back. If you change the pill's height, change
+that token to match or the hero will overlap it.
+
+The magnifying glass is a working control, not decoration. It filters a small
+index of pages and sections and opens with <kbd>Ctrl/Cmd + K</kbd>. **When you
+add a page, add it to `SEARCH_INDEX` near the bottom of `assets/js/app.js`** —
+it is a hand-maintained list, roughly ten lines in.
 
 ### Light and dark mode
 

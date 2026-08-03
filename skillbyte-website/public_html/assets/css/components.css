@@ -63,7 +63,7 @@
   --btn-bg: transparent;
   --btn-fg: var(--brand-on);
   --btn-border: transparent;
-  background-image: var(--grad-flare);
+  background-image: var(--grad-primary);
   box-shadow: var(--shadow-brand);
 }
 
@@ -82,7 +82,7 @@
 }
 
 .btn--primary:hover {
-  box-shadow: 0 18px 40px -12px color-mix(in oklab, var(--flare-600) 55%, transparent);
+  box-shadow: 0 18px 40px -12px color-mix(in oklab, var(--tide-600) 55%, transparent);
 }
 
 /* Secondary — outlined, fills from the bottom on hover */
@@ -205,8 +205,25 @@
 
 .badge--accent {
   background: var(--accent-soft);
-  color: var(--text-accent-alt);
+  color: var(--volt-700);
   border-color: color-mix(in oklab, var(--accent) 25%, transparent);
+}
+
+:root[data-theme='dark'] .badge--accent {
+  color: var(--volt-300);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) .badge--accent {
+    color: var(--volt-300);
+  }
+}
+
+/* Outcome badge — orange, matching the data role Flare plays elsewhere */
+.badge--highlight {
+  background: var(--highlight-soft);
+  color: var(--text-accent-alt);
+  border-color: color-mix(in oklab, var(--highlight) 28%, transparent);
 }
 
 .badge__dot {
@@ -235,35 +252,81 @@
    Header / navigation
    -------------------------------------------------------------------------- */
 
+/* The header is a transparent rail; the visible object is the pill inside it,
+   which floats clear of the page edges. */
 .site-header {
   position: sticky;
   top: 0;
   z-index: var(--z-nav);
-  background: var(--glass-bg);
-  border-block-end: 1px solid transparent;
-  transition: border-color var(--dur-base) var(--ease-out),
-    background-color var(--dur-base) var(--ease-out),
-    box-shadow var(--dur-base) var(--ease-out);
+  padding-block: var(--space-4);
+  background: transparent;
+  /* Pull the page up underneath, so the bar floats OVER the hero instead of
+     sitting in a band above it. Without this the transparent header leaves a
+     blank stripe and the section below starts with a visible seam. The first
+     section adds --nav-space back as top padding. */
+  margin-block-end: calc(-1 * var(--nav-space));
 }
 
-@supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
-  .site-header {
-    -webkit-backdrop-filter: blur(16px) saturate(150%);
-    backdrop-filter: blur(16px) saturate(150%);
+/* Deliberately not a padding change: the header's height is what the negative
+   margin above compensates for, so resizing it on scroll would shift the whole
+   page. Depth on scroll comes from the shadow instead. */
+.site-header.is-stuck .navbar {
+  box-shadow: 0 22px 50px -24px rgb(6 18 32 / 0.7), 0 3px 10px -3px rgb(6 18 32 / 0.35);
+}
+
+.navbar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: 0.55rem 0.6rem 0.55rem 1.35rem;
+  min-block-size: 4rem;
+  border-radius: var(--radius-lg);
+  background: var(--nav-bg);
+  border: 1px solid var(--nav-border);
+  box-shadow: var(--nav-shadow);
+  transition: box-shadow var(--dur-base) var(--ease-out),
+    background-color var(--dur-base) var(--ease-out);
+}
+
+/* A very low-opacity brand wash across the bar keeps it from reading as a
+   flat black slab without tinting the text. */
+.navbar::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(
+    100deg,
+    color-mix(in oklab, var(--tide-500) 13%, transparent) 0%,
+    transparent 45%,
+    color-mix(in oklab, var(--volt-500) 9%, transparent) 100%
+  );
+}
+
+.navbar > * {
+  position: relative;
+  z-index: 1;
+}
+
+.navbar__divider {
+  inline-size: 1px;
+  block-size: 1.75rem;
+  flex: none;
+  background: var(--nav-divider);
+  display: none;
+}
+
+@media (min-width: 68rem) {
+  .navbar__divider {
+    display: block;
   }
 }
 
-.site-header.is-stuck {
-  border-block-end-color: var(--glass-border);
-  box-shadow: var(--shadow-sm);
-}
-
-.site-header__inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-5);
-  block-size: 4.5rem;
+/* Pushes the actions group to the right edge when the nav is hidden */
+.navbar__spacer {
+  flex: 1;
 }
 
 /* Logo */
@@ -274,6 +337,31 @@
   text-decoration: none;
   color: var(--text);
   flex: none;
+}
+
+/* Inside the dark pill the logo always sits on navy, whatever the theme */
+.navbar .logo {
+  color: #ffffff;
+}
+
+.logo__tagline {
+  display: none;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  line-height: 1;
+  margin-block-start: 0.28rem;
+  color: var(--nav-text);
+}
+
+@media (min-width: 30rem) {
+  .logo__tagline {
+    display: block;
+  }
+}
+
+.site-footer .logo__tagline {
+  color: var(--text-subtle);
 }
 
 .logo__mark {
@@ -287,9 +375,16 @@
   transform: rotate(-8deg) scale(1.06);
 }
 
+.logo__body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .logo__text {
+  display: block;
   font-family: var(--font-display);
-  font-size: 1.32rem;
+  font-size: 1.25rem;
   font-weight: 700;
   letter-spacing: -0.03em;
   line-height: 1;
@@ -300,45 +395,63 @@
   display: none;
 }
 
-@media (min-width: 62rem) {
+@media (min-width: 68rem) {
   .nav {
     display: flex;
     align-items: center;
-    gap: var(--space-1);
+    gap: 0.15rem;
+    flex: 1;
+    justify-content: center;
   }
 }
 
 .nav__link {
   position: relative;
-  display: inline-block;
-  padding: 0.55rem 0.95rem;
-  font-size: var(--step-0);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.6rem 1.05rem;
+  font-size: var(--step--1);
   font-weight: 500;
-  color: var(--text-muted);
+  letter-spacing: -0.005em;
+  color: var(--nav-text);
   text-decoration: none;
+  white-space: nowrap;
   border-radius: var(--radius-pill);
   transition: color var(--dur-fast) var(--ease-out),
     background-color var(--dur-fast) var(--ease-out);
 }
 
 .nav__link:hover {
-  color: var(--text);
-  background: var(--bg-sunken);
+  color: var(--nav-text-hover);
+  background: var(--nav-chip);
 }
 
+/* Active item: a gradient pill, with a dot sitting just below it. The dot is
+   the detail that makes the state read as "you are here" rather than just
+   "this one is highlighted". */
 .nav__link[aria-current='page'] {
-  color: var(--text);
-  font-weight: 600;
+  color: #04231f;
+  font-weight: 650;
+  background: var(--grad-primary);
+  box-shadow: 0 6px 16px -6px color-mix(in oklab, var(--tide-500) 65%, transparent);
+}
+
+.nav__link[aria-current='page']:hover {
+  color: #04231f;
+  background: var(--grad-primary);
 }
 
 .nav__link[aria-current='page']::after {
   content: '';
   position: absolute;
-  inset-block-end: 0.15rem;
-  inset-inline: 0.95rem;
-  block-size: 2px;
-  border-radius: 2px;
-  background: var(--grad-flare);
+  inset-block-end: -0.45rem;
+  inset-inline-start: 50%;
+  translate: -50% 0;
+  inline-size: 4px;
+  block-size: 4px;
+  border-radius: 50%;
+  background: var(--tide-400);
 }
 
 .site-header__actions {
@@ -346,16 +459,79 @@
   align-items: center;
   gap: var(--space-2);
   flex: none;
+  margin-inline-start: auto;
+}
+
+@media (min-width: 68rem) {
+  .site-header__actions {
+    margin-inline-start: 0;
+  }
 }
 
 .site-header__cta {
   display: none;
 }
 
-@media (min-width: 62rem) {
+@media (min-width: 48rem) {
   .site-header__cta {
     display: inline-flex;
   }
+}
+
+/* Round icon button living inside the dark pill (search, theme) */
+.nav-icon-btn {
+  display: inline-grid;
+  place-items: center;
+  inline-size: 2.5rem;
+  block-size: 2.5rem;
+  flex: none;
+  border-radius: 50%;
+  border: 1px solid var(--nav-border);
+  background: var(--nav-chip);
+  color: var(--nav-text);
+  transition: color var(--dur-fast) var(--ease-out),
+    background-color var(--dur-fast) var(--ease-out),
+    border-color var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
+}
+
+.nav-icon-btn:hover {
+  color: var(--nav-text-hover);
+  background: color-mix(in oklab, #ffffff 15%, transparent);
+  border-color: color-mix(in oklab, #ffffff 22%, transparent);
+  transform: translateY(-1px);
+}
+
+.nav-icon-btn svg {
+  inline-size: 1.1rem;
+  block-size: 1.1rem;
+}
+
+/* The CTA inside the pill: gradient, with the arrow in its own disc */
+.btn--nav {
+  padding: 0.55rem 0.55rem 0.55rem 1.25rem;
+  min-block-size: 2.75rem;
+  font-size: var(--step--1);
+  gap: 0.6rem;
+}
+
+.btn--nav .btn__arrow {
+  display: grid;
+  place-items: center;
+  inline-size: 1.65rem;
+  block-size: 1.65rem;
+  flex: none;
+  border-radius: 50%;
+  background: color-mix(in oklab, #ffffff 24%, transparent);
+  transition: transform var(--dur-base) var(--ease-out);
+}
+
+.btn--nav .btn__arrow svg {
+  inline-size: 0.85rem;
+  block-size: 0.85rem;
+}
+
+.btn--nav:hover .btn__arrow {
+  transform: translateX(3px);
 }
 
 /* Theme toggle */
@@ -363,20 +539,23 @@
   position: relative;
   display: inline-grid;
   place-items: center;
-  inline-size: 2.6rem;
-  block-size: 2.6rem;
+  inline-size: 2.5rem;
+  block-size: 2.5rem;
+  flex: none;
   border-radius: var(--radius-pill);
-  border: 1px solid var(--border);
-  background: var(--surface);
-  color: var(--text-muted);
+  border: 1px solid var(--nav-border);
+  background: var(--nav-chip);
+  color: var(--nav-text);
   overflow: hidden;
   transition: color var(--dur-fast) var(--ease-out),
+    background-color var(--dur-fast) var(--ease-out),
     border-color var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
 }
 
 .theme-toggle:hover {
-  color: var(--text);
-  border-color: var(--border-strong);
+  color: var(--nav-text-hover);
+  background: color-mix(in oklab, #ffffff 15%, transparent);
+  border-color: color-mix(in oklab, #ffffff 22%, transparent);
   transform: translateY(-1px);
 }
 
@@ -419,15 +598,23 @@
 .nav-toggle {
   display: inline-grid;
   place-items: center;
-  inline-size: 2.6rem;
-  block-size: 2.6rem;
+  inline-size: 2.5rem;
+  block-size: 2.5rem;
+  flex: none;
   border-radius: var(--radius-pill);
-  border: 1px solid var(--border);
-  background: var(--surface);
-  color: var(--text);
+  border: 1px solid var(--nav-border);
+  background: var(--nav-chip);
+  color: #ffffff;
+  transition: background-color var(--dur-fast) var(--ease-out),
+    border-color var(--dur-fast) var(--ease-out);
 }
 
-@media (min-width: 62rem) {
+.nav-toggle:hover {
+  background: color-mix(in oklab, #ffffff 15%, transparent);
+  border-color: color-mix(in oklab, #ffffff 22%, transparent);
+}
+
+@media (min-width: 68rem) {
   .nav-toggle {
     display: none;
   }
@@ -461,11 +648,11 @@
 /* Mobile menu panel */
 .mobile-menu {
   position: fixed;
-  inset: 4.5rem 0 0;
-  z-index: var(--z-overlay);
+  inset: 0;
+  z-index: calc(var(--z-nav) - 5);
   display: flex;
   flex-direction: column;
-  padding: var(--space-6) var(--gutter) var(--space-8);
+  padding: 6.5rem var(--gutter) var(--space-8);
   background: var(--bg);
   overflow-y: auto;
   overscroll-behavior: contain;
@@ -483,7 +670,7 @@
   transition-delay: 0s;
 }
 
-@media (min-width: 62rem) {
+@media (min-width: 68rem) {
   .mobile-menu {
     display: none;
   }
@@ -516,6 +703,171 @@
 }
 
 body.nav-open {
+  overflow: hidden;
+}
+
+/* --------------------------------------------------------------------------
+   Search overlay
+   -------------------------------------------------------------------------- */
+
+.search-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-overlay);
+  display: grid;
+  justify-items: center;
+  align-content: start;
+  padding: clamp(4rem, 12vh, 8rem) var(--gutter) var(--space-6);
+  background: color-mix(in oklab, var(--deep-950) 62%, transparent);
+  opacity: 0;
+  transition: opacity var(--dur-base) var(--ease-out);
+}
+
+@supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
+  .search-overlay {
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+  }
+}
+
+.search-overlay.is-open {
+  opacity: 1;
+}
+
+.search-panel {
+  inline-size: 100%;
+  max-inline-size: 38rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  transform: translateY(-0.75rem) scale(0.985);
+  transition: transform var(--dur-base) var(--ease-out);
+}
+
+.search-overlay.is-open .search-panel {
+  transform: none;
+}
+
+.search-panel__field {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-5);
+  border-block-end: 1px solid var(--border);
+}
+
+.search-panel__field > svg {
+  inline-size: 1.15rem;
+  block-size: 1.15rem;
+  flex: none;
+  color: var(--text-subtle);
+}
+
+.search-panel__field input {
+  flex: 1;
+  min-inline-size: 0;
+  border: none;
+  background: none;
+  font-size: var(--step-1);
+  color: var(--text);
+  outline: none;
+  appearance: none;
+}
+
+.search-panel__field input::placeholder {
+  color: var(--text-subtle);
+}
+
+.search-panel__field input::-webkit-search-cancel-button {
+  display: none;
+}
+
+.search-panel__close {
+  flex: none;
+  padding: 0.25rem 0.55rem;
+  font-size: var(--step--2);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--text-subtle);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xs);
+  background: var(--bg-subtle);
+}
+
+.search-panel__close:hover {
+  color: var(--text);
+  border-color: var(--border-strong);
+}
+
+.search-results {
+  list-style: none;
+  margin: 0;
+  padding: var(--space-2);
+  max-block-size: min(24rem, 50vh);
+  overflow-y: auto;
+}
+
+.search-results:empty {
+  display: none;
+}
+
+.search-result a {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  color: var(--text);
+}
+
+.search-result a:hover,
+.search-result a:focus-visible {
+  background: var(--brand-soft);
+  outline-offset: -2px;
+}
+
+.search-result__title {
+  font-weight: 600;
+  font-size: var(--step-0);
+  line-height: 1.3;
+}
+
+.search-result__meta {
+  font-size: var(--step--1);
+  color: var(--text-muted);
+  line-height: 1.35;
+}
+
+.search-result__page {
+  color: var(--text-accent);
+  font-weight: 600;
+}
+
+.search-empty {
+  padding: var(--space-5);
+  color: var(--text-muted);
+  font-size: var(--step-0);
+  text-align: center;
+}
+
+.search-panel__hint {
+  padding: var(--space-3) var(--space-5);
+  border-block-start: 1px solid var(--border);
+  font-size: var(--step--2);
+  color: var(--text-subtle);
+  background: var(--bg-subtle);
+}
+
+@media (max-width: 40rem) {
+  .search-panel__hint {
+    display: none;
+  }
+}
+
+body.search-open {
   overflow: hidden;
 }
 
@@ -808,7 +1160,7 @@ body.nav-open {
 
 .bento__tile--feature .card__icon {
   background: color-mix(in oklab, #ffffff 10%, transparent);
-  color: var(--flare-300);
+  color: var(--tide-300);
 }
 
 /* In dark mode an ink surface is the page background, so the tile would
@@ -817,25 +1169,25 @@ body.nav-open {
 :root[data-theme='dark'] .bento__tile--feature {
   background: linear-gradient(
     150deg,
-    color-mix(in oklab, var(--flare-500) 16%, #241f1b) 0%,
-    #191817 62%
+    color-mix(in oklab, var(--tide-500) 18%, #142433) 0%,
+    #101d2c 62%
   );
-  border-color: color-mix(in oklab, var(--flare-400) 22%, transparent);
+  border-color: color-mix(in oklab, var(--tide-400) 24%, transparent);
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme]) .bento__tile--feature {
     background: linear-gradient(
       150deg,
-      color-mix(in oklab, var(--flare-500) 16%, #241f1b) 0%,
-      #191817 62%
+      color-mix(in oklab, var(--tide-500) 18%, #142433) 0%,
+      #101d2c 62%
     );
-    border-color: color-mix(in oklab, var(--flare-400) 22%, transparent);
+    border-color: color-mix(in oklab, var(--tide-400) 24%, transparent);
   }
 }
 
 .bento__tile--brand {
-  background: var(--grad-flare);
+  background: var(--grad-primary);
   border-color: transparent;
   color: #fff;
 }
@@ -912,7 +1264,7 @@ body.nav-open {
   inset-inline-start: 0;
   inline-size: 0;
   block-size: 2px;
-  background: var(--grad-flare);
+  background: var(--grad-primary);
   transition: inline-size var(--dur-slower) var(--ease-out);
 }
 
@@ -991,7 +1343,7 @@ body.nav-open {
   font-family: var(--font-display);
   font-weight: 700;
   font-size: var(--step--1);
-  background: var(--grad-flare);
+  background: var(--grad-primary);
   color: #fff;
 }
 
@@ -1586,7 +1938,7 @@ select.field__control {
   font-weight: 800;
   letter-spacing: -0.035em;
   line-height: 1;
-  background: var(--grad-spectrum);
+  background: var(--grad-highlight);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
