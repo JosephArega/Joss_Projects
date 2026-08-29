@@ -57,8 +57,6 @@ const favouriteLabel = computed(() =>
 
       <span class="card__name">{{ service.name }}</span>
 
-      <span v-if="service.description" class="card__description">{{ service.description }}</span>
-
       <span class="card__footer">
         <span v-if="showCategory" class="card__category">{{ categoryLabel }}</span>
         <span v-else class="card__host">{{ host }}</span>
@@ -89,12 +87,12 @@ const favouriteLabel = computed(() =>
 }
 
 .card {
-  /* Icon and name share the first row; the description and footer then run
-     the full width of the card, which keeps long text readable instead of
+  /* Icon and name share the first row; the footer then runs the full width
+     of the card, which keeps the category chip / host readable instead of
      squeezing it into a narrow middle column. */
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
-  grid-template-rows: auto auto 1fr;
+  grid-template-rows: auto 1fr;
   align-items: center;
   column-gap: var(--id-space-2);
   row-gap: 0.5rem;
@@ -158,22 +156,9 @@ const favouriteLabel = computed(() =>
   overflow-wrap: anywhere;
 }
 
-.card__description {
-  grid-column: 1 / -1;
-  grid-row: 2;
-  font-size: 0.875rem;
-  line-height: 1.45;
-  color: var(--p-text-muted-color);
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
 .card__footer {
   grid-column: 1 / -1;
-  grid-row: 3;
+  grid-row: 2;
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
