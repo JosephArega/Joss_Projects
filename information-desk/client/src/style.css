@@ -1,0 +1,221 @@
+/* ---------------------------------------------------------------------------
+   Information Desk — global styles.
+
+   Every colour in this file resolves to a PrimeVue design token (--p-*) or is
+   derived from one, so switching the Aura preset or toggling dark mode
+   recolours the whole app with no component changes. Components never contain
+   a literal colour; they reference the tokens declared here.
+   --------------------------------------------------------------------------- */
+
+@layer base, primevue, app;
+
+@layer base {
+  :root {
+    /* 8px spacing scale. */
+    --id-space-1: 0.5rem;
+    --id-space-2: 1rem;
+    --id-space-3: 1.5rem;
+    --id-space-4: 2rem;
+    --id-space-5: 2.5rem;
+    --id-space-6: 3rem;
+    --id-space-8: 4rem;
+
+    --id-radius: var(--p-border-radius-lg, 0.75rem);
+    --id-radius-sm: var(--p-border-radius-md, 0.5rem);
+
+    --id-page-max: 84rem;
+
+    /* Restrained motion: long enough to read, short enough to stay out of the
+       way. Nothing in the app bounces. */
+    --id-transition: 160ms cubic-bezier(0.4, 0, 0.2, 1);
+    --id-transition-slow: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+
+    --id-shadow-resting: 0 1px 2px color-mix(in srgb, var(--p-surface-950) 6%, transparent);
+    --id-shadow-lifted:
+      0 12px 24px -12px color-mix(in srgb, var(--p-surface-950) 22%, transparent),
+      0 2px 6px -2px color-mix(in srgb, var(--p-surface-950) 12%, transparent);
+
+    --id-danger-text: var(--p-red-600);
+
+    --id-page-background: var(--p-surface-50);
+    --id-panel-background: var(--p-surface-0);
+    --id-panel-border: var(--p-surface-200);
+    --id-panel-border-strong: var(--p-surface-300);
+
+    /* Categorical accents. Expressed in oklch so lightness and chroma can be
+       retuned once per theme while each category keeps its own hue.
+       `--id-accent-wash` is how much panel background goes into the tinted
+       surface behind an accent, so a higher number means a subtler fill. */
+    --id-accent-lightness: 45%;
+    --id-accent-chroma: 0.135;
+    --id-accent-wash: 92%;
+  }
+
+  :root.app-dark {
+    --id-danger-text: var(--p-red-400);
+
+    --id-page-background: var(--p-surface-950);
+    --id-panel-background: var(--p-surface-900);
+    --id-panel-border: var(--p-surface-700);
+    --id-panel-border-strong: var(--p-surface-600);
+
+    /* Lighter and less saturated so the accents keep AA contrast on a dark
+       surface without glowing. The wash stays high in both themes: it is the
+       share of panel background in the tint, so a low value here would leave
+       accent-coloured text sitting on an accent-coloured field. */
+    --id-accent-lightness: 76%;
+    --id-accent-chroma: 0.105;
+    --id-accent-wash: 86%;
+
+    --id-shadow-resting: 0 1px 2px rgb(0 0 0 / 40%);
+    --id-shadow-lifted: 0 12px 28px -12px rgb(0 0 0 / 62%), 0 2px 6px -2px rgb(0 0 0 / 45%);
+  }
+
+  /* Six hues, cycled for any further categories the admin adds. */
+  [data-accent='0'] { --id-accent-hue: 258; }
+  [data-accent='1'] { --id-accent-hue: 162; }
+  [data-accent='2'] { --id-accent-hue: 44; }
+  [data-accent='3'] { --id-accent-hue: 12; }
+  [data-accent='4'] { --id-accent-hue: 208; }
+  [data-accent='5'] { --id-accent-hue: 320; }
+  [data-accent='6'] { --id-accent-hue: 138; }
+  [data-accent='7'] { --id-accent-hue: 86; }
+
+  [data-accent] {
+    --id-accent: oklch(var(--id-accent-lightness) var(--id-accent-chroma) var(--id-accent-hue));
+    --id-accent-surface: color-mix(in srgb, var(--id-accent) calc(100% - var(--id-accent-wash)), var(--id-panel-background));
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background: var(--id-page-background);
+    color: var(--p-text-color);
+    font-family: var(--p-font-family, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif);
+    font-size: 1rem;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    transition: background-color var(--id-transition-slow), color var(--id-transition-slow);
+  }
+
+  h1, h2, h3, h4 {
+    margin: 0;
+    line-height: 1.25;
+    letter-spacing: -0.011em;
+    color: var(--p-text-color);
+  }
+
+  a {
+    color: var(--id-accent-text);
+  }
+
+  /* One consistent, clearly visible focus ring everywhere. */
+  :focus-visible {
+    outline: 2px solid var(--p-primary-color);
+    outline-offset: 2px;
+    border-radius: var(--id-radius-sm);
+  }
+
+  ::selection {
+    background: color-mix(in srgb, var(--p-primary-color) 26%, transparent);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer app {
+  /* ---------------------------------------------------------------------
+     Accessible accent text.
+
+     Aura's primary sits at ramp step 500. That is right for a filled button
+     (white text on the primary) but too light to use AS text on a light
+     surface: measured against surface-0 it lands around 2.5:1, short of the
+     4.5:1 AA needs. These pick the ramp step that carries the same accent
+     identity while passing AA in each theme, and hand it to the components
+     that render the accent as text.
+
+     Declared in the `app` layer so they win over PrimeVue's own :root tokens.
+     --------------------------------------------------------------------- */
+  :root {
+    --id-accent-text: var(--p-primary-700);
+    --p-tabs-tab-active-color: var(--id-accent-text);
+  }
+
+  :root.app-dark {
+    --id-accent-text: var(--p-primary-400);
+    --p-tabs-tab-active-color: var(--id-accent-text);
+  }
+
+  .id-page {
+    width: min(100% - var(--id-space-4), var(--id-page-max));
+    margin-inline: auto;
+  }
+
+  @media (max-width: 480px) {
+    .id-page {
+      width: min(100% - var(--id-space-2), var(--id-page-max));
+    }
+  }
+
+  /* Visible only to screen readers, but focusable (used by the skip link). */
+  .id-visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .id-skip-link {
+    position: absolute;
+    left: var(--id-space-2);
+    top: calc(var(--id-space-1) * -8);
+    z-index: 100;
+    padding: var(--id-space-1) var(--id-space-2);
+    background: var(--id-panel-background);
+    color: var(--p-text-color);
+    border: 1px solid var(--id-panel-border-strong);
+    border-radius: var(--id-radius-sm);
+    text-decoration: none;
+    transition: top var(--id-transition);
+  }
+
+  .id-skip-link:focus-visible {
+    top: var(--id-space-1);
+  }
+
+  .id-muted {
+    color: var(--p-text-muted-color);
+  }
+
+  .id-section-heading {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--p-text-muted-color);
+  }
+}

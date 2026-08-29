@@ -1,0 +1,29 @@
+{
+  "name": "information-desk",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Internal Information Desk — a service portal listing every system the organization provides.",
+  "engines": {
+    "node": ">=20"
+  },
+  "workspaces": [
+    "client",
+    "server"
+  ],
+  "scripts": {
+    "dev": "concurrently -n server,client -c cyan,magenta \"npm run dev -w server\" \"npm run dev -w client\"",
+    "build": "npm run build -w client && npm run build -w server",
+    "start": "npm run start -w server",
+    "migrate": "npm run migrate -w server",
+    "migrate:down": "npm run migrate:down -w server",
+    "create-admin": "npm run create-admin -w server",
+    "typecheck": "npm run typecheck -w client && npm run typecheck -w server",
+    "lint": "npm run typecheck"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  },
+  "overrides": {
+    "glob": "^11.1.0"
+  }
+}

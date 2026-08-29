@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!--
+      vite.config.ts sets `base: './'`, so the built asset URLs are relative.
+      The app uses history routing, which means a deep link such as
+      /admin/change-password would otherwise resolve those relative URLs
+      against /admin/ and 404. This <base> anchors them at the site root.
+
+      Mounting the portal under a sub-path instead? Change this one href
+      (e.g. href="/desk/") and the relative asset URLs follow.
+    -->
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Internal service directory — every system the organization provides, in one place." />
+    <link rel="icon" type="image/png" href="./logo.png" />
+    <title>Information Desk</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <noscript>
+      <p style="font: 16px/1.5 system-ui, sans-serif; margin: 3rem auto; max-width: 40rem">
+        The Information Desk needs JavaScript enabled. Please contact the service
+        desk if you cannot enable it.
+      </p>
+    </noscript>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
